@@ -2,6 +2,13 @@ import { expect } from '@oclif/test';
 import { IntegrationRpc } from './integration';
 import { ChainType, Handler, Integration, Subscriber, Webhook } from '../types';
 import * as faker from 'faker';
+import wretch from 'wretch';
+
+wretch().polyfills({
+    fetch: require("node-fetch"),
+    FormData: require("form-data"),
+    URLSearchParams: require("url").URLSearchParams
+});
 
 const mockServer = require('mockttp').getLocal();
 

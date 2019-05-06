@@ -60,7 +60,10 @@
     "bin": "cli",
     "plugins": [
       "@oclif/plugin-help"
-    ]
+    ],
+    "hooks": {
+      "init": "./lib/hooks/init/wretch"
+    }
   },
   "repository": "Nipol/cli",
   "scripts": {

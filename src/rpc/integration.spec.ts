@@ -1,9 +1,9 @@
 import { expect } from '@oclif/test';
 import { IntegrationRpc } from './integration';
-import { ChainType, Handler, Integration, Subscriber, Webhook } from '../types';
-import * as faker from 'faker';
+import { Integration } from '../types';
 import wretch from 'wretch';
 import { baseUrl, rpcVersion } from './config';
+import { newMockIntegration } from '../mock';
 
 wretch().polyfills({
   fetch: require('node-fetch'),
@@ -57,7 +57,7 @@ describe('IntegrationRpc', () => {
 
   describe('#getIntegrations()', async () => {
     it('should get integration list', async () => {
-      const integrations = [mockIntegrationFactory(), mockIntegrationFactory()];
+      const integrations = [newMockIntegration(), newMockIntegration()];
       await mockServer.get('/integrations/v1').thenJSON(200, integrations);
       const response: Integration[] = await integrationRpc.getIntegrations();
       expect(response).to.deep.equal(integrations);
@@ -88,7 +88,7 @@ describe('IntegrationRpc', () => {
 
   describe('#getIntegration()', async () => {
     it('should get a integration', async () => {
-      const integration = mockIntegrationFactory();
+      const integration = newMockIntegration();
       await mockServer
         .get('/integrations/v1/' + integration.integrationId)
         .thenJSON(200, integration);
@@ -101,7 +101,7 @@ describe('IntegrationRpc', () => {
 
   describe('#patchIntegration()', async () => {
     it('should patch a integration', async () => {
-      const integration = mockIntegrationFactory();
+      const integration = newMockIntegration();
       integration.version = 'v3';
       await mockServer
         .patch('/integrations/v1/' + integration.integrationId)
@@ -118,7 +118,7 @@ describe('IntegrationRpc', () => {
 
   describe('#createIntegration()', async () => {
     it('should create a integration', async () => {
-      const integration = mockIntegrationFactory();
+      const integration = newMockIntegration();
       await mockServer.post('/integrations/v1').thenJSON(200, integration);
       const response: Integration | null = await integrationRpc.createIntegration(
         integration,
@@ -129,7 +129,7 @@ describe('IntegrationRpc', () => {
 
   describe('#deleteIntegration()', async () => {
     it('should delete a integration', async () => {
-      const integration = mockIntegrationFactory();
+      const integration = newMockIntegration();
       await mockServer
         .delete('/integrations/v1/' + integration.integrationId)
         .thenReply(200, null);

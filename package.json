@@ -63,13 +63,16 @@
     ],
     "hooks": {
       "init": "./lib/hooks/init/wretch"
+    },
+    "topics": {
+      "integration": { "description": "manage integrations" }
     }
   },
   "repository": "Nipol/cli",
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "test": "nyc --extension .ts mocha --forbid-only \"src/**/*.spec.ts\"",
     "version": "oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts"

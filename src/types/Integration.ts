@@ -1,4 +1,4 @@
-import "reflect-metadata";
+import 'reflect-metadata';
 
 export class Integration {
   integrationId: string;
@@ -9,8 +9,17 @@ export class Integration {
   handlers: Handler[];
   webhook: Webhook;
   status: string;
-  
-  constructor(integrationId: string, userId: number, name: string, version: string, subscriber: Subscriber, handlers: Handler[], webhook: Webhook, status: string) {
+
+  constructor(
+    integrationId: string,
+    userId: number,
+    name: string,
+    version: string,
+    subscriber: Subscriber,
+    handlers: Handler[],
+    webhook: Webhook,
+    status: string,
+  ) {
     this.integrationId = integrationId;
     this.userId = userId;
     this.name = name;
@@ -30,8 +39,16 @@ export class Handler {
   code: string;
   runtime: string;
   'function': string;
-  
-  constructor(id: string, name: string, event: string, version: string, code: string, runtime: string, func: string) {
+
+  constructor(
+    id: string,
+    name: string,
+    event: string,
+    version: string,
+    code: string,
+    runtime: string,
+    func: string,
+  ) {
     this.id = id;
     this.name = name;
     this.event = event;
@@ -45,9 +62,9 @@ export class Handler {
 export class Webhook {
   url: string;
   method: string;
-  headers: {[key:string]: string};
-  
-  constructor(url: string, method: string, headers: {[key:string]: string}) {
+  headers: { [key: string]: string };
+
+  constructor(url: string, method: string, headers: { [key: string]: string }) {
     this.url = url;
     this.method = method;
     this.headers = headers;
@@ -64,8 +81,13 @@ export class Subscriber {
   contractAddress: string;
   abi: string;
   type: ChainType;
-  
-  constructor(blockchainEndpoint: string, contractAddress: string, abi: string, type: ChainType) {
+
+  constructor(
+    blockchainEndpoint: string,
+    contractAddress: string,
+    abi: string,
+    type: ChainType,
+  ) {
     this.blockchainEndpoint = blockchainEndpoint;
     this.contractAddress = contractAddress;
     this.abi = abi;

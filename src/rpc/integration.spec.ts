@@ -1,9 +1,10 @@
 import { expect } from '@oclif/test';
 import { IntegrationRpc } from './integration';
-import { Integration } from '../types';
-import wretch from 'wretch';
 import { baseUrl, rpcVersion } from './config';
 import { newMockIntegration } from '../mock';
+import * as mockhttp from 'mockttp';
+import { Integration } from '../types';
+import wretch from 'wretch';
 
 wretch().polyfills({
   fetch: require('node-fetch'),
@@ -11,40 +12,9 @@ wretch().polyfills({
   URLSearchParams: require('url').URLSearchParams,
 });
 
-const mockServer = require('mockttp').getLocal();
-
-export function mockIntegrationFactory(): Integration {
-  return new Integration(
-    faker.random.alphaNumeric(),
-    faker.random.number(),
-    faker.name.firstName(),
-    'v1',
-    new Subscriber(
-      'localhost:8080',
-      '0x12u31ijdiasdjmi',
-      'abi',
-      ChainType.ETHEREUM,
-    ),
-    [
-      new Handler(
-        faker.random.alphaNumeric(),
-        faker.name.firstName(),
-        'event',
-        'v1',
-        faker.random.words(5),
-        'tsnode8',
-        'handler',
-      ),
-    ],
-    new Webhook(faker.internet.ip(), 'POST', {
-      Authorization: 'Bear ashd8uado9012i31kod',
-    }),
-    'Starting',
-  );
-}
-
 describe('IntegrationRpc', () => {
   let integrationRpc: IntegrationRpc;
+  const mockServer = mockhttp.getLocal();
   // Start your servers
   beforeEach(async () => {
     integrationRpc = new IntegrationRpc(baseUrl, rpcVersion);
@@ -132,8 +102,8 @@ describe('IntegrationRpc', () => {
       const integration = newMockIntegration();
       await mockServer
         .delete('/integrations/v1/' + integration.integrationId)
-        .thenReply(200, null);
-      const response: null = await integrationRpc.deleteIntegration(
+        .thenReply(200, undefined);
+      const response = await integrationRpc.deleteIntegration(
         integration.integrationId,
       );
       expect(response).to.deep.equal(null);

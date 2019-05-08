@@ -10,7 +10,7 @@ describe('integration:delete', () => {
       .stdout()
       .command([`integration:delete`, id])
       .it('delete a  integration', ctx => {
-        expect(ctx.stdout).to.equal('integrationId has been deleted\n');
+        expect(ctx.stdout).to.equal(`${id} has been deleted\n`);
       });
   });
 

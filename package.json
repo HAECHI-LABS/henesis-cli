@@ -13,6 +13,7 @@
 		"@oclif/plugin-help": "^2.1.6",
 		"class-transformer": "^0.2.0",
 		"form-data": "^2.3.3",
+		"nock": "^10.0.6",
 		"node-fetch": "^2.5.0",
 		"reflect-metadata": "^0.1.13",
 		"tslib": "^1.9.3",
@@ -45,15 +46,24 @@
 	"engines": {
 		"node": ">=8.0.0"
 	},
-	"files": [ "/bin", "/lib", "/npm-shrinkwrap.json", "/oclif.manifest.json" ],
+	"files": [
+		"/bin",
+		"/lib",
+		"/npm-shrinkwrap.json",
+		"/oclif.manifest.json"
+	],
 	"homepage": "https://github.com/Nipol/cli",
-	"keywords": [ "oclif" ],
+	"keywords": [
+		"oclif"
+	],
 	"license": "LGPL3",
 	"main": "lib/index.js",
 	"oclif": {
 		"commands": "./lib/commands",
 		"bin": "cli",
-		"plugins": [ "@oclif/plugin-help" ],
+		"plugins": [
+			"@oclif/plugin-help"
+		],
 		"hooks": {
 			"init": "./lib/hooks/init/wretch"
 		},

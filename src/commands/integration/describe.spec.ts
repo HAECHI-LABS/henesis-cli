@@ -12,7 +12,7 @@ describe('integration:describe', () => {
       )
       .stdout()
       .command([`integration:describe`, integration.integrationId])
-      .it('delete a  integration', ctx => {
+      .it('describe a integration', ctx => {
         expect(ctx.stdout).to.equal(
           JSON.stringify(integration, undefined, 2) + '\n',
         );

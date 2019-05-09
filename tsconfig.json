@@ -9,9 +9,22 @@
     "rootDir": "src",
     "strict": true,
     "target": "es2017",
-    "composite": true
+    "composite": true,
+    "sourceMap": true,
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*"
-  ]
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "dist",
+    "__mocks__",
+    "coverage",
+    "*.config.js",
+    "*.babel.js",
+    "specs"
+  ],
+  "types" : ["mocha"]
 }

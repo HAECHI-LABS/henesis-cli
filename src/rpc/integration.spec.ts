@@ -108,8 +108,9 @@ describe('IntegrationRpc', () => {
         .thenJSON(200, integration);
       const response: Integration | null = await integrationRpc.patchIntegration(
         integration.integrationId,
-        // eslint-disable-next-line @typescript-eslint/no-object-literal-type-assertion
-        { version: 'v3' } as Integration,
+        {
+          version: 'v3',
+        } as Integration,
       );
       expect(response).to.deep.equal(integration);
     });

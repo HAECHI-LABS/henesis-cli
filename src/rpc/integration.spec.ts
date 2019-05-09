@@ -13,6 +13,36 @@ wretch().polyfills({
 
 const mockServer = require('mockttp').getLocal();
 
+export function mockIntegrationFactory(): Integration {
+  return new Integration(
+    faker.random.alphaNumeric(),
+    faker.random.number(),
+    faker.name.firstName(),
+    'v1',
+    new Subscriber(
+      'localhost:8080',
+      '0x12u31ijdiasdjmi',
+      'abi',
+      ChainType.ETHEREUM,
+    ),
+    [
+      new Handler(
+        faker.random.alphaNumeric(),
+        faker.name.firstName(),
+        'event',
+        'v1',
+        faker.random.words(5),
+        'tsnode8',
+        'handler',
+      ),
+    ],
+    new Webhook(faker.internet.ip(), 'POST', {
+      Authorization: 'Bear ashd8uado9012i31kod',
+    }),
+    'Starting',
+  );
+}
+
 describe('IntegrationRpc', () => {
   let integrationRpc: IntegrationRpc;
   // Start your servers
@@ -78,6 +108,7 @@ describe('IntegrationRpc', () => {
         .thenJSON(200, integration);
       const response: Integration | null = await integrationRpc.patchIntegration(
         integration.integrationId,
+        // eslint-disable-next-line @typescript-eslint/no-object-literal-type-assertion
         { version: 'v3' } as Integration,
       );
       expect(response).to.deep.equal(integration);
@@ -108,33 +139,3 @@ describe('IntegrationRpc', () => {
     });
   });
 });
-
-export function mockIntegrationFactory(): Integration {
-  return new Integration(
-    faker.random.alphaNumeric(),
-    faker.random.number(),
-    faker.name.firstName(),
-    'v1',
-    new Subscriber(
-      'localhost:8080',
-      '0x12u31ijdiasdjmi',
-      'abi',
-      ChainType.ETHEREUM,
-    ),
-    [
-      new Handler(
-        faker.random.alphaNumeric(),
-        faker.name.firstName(),
-        'event',
-        'v1',
-        faker.random.words(5),
-        'tsnode8',
-        'handler',
-      ),
-    ],
-    new Webhook(faker.internet.ip(), 'POST', {
-      Authorization: 'Bear ashd8uado9012i31kod',
-    }),
-    'Starting',
-  );
-}

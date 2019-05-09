@@ -1,16 +1,16 @@
 import 'reflect-metadata';
 
 export class Integration {
-  integrationId: string;
-  userId: number;
-  name: string;
-  version: string;
-  subscriber: Subscriber;
-  handlers: Handler[];
-  webhook: Webhook;
-  status: string;
+  public integrationId: string;
+  public userId: number;
+  public name: string;
+  public version: string;
+  public subscriber: Subscriber;
+  public handlers: Handler[];
+  public webhook: Webhook;
+  public status: string;
 
-  constructor(
+  public constructor(
     integrationId: string,
     userId: number,
     name: string,
@@ -32,15 +32,15 @@ export class Integration {
 }
 
 export class Handler {
-  id: string;
-  name: string;
-  event: string;
-  version: string;
-  code: string;
-  runtime: string;
-  'function': string;
+  public id: string;
+  public name: string;
+  public event: string;
+  public version: string;
+  public code: string;
+  public runtime: string;
+  public 'function': string;
 
-  constructor(
+  public constructor(
     id: string,
     name: string,
     event: string,
@@ -60,11 +60,15 @@ export class Handler {
 }
 
 export class Webhook {
-  url: string;
-  method: string;
-  headers: { [key: string]: string };
+  public url: string;
+  public method: string;
+  public headers: { [key: string]: string };
 
-  constructor(url: string, method: string, headers: { [key: string]: string }) {
+  public constructor(
+    url: string,
+    method: string,
+    headers: { [key: string]: string },
+  ) {
     this.url = url;
     this.method = method;
     this.headers = headers;
@@ -77,12 +81,12 @@ export enum ChainType {
 }
 
 export class Subscriber {
-  blockchainEndpoint: string;
-  contractAddress: string;
-  abi: string;
-  type: ChainType;
+  public blockchainEndpoint: string;
+  public contractAddress: string;
+  public abi: string;
+  public type: ChainType;
 
-  constructor(
+  public constructor(
     blockchainEndpoint: string,
     contractAddress: string,
     abi: string,

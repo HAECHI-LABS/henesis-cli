@@ -4,9 +4,9 @@ import wretch from 'wretch';
 import { baseUrl, rpcVersion } from './config';
 
 export class IntegrationRpc {
-  server: string;
+  private server: string;
 
-  constructor(server: string, version: string) {
+  public constructor(server: string, version: string) {
     this.server = server + '/integrations/' + version;
   }
 
@@ -19,7 +19,7 @@ export class IntegrationRpc {
       .get()
       .json()
       .catch((err: any) => {
-        throw err
+        throw err;
       });
 
     if (!Array.isArray(json)) {

@@ -68,15 +68,30 @@ describe('IntegrationRpc', () => {
       expect(response).to.deep.equal(integration);
     });
   });
+  
+  describe('#getIntegrationByName()', async () => {
+    it('should get a integration by name', async () => {
+      const integration = newMockIntegration();
+      await mockServer
+        .get('/integrations/v1/search/findByName')
+        .withQuery({"name":integration.name})
+        .thenJSON(200, integration);
+      
+      const response: Integration | null = await integrationRpc.getIntegrationByName(
+        integration.name,
+      );
+      expect(response).to.deep.equal(integration);
+    });
+  });
 
-  describe('#patchIntegration()', async () => {
-    it('should patch a integration', async () => {
+  describe('#updateIntegration()', async () => {
+    it('should update a integration', async () => {
       const integration = newMockIntegration();
       integration.version = 'v3';
       await mockServer
-        .patch('/integrations/v1/' + integration.integrationId)
+        .put('/integrations/v1/' + integration.integrationId)
         .thenJSON(200, integration);
-      const response: Integration | null = await integrationRpc.patchIntegration(
+      const response: Integration | null = await integrationRpc.updateIntegration(
         integration.integrationId,
         {
           version: 'v3',

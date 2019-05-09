@@ -17,7 +17,7 @@ handlers:
     version: v1
     runtime: tsnode8
     path: 'path-to-handler-file'
-    function: handler
+    function: 'handler'
 
 webhook:
   url: localhost:8080

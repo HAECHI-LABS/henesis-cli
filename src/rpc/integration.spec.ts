@@ -1,10 +1,10 @@
 import { expect } from '@oclif/test';
 import { IntegrationRpc } from './integration';
+import wretch from 'wretch';
 import { baseUrl, rpcVersion } from './config';
 import { newMockIntegration } from '../mock';
 import * as mockhttp from 'mockttp';
 import { Integration } from '../types';
-import wretch from 'wretch';
 
 wretch().polyfills({
   fetch: require('node-fetch'),

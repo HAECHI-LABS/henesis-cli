@@ -22,7 +22,7 @@ export default class Status extends Command {
             integration.status,
           );
       }
-      this.log(msg);
+      this.log(msg.substring(0, msg.length-1));
     } catch (err) {
       this.error(err, { exit: 1 });
     }

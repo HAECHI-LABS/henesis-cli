@@ -2,7 +2,7 @@ import { Command, flags } from '@oclif/command';
 import integrationRpc from '../../rpc/integration';
 
 export default class Describe extends Command {
-  public static description = 'delete a integration';
+  public static description = 'describe a integration';
   public static examples = [`$ ql-cli integration:delete`];
   public static flags = {};
   public static args = [{ name: 'integrationId' }];

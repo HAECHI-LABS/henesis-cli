@@ -11,7 +11,8 @@
     "target": "es2017",
     "composite": true,
     "sourceMap": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "resolveJsonModule":true
   },
   "include": [
     "src/**/*"

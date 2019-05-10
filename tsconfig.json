@@ -15,8 +15,7 @@
     "resolveJsonModule":true
   },
   "include": [
-    "src/**/*",
-    "package.json"
+    "src/**/*"
   ],
   "exclude": [
     "node_modules",

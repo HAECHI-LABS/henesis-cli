@@ -1,8 +1,7 @@
-import { Hook } from '@oclif/config';
 import { cli } from 'cli-ux';
 import configstore from '../../configstore';
 
-const hook: Hook<'prerun'> = async function({}): Promise<void> {
+const hook = async function({}): Promise<void> {
   const isAgree = configstore.get('analytics');
 
   if (isAgree || isAgree === false) return;

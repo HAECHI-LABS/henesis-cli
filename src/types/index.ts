@@ -5,3 +5,8 @@ export {
   Webhook,
   Subscriber,
 } from './Integration';
+export {
+  IntegrationSpec,
+  HandlerSpec,
+  WebhookSpec,
+} from './integrationSpec';

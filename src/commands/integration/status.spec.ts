@@ -29,7 +29,7 @@ describe('integration:status', () => {
             res[1].status,
           ) +
           '\n';
-        expect(ctx.stdout).to.equal(expected);
+        expect(ctx.stdout).to.equal(expected.substring(0, expected.length-1));
       });
   });
 

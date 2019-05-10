@@ -1,1 +1,4 @@
-export * from './factory';
+export {
+  newMockIntegration,
+  newMockIntegrationSpec,
+} from './factory';

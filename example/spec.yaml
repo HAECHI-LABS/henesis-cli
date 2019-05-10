@@ -1,0 +1,26 @@
+version: v1
+name: 'integration'
+
+contract:
+  address: '0xef3fbc3e228dbdc523ce5e58530874005553eb2e'
+  path: 'path-to-contract-file'
+  name: 'name'
+  compilerVersion: '0.5.0'
+
+network:
+  type: 'klaytn'
+  endpoint: 'http://localhost:8545'
+
+handlers:
+  transfer:
+    event: 'transfer(address,address,uint256)'
+    version: v1
+    runtime: tsnode8
+    path: 'path-to-handler-file'
+    function: 'handler'
+
+webhook:
+  url: localhost:8080
+  method: POST
+  headers:
+    Authorization: 'Bearer aisdjiajdais'

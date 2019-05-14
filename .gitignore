@@ -9,4 +9,6 @@
 node_modules
 .idea/
 .vscode/
+*.swp
+*.swo
 tsconfig.tsbuildinfo

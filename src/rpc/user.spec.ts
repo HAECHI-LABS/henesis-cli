@@ -61,7 +61,6 @@ describe('UserRpc', (): void => {
 
       try {
         await userRpc.changePassword(
-          'jwtToken',
           'existing password',
           'To be changed password',
         );
@@ -77,7 +76,6 @@ describe('UserRpc', (): void => {
 
       try {
         await userRpc.changePassword(
-          'jwtToken',
           'existing password',
           'To be changed password',
         );

@@ -25,14 +25,12 @@ export class UserRpc {
   }
 
   public async changePassword(
-    jwtToken: string,
     password: string,
     newPassword: string,
   ): Promise<void> {
     const payload = new ChangePassword(password, newPassword);
 
     await wretch(`${this.server}/passwd`)
-      .auth(`Bearer ${jwtToken}`)
       .patch(payload)
       .forbidden(
         (): Error => {

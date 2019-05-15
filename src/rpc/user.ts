@@ -20,12 +20,12 @@ export class UserRpc {
           throw new Error(`Unauthenticated User`);
         },
       )
-      .json()
-      .catch(
-        (): Error => {
-          throw new Error(`Internet Connection Fail`);
-        },
-      );
+      .json();
+    // .catch(
+    //   (): Error => {
+    //     throw new Error(`Internet Connection Fail`);
+    //   },
+    // );
 
     return plainToClass(LoginResponse, json) as LoginResponse;
   }
@@ -38,13 +38,12 @@ export class UserRpc {
 
     await wretch(`${this.server}/passwd`)
       .patch(payload)
-      .forbidden(
+      .unauthorized(
         (): Error => {
-          throw new Error(`Unauthorization Token`);
+          throw new Error(`Unauthenticated Token`);
         },
       )
-      .error(
-        412,
+      .forbidden(
         (): Error => {
           throw new Error(`No satisfied conditions`);
         },

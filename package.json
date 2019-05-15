@@ -3,8 +3,7 @@
 	"version": "0.0.0",
 	"author": "Choi Yoons @Nipol",
 	"bin": {
-		"cli": "./bin/run",
-		"lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+		"cli": "./bin/run"
 	},
 	"bugs": "https://github.com/Nipol/cli/issues",
 	"dependencies": {
@@ -56,15 +55,24 @@
 	"engines": {
 		"node": ">=8.0.0"
 	},
-	"files": [ "/bin", "/lib", "/npm-shrinkwrap.json", "/oclif.manifest.json" ],
+	"files": [
+		"/bin",
+		"/lib",
+		"/npm-shrinkwrap.json",
+		"/oclif.manifest.json"
+	],
 	"homepage": "https://github.com/Nipol/cli",
-	"keywords": [ "oclif" ],
+	"keywords": [
+		"oclif"
+	],
 	"license": "LGPL3",
 	"main": "lib/index.js",
 	"oclif": {
 		"commands": "./lib/commands",
 		"bin": "cli",
-		"plugins": [ "@oclif/plugin-help" ],
+		"plugins": [
+			"@oclif/plugin-help"
+		],
 		"hooks": {
 			"init": "./lib/hooks/init/wretch",
 			"analyticsCheck": "./lib/hooks/analytics/check"
@@ -80,7 +88,8 @@
 		"postpack": "rm -f oclif.manifest.json",
 		"prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
 		"test": "nyc --extension .ts mocha --forbid-only \"src/**/*.spec.ts\"",
-		"version": "oclif-dev readme && git add README.md"
+		"version": "oclif-dev readme && git add README.md",
+		"lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
 	},
 	"types": "lib/index.d.ts"
 }

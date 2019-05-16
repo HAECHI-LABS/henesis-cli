@@ -21,11 +21,6 @@ export class UserRpc {
         },
       )
       .json();
-    // .catch(
-    //   (): Error => {
-    //     throw new Error(`Internet Connection Fail`);
-    //   },
-    // );
 
     return plainToClass(LoginResponse, json) as LoginResponse;
   }

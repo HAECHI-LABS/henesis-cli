@@ -1,6 +1,7 @@
 import { LoginRequest, LoginResponse, ChangePassword } from '../types';
 import wretch from 'wretch';
 import { plainToClass } from 'class-transformer';
+import { baseUrl } from './config';
 
 export class UserRpc {
   private server: string;
@@ -32,13 +33,12 @@ export class UserRpc {
 
     await wretch(`${this.server}/passwd`)
       .patch(payload)
-      .forbidden(
+      .unauthorized(
         (): Error => {
-          throw new Error(`Unauthorization Token`);
+          throw new Error(`Unauthenticated Token`);
         },
       )
-      .error(
-        412,
+      .forbidden(
         (): Error => {
           throw new Error(`No satisfied conditions`);
         },
@@ -46,3 +46,5 @@ export class UserRpc {
       .json();
   }
 }
+
+export default new UserRpc(baseUrl);

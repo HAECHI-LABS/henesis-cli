@@ -57,7 +57,7 @@ describe('UserRpc', (): void => {
     it('should be failed when different exist password.', async (): Promise<
       void
     > => {
-      await mockServer.patch('/users/passwd').thenReply(412);
+      await mockServer.patch('/users/passwd').thenReply(403);
 
       try {
         await userRpc.changePassword(
@@ -72,7 +72,7 @@ describe('UserRpc', (): void => {
     it('should be failed when jwt Token is expire.', async (): Promise<
       void
     > => {
-      await mockServer.patch('/users/passwd').thenReply(403);
+      await mockServer.patch('/users/passwd').thenReply(401);
 
       try {
         await userRpc.changePassword(
@@ -80,7 +80,7 @@ describe('UserRpc', (): void => {
           'To be changed password',
         );
       } catch (err) {
-        expect(err.toString()).to.equal('Error: Unauthorization Token');
+        expect(err.toString()).to.equal('Error: Unauthenticated Token');
       }
     });
   });

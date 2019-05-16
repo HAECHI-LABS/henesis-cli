@@ -29,6 +29,7 @@ password:
       try {
         const userInfo = await UserRPC.login(email, password);
         configstore.set('user', userInfo);
+        this.log(`🎉 Login Success from ${userInfo.email} 🎉`);
       } catch (err) {
         configstore.delete('analytics');
         this.error(err);

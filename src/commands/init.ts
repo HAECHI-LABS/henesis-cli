@@ -65,18 +65,5 @@ export default class Init extends Command {
     );
 
     this.log(`${name} directory has been created.`);
-
-    // writeFileSync(file, str, { mode: mode || MODE_0666 });
-
-    // let files = readdirSync(destinationPath);
-    // for (let f of files) {
-    //   this.log(f);
-    // }
-    // const { args, flags } = this.parse(Init);
-    // const name = flags.name || 'world';
-    // this.log(`hello ${name} from ./src/commands/init.ts`);
-    // if (args.file && flags.force) {
-    //   this.log(`you input --force and --file: ${args.file}`);
-    // }
   }
 }

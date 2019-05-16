@@ -2,11 +2,11 @@ version: v1
 name: ProjectName
 
 contract:
-	address: 0x
-	path: ./contract/example.sol
+  address: 0x
+  path: ./contract/example.sol
   name: example
   compilerVersion: 0.5.8
-  
+
 network:
   type: mainnet
   endpoint: http://localhost:8545
@@ -23,4 +23,4 @@ webhook:
   url: https://localhost:8080
     method: POST
     headers: 
-      Authorization: 'Bearer aisdjiajdais'
+      Authorization: 'Bearer aisdjiajdais' 

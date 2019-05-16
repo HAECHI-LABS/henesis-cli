@@ -1,0 +1,26 @@
+version: v1
+name: ProjectName
+
+contract:
+	address: 0x
+	path: ./contract/example.sol
+  name: example
+  compilerVersion: 0.5.8
+  
+network:
+  type: mainnet
+  endpoint: http://localhost:8545
+
+handlers:
+  Excution:
+    event: Excution(address)
+    version: v1
+    runtime: tsnode8
+    path: ./handler/handler.ts
+    function: handler
+
+webhook:
+  url: https://localhost:8080
+    method: POST
+    headers: 
+      Authorization: 'Bearer aisdjiajdais'

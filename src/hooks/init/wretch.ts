@@ -14,7 +14,10 @@ const hook: Hook<'init'> = async function(opts) {
         FormData: require('form-data'),
         URLSearchParams: require('url').URLSearchParams,
       })
-      .auth(`Bearer ${user.jwtToken}`);
+      .auth(`Bearer ${user.jwtToken}`)
+      .catcher(401, () => {
+        configstore.delete('user');
+      });
   } else {
     wretch().polyfills({
       fetch: require('node-fetch'),

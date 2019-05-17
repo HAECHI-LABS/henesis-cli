@@ -12,10 +12,10 @@ const hook = async function(argv: {
   const visitor = ua('UA-126138188-2');
 
   if (argv.error) {
-    visitor.exception(argv.error);
+    visitor.exception(argv.error).send();
     return;
   } else if (argv.command) {
-    visitor.event('cli', argv.command);
+    visitor.event('cli', argv.command).send();
   }
 };
 

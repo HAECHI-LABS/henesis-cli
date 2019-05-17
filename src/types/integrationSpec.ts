@@ -10,7 +10,7 @@ export interface IntegrationSpec {
     compilerVersion: string;
   };
   network: {
-    endpoint: string,
+    endpoint: string;
     type: ChainType;
   };
   handlers: { [key: string]: HandlerSpec };
@@ -22,6 +22,7 @@ export interface HandlerSpec {
   version: string;
   runtime: string;
   path: string;
+  dep: string;
   function: string;
 }
 

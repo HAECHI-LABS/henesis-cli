@@ -11,9 +11,9 @@ import { fancy } from 'fancy-test';
 describe('solc', () => {
   describe('#compileSol()', () => {
     it('should compile solidity code', async () => {
-      const path = __dirname + '/../../example/contract/erc20.sol';
+      const path = __dirname + '/../../templates/contract/example.sol';
       const result: CompileResult = await compileSol(path, {
-        solcVersion: '0.4.12',
+        solcVersion: '0.5.8',
       } as Option);
       expect(result.contracts).to.not.equal(undefined);
       expect(result.sources).to.not.equal(undefined);
@@ -22,7 +22,7 @@ describe('solc', () => {
     context('when file does not end with .sol', () => {
       fancy
         .do(async () => {
-          const path = __dirname + '/../../example/contract/erc20.notsol';
+          const path = __dirname + '/../../templates/contract/example.notsol';
           await compileSol(path, { solcVersion: '0.4.12' } as Option);
         })
         .catch('it is not a solidity file.')
@@ -33,14 +33,14 @@ describe('solc', () => {
   describe('CompileResult', () => {
     let result: CompileResult;
     describe('#getAbi()', () => {
-      const contractName = 'BNB';
-      const abi = [{ abi: 'abi' }] as Object[];
+      const contractName = 'example';
+      const abi = [{ abi: 'abi' }] as Record<string, any>[];
       beforeEach(() => {
         const contracts = {
-          BNB: { abi: abi } as CompiledContract,
+          example: { abi: abi } as CompiledContract,
         };
         const sources = {
-          BNB: {} as CompiledSource,
+          example: {} as CompiledSource,
         };
         result = new CompileResult(contracts, sources);
       });

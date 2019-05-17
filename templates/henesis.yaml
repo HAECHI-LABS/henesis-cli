@@ -13,20 +13,20 @@ network:
 
 handlers:
   event1:
-    event: Excution(address)
+    event: Execution(address)
     version: v1
     runtime: tsnode8
-    path: ./handler/excution.ts
+    path: ./handler/execution.ts
     dep: ./handler/package.json
-    function: excution
+    function: execution
 
   event2:
-    event: Excution(address,address)
+    event: Execution(address,address)
     version: v1
     runtime: tsnode8
-    path: ./handler/excution2.ts
+    path: ./handler/execution2.ts
     dep: ./handler/package.json
-    function: excution2
+    function: execution2
 
 webhook:
   url: https://localhost:8080

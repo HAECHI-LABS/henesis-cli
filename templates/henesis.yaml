@@ -16,7 +16,7 @@ handlers:
     event: Excution(address)
     version: v1
     runtime: tsnode8
-    path: ./handler/execution.ts
+    path: ./handler/excution.ts
     dep: ./handler/package.json
     function: excution
 
@@ -24,7 +24,7 @@ handlers:
     event: Excution(address,address)
     version: v1
     runtime: tsnode8
-    path: ./handler/execution2.ts
+    path: ./handler/excution2.ts
     dep: ./handler/package.json
     function: excution2
 

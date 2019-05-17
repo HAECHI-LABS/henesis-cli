@@ -16,7 +16,7 @@ const defaultSpecFile = './henesis.yaml';
 
 export default class Deploy extends Command {
   public static description = 'deploy a integration';
-  public static examples = [`$ ql-cli integration:delete`];
+  public static examples = [`$ ql-cli integration:deploy`];
   public static flags = {
     file: flags.string({ char: 'f', default: defaultSpecFile }),
     update: flags.boolean({ char: 'u' }),
@@ -29,6 +29,10 @@ export default class Deploy extends Command {
       const integrationSpec: IntegrationSpec = yaml.safeLoad(
         fs.readFileSync(flags.file || defaultSpecFile, 'utf8'),
       );
+
+      await this.config.runHook('analyticsSend', {
+        command: 'integration:deploy',
+      });
 
       if (flags.update) {
         const integration = await integrationRpc.getIntegrationByName(
@@ -46,8 +50,9 @@ export default class Deploy extends Command {
         this.log(`${integration.integrationId} has been deployed`);
         return;
       }
-    } catch (e) {
-      this.error(e, { exit: 1 });
+    } catch (err) {
+      await this.config.runHook('analyticsSend', { error: err });
+      this.error(err, { exit: 1 });
     }
   }
 }

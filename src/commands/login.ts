@@ -29,10 +29,12 @@ password:
       try {
         const userInfo = await UserRPC.login(email, password);
         configstore.set('user', userInfo);
+        await this.config.runHook('analyticsSend', { command: 'login' });
         this.log(`🎉 Login Success from ${userInfo.email} 🎉`);
       } catch (err) {
         configstore.delete('analytics');
         this.error(err);
+        await this.config.runHook('analyticsSend', { error: err });
         this.exit(1);
       }
     }

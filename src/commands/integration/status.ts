@@ -22,8 +22,12 @@ export default class Status extends Command {
             integration.status,
           );
       }
-      this.log(msg.substring(0, msg.length-1));
+      await this.config.runHook('analyticsSend', {
+        command: 'integration:list',
+      });
+      this.log(msg.substring(0, msg.length - 1));
     } catch (err) {
+      await this.config.runHook('analyticsSend', { error: err });
       this.error(err, { exit: 1 });
     }
   }

@@ -15,8 +15,12 @@ export default class Delete extends Command {
 
     try {
       await integrationRpc.deleteIntegration(args.integrationId);
+      await this.config.runHook('analyticsSend', {
+        command: 'integration:delete',
+      });
       this.log(`${args.integrationId} has been deleted`);
     } catch (err) {
+      await this.config.runHook('analyticsSend', { error: err });
       this.error(err, { exit: 1 });
     }
   }

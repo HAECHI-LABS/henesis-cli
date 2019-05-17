@@ -8,7 +8,7 @@ contract:
   compilerVersion: 0.5.8
 
 network:
-  type: mainnet
+  type: ethereum
   endpoint: http://localhost:8545
 
 handlers:

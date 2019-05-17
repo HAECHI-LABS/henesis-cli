@@ -65,10 +65,10 @@ export function newMockIntegrationSpec(): IntegrationSpec {
     },
     handlers: {
       event1: {
-        event: 'excution(address)',
+        event: 'execution(address)',
         version: 'v1',
         runtime: 'tsnode8',
-        path: __dirname + '/../../templates/handler/excution.ts',
+        path: __dirname + '/../../templates/handler/execution.ts',
         dep: __dirname + '/../../templates/handler/package.json',
         function: 'excution',
       } as HandlerSpec,

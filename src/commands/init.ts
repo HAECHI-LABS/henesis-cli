@@ -41,6 +41,9 @@ export default class Init extends Command {
 
     if (existsSync(destinationPath) && flags.force === false) {
       this.error(`The directory exists at the current directory.`);
+      await this.config.runHook('analyticsSend', {
+        error: `The directory exists at the current directory.`,
+      });
       this.exit(-1);
     }
 
@@ -74,6 +77,7 @@ export default class Init extends Command {
       { mode: MODE_0666 },
     );
 
+    await this.config.runHook('analyticsSend', { command: 'init' });
     this.log(`${name} directory has been created.`);
   }
 }

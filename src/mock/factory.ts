@@ -55,25 +55,26 @@ export function newMockIntegrationSpec(): IntegrationSpec {
     name: 'integration',
     contract: {
       address: '0xef3fbc3e228dbdc523ce5e58530874005553eb2e',
-      path: __dirname + '/../../example/contract/erc20.sol',
-      name: 'BNB',
-      compilerVersion: '0.4.12',
+      path: __dirname + '/../../templates/contract/example.sol',
+      name: 'example',
+      compilerVersion: '0.5.8',
     },
     network: {
       type: 'klaytn',
       endpoint: 'http://localhost:8545',
     },
     handlers: {
-      transfer: {
-        event: 'transfer(address,address,uint256)',
+      event1: {
+        event: 'excution(address)',
         version: 'v1',
         runtime: 'tsnode8',
-        path: __dirname + '/../../example/handler/handler.js',
-        function: 'handler',
+        path: __dirname + '/../../templates/handler/excution.ts',
+        dep: __dirname + '/../../templates/handler/package.json',
+        function: 'excution',
       } as HandlerSpec,
     },
     webhook: {
-      url: 'localhost:8080',
+      url: 'https://localhost:8080',
       method: 'POST',
       headers: {
         Authorization: 'Bearer aisdjiajdais',

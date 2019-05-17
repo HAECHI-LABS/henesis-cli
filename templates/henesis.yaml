@@ -1,0 +1,35 @@
+version: v1
+name: projectname
+
+contract:
+  address: '0x'
+  path: ./contract/example.sol
+  name: example
+  compilerVersion: 0.5.8
+
+network:
+  type: mainnet
+  endpoint: http://localhost:8545
+
+handlers:
+  event1:
+    event: Excution(address)
+    version: v1
+    runtime: tsnode8
+    path: ./handler/execution.ts
+    dep: ./hanelder/package.json
+    function: excution
+
+  event2:
+    event: Excution(address,address)
+    version: v1
+    runtime: tsnode8
+    path: ./handler/execution2.ts
+    dep: ./hanelder/package.json
+    function: excution2
+
+webhook:
+  url: https://localhost:8080
+    method: POST
+    headers: 
+      Authorization: 'Bearer aisdjiajdais' 

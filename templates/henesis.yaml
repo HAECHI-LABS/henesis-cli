@@ -12,7 +12,7 @@ network:
   endpoint: http://localhost:8545
 
 handlers:
-  excution:
+  evnet1:
     event: Excution(address)
     version: v1
     runtime: tsnode8
@@ -20,7 +20,7 @@ handlers:
     dep: ./hanelder/package.json
     function: excution
 
-  excution:
+  event2:
     event: Excution(address,address)
     version: v1
     runtime: tsnode8

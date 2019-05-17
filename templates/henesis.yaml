@@ -30,6 +30,6 @@ handlers:
 
 webhook:
   url: https://localhost:8080
-    method: POST
-    headers: 
-      Authorization: 'Bearer aisdjiajdais' 
+  method: POST
+  headers: 
+    Authorization: 'Bearer aisdjiajdais' 

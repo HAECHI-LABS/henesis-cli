@@ -1,8 +1,8 @@
 version: v1
-name: ProjectName
+name: projectname
 
 contract:
-  address: 0x
+  address: '0x'
   path: ./contract/example.sol
   name: example
   compilerVersion: 0.5.8
@@ -12,12 +12,21 @@ network:
   endpoint: http://localhost:8545
 
 handlers:
-  Excution:
+  excution:
     event: Excution(address)
     version: v1
     runtime: tsnode8
-    path: ./handler/handler.ts
-    function: handler
+    path: ./handler/execution.ts
+    dep: ./hanelder/package.json
+    function: excution
+
+  excution:
+    event: Excution(address,address)
+    version: v1
+    runtime: tsnode8
+    path: ./handler/execution2.ts
+    dep: ./hanelder/package.json
+    function: excution2
 
 webhook:
   url: https://localhost:8080

@@ -53,8 +53,18 @@ export default class Init extends Command {
     );
     mkdirSync(`${destinationPath}/handler`);
     writeFileSync(
-      join(`${destinationPath}/handler`, 'handler.ts'),
-      readFileSync(join(`${TEMPLATE_DIR}/handler`, 'handler.ts')),
+      join(`${destinationPath}/handler`, 'excution.ts'),
+      readFileSync(join(`${TEMPLATE_DIR}/handler`, 'excution.ts')),
+      { mode: MODE_0666 },
+    );
+    writeFileSync(
+      join(`${destinationPath}/handler`, 'excution2.ts'),
+      readFileSync(join(`${TEMPLATE_DIR}/handler`, 'excution2.ts')),
+      { mode: MODE_0666 },
+    );
+    writeFileSync(
+      join(`${destinationPath}/handler`, 'package.json'),
+      readFileSync(join(`${TEMPLATE_DIR}/handler`, 'package.json')),
       { mode: MODE_0666 },
     );
     mkdirSync(`${destinationPath}/contract`);

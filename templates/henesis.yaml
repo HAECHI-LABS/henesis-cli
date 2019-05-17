@@ -12,7 +12,7 @@ network:
   endpoint: http://localhost:8545
 
 handlers:
-  evnet1:
+  event1:
     event: Excution(address)
     version: v1
     runtime: tsnode8

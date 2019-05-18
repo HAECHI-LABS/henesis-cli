@@ -41,6 +41,9 @@ export default class Init extends Command {
 
     if (existsSync(destinationPath) && flags.force === false) {
       this.error(`The directory exists at the current directory.`);
+      await this.config.runHook('analyticsSend', {
+        error: `The directory exists at the current directory.`,
+      });
       this.exit(-1);
     }
 
@@ -53,13 +56,13 @@ export default class Init extends Command {
     );
     mkdirSync(`${destinationPath}/handler`);
     writeFileSync(
-      join(`${destinationPath}/handler`, 'excution.ts'),
-      readFileSync(join(`${TEMPLATE_DIR}/handler`, 'excution.ts')),
+      join(`${destinationPath}/handler`, 'execution.ts'),
+      readFileSync(join(`${TEMPLATE_DIR}/handler`, 'execution.ts')),
       { mode: MODE_0666 },
     );
     writeFileSync(
-      join(`${destinationPath}/handler`, 'excution2.ts'),
-      readFileSync(join(`${TEMPLATE_DIR}/handler`, 'excution2.ts')),
+      join(`${destinationPath}/handler`, 'execution2.ts'),
+      readFileSync(join(`${TEMPLATE_DIR}/handler`, 'execution2.ts')),
       { mode: MODE_0666 },
     );
     writeFileSync(
@@ -74,6 +77,7 @@ export default class Init extends Command {
       { mode: MODE_0666 },
     );
 
+    await this.config.runHook('analyticsSend', { command: 'init' });
     this.log(`${name} directory has been created.`);
   }
 }

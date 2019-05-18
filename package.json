@@ -12,6 +12,7 @@
 		"@oclif/plugin-help": "^2.1.6",
 		"@types/configstore": "^4.0.0",
 		"@types/js-yaml": "^3.12.1",
+		"@types/universal-analytics": "^0.4.2",
 		"class-transformer": "^0.2.0",
 		"configstore": "^4.0.0",
 		"find-cache-dir": "^3.0.0",
@@ -28,6 +29,7 @@
 		"semver": "^6.0.0",
 		"solc": "^0.5.8",
 		"tslib": "^1.9.3",
+		"universal-analytics": "^0.4.20",
 		"wretch": "^1.5.2"
 	},
 	"devDependencies": {
@@ -77,7 +79,8 @@
 		],
 		"hooks": {
 			"init": "./lib/hooks/init/wretch",
-			"analyticsCheck": "./lib/hooks/analytics/check"
+			"analyticsCheck": "./lib/hooks/analytics/check",
+			"analyticsSend": "./lib/hooks/analytics/send"
 		},
 		"topics": {
 			"integration": {

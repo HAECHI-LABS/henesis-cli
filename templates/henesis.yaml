@@ -8,28 +8,28 @@ contract:
   compilerVersion: 0.5.8
 
 network:
-  type: mainnet
+  type: ethereum
   endpoint: http://localhost:8545
 
 handlers:
   event1:
-    event: Excution(address)
+    event: Execution(address)
     version: v1
     runtime: tsnode8
     path: ./handler/execution.ts
-    dep: ./hanelder/package.json
-    function: excution
+    dep: ./handler/package.json
+    function: execution
 
   event2:
-    event: Excution(address,address)
+    event: Execution(address,address)
     version: v1
     runtime: tsnode8
     path: ./handler/execution2.ts
-    dep: ./hanelder/package.json
-    function: excution2
+    dep: ./handler/package.json
+    function: execution2
 
 webhook:
   url: https://localhost:8080
-    method: POST
-    headers: 
-      Authorization: 'Bearer aisdjiajdais' 
+  method: POST
+  headers: 
+    Authorization: 'Bearer aisdjiajdais' 

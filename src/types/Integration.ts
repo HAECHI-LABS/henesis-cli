@@ -1,11 +1,24 @@
 import 'reflect-metadata';
 
+export enum PlatformType {
+  ETHEREUM = 'ethereum',
+  KLAYTN = 'klaytn',
+}
+
+export enum NetworkType {
+  MAINNET = 'mainnet',
+  ROPSTEN = 'ropsten',
+}
+
 export class Integration {
   public integrationId: string;
   public userId: number;
   public name: string;
   public version: string;
-  public subscriber: Subscriber;
+  public abi: any;
+  public contractAddress: string;
+  public platform: PlatformType;
+  public network: NetworkType;
   public handlers: Handler[];
   public webhook: Webhook;
   public status: string;
@@ -15,7 +28,10 @@ export class Integration {
     userId: number,
     name: string,
     version: string,
-    subscriber: Subscriber,
+    abi: any,
+    contractAddress: string,
+    platform: PlatformType,
+    network: NetworkType,
     handlers: Handler[],
     webhook: Webhook,
     status: string,
@@ -24,7 +40,10 @@ export class Integration {
     this.userId = userId;
     this.name = name;
     this.version = version;
-    this.subscriber = subscriber;
+    this.abi = abi;
+    this.contractAddress = contractAddress;
+    this.platform = platform;
+    this.network = network;
     this.handlers = handlers;
     this.webhook = webhook;
     this.status = status;
@@ -37,6 +56,7 @@ export class Handler {
   public event: string;
   public version: string;
   public code: string;
+  public dep: string;
   public runtime: string;
   public 'function': string;
 
@@ -46,6 +66,7 @@ export class Handler {
     event: string,
     version: string,
     code: string,
+    dep: string,
     runtime: string,
     func: string,
   ) {
@@ -54,6 +75,7 @@ export class Handler {
     this.event = event;
     this.version = version;
     this.code = code;
+    this.dep = dep;
     this.runtime = runtime;
     this.function = func;
   }
@@ -72,29 +94,5 @@ export class Webhook {
     this.url = url;
     this.method = method;
     this.headers = headers;
-  }
-}
-
-export enum ChainType {
-  ETHEREUM = 'ethereum',
-  KLAYTN = 'klaytn',
-}
-
-export class Subscriber {
-  public blockchainEndpoint: string;
-  public contractAddress: string;
-  public abi: string;
-  public type: ChainType;
-
-  public constructor(
-    blockchainEndpoint: string,
-    contractAddress: string,
-    abi: string,
-    type: ChainType,
-  ) {
-    this.blockchainEndpoint = blockchainEndpoint;
-    this.contractAddress = contractAddress;
-    this.abi = abi;
-    this.type = type;
   }
 }

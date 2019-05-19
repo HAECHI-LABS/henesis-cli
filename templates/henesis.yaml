@@ -7,9 +7,9 @@ contract:
   name: example
   compilerVersion: 0.5.8
 
-network:
-  type: ethereum
-  endpoint: http://localhost:8545
+blockchain:
+  platform: ethereum
+  network: mainnet
 
 handlers:
   event1:

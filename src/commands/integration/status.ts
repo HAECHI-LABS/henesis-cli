@@ -17,7 +17,7 @@ export default class Status extends Command {
           buildMsg(
             integration.integrationId,
             integration.name,
-            integration.subscriber.type,
+            integration.platform,
             integration.version,
             integration.status,
           );

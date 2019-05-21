@@ -21,7 +21,7 @@ export default class Delete extends Command {
       this.log(`${args.integrationId} has been deleted`);
     } catch (err) {
       await this.config.runHook('analyticsSend', { error: err });
-      this.error(err, { exit: 1 });
+      this.error(err.message, { exit: 1 });
     }
   }
 }

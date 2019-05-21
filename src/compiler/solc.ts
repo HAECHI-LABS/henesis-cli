@@ -27,7 +27,7 @@ export interface CompiledOutputs {
       [contract: string]: CompiledSource;
     };
   };
-  errors: CompiledError[]
+  errors: CompiledError[];
 }
 
 export interface CompiledContract {
@@ -44,12 +44,12 @@ export interface CompiledSource {
   id: number;
 }
 
-export interface CompiledError{
-  component: string,
-  formattedMessage: string,
-  message: string,
-  severity: string,
-  type: string
+export interface CompiledError {
+  component: string;
+  formattedMessage: string;
+  message: string;
+  severity: string;
+  type: string;
 }
 
 export class CompileResult {
@@ -63,6 +63,11 @@ export class CompileResult {
   ) {}
 
   public getAbi(contractName: string): any {
+    if (typeof this.contracts[contractName] === 'undefined') {
+      throw new Error('contract name is invalid');
+      return undefined;
+    }
+
     return this.contracts[contractName].abi;
   }
 }
@@ -85,10 +90,10 @@ export const compileSol = async (
     option,
   );
 
-  if (output.errors){
+  if (output.errors) {
     let errMsg = '';
     for (let i = 0; i < output.errors.length; i++) {
-      errMsg = errMsg + (output.errors[i].message + "\n");
+      errMsg = errMsg + (output.errors[i].message + '\n');
     }
     throw new Error(`Compilation Error! ${errMsg}`);
   }

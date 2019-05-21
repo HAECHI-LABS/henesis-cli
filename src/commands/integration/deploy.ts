@@ -51,7 +51,7 @@ export default class Deploy extends Command {
       }
     } catch (err) {
       await this.config.runHook('analyticsSend', { error: err });
-      this.error(err, { exit: 1 });
+      this.error(err.message, { exit: 1 });
     }
   }
 }

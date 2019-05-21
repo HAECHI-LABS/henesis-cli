@@ -28,7 +28,7 @@ export default class Status extends Command {
       this.log(msg.substring(0, msg.length - 1));
     } catch (err) {
       await this.config.runHook('analyticsSend', { error: err });
-      this.error(err, { exit: 1 });
+      this.error(err.message, { exit: 1 });
     }
   }
 }

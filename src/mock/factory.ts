@@ -1,10 +1,10 @@
 import {
-  ChainType,
+  PlatformType,
+  NetworkType,
   Handler,
   HandlerSpec,
   Integration,
   IntegrationSpec,
-  Subscriber,
   Webhook,
   LoginResponse,
 } from '../types';
@@ -25,12 +25,78 @@ export function newMockIntegration(): Integration {
     faker.random.number(2),
     faker.name.firstName(),
     'v1',
-    new Subscriber(
-      'localhost:8080',
-      '0x12u31ijdiasdjmi',
-      'abi',
-      ChainType.ETHEREUM,
-    ),
+    [
+      {
+        constant: false,
+        inputs: [
+          {
+            name: 'to',
+            type: 'address',
+          },
+        ],
+        name: 'delegate',
+        outputs: [],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+      {
+        constant: true,
+        inputs: [],
+        name: 'winningProposal',
+        outputs: [
+          {
+            name: '_winningProposal',
+            type: 'uint8',
+          },
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        constant: false,
+        inputs: [
+          {
+            name: 'toVoter',
+            type: 'address',
+          },
+        ],
+        name: 'giveRightToVote',
+        outputs: [],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+      {
+        constant: false,
+        inputs: [
+          {
+            name: 'toProposal',
+            type: 'uint8',
+          },
+        ],
+        name: 'vote',
+        outputs: [],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+      {
+        inputs: [
+          {
+            name: '_numProposals',
+            type: 'uint8',
+          },
+        ],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'constructor',
+      },
+    ],
+    '0x12u31ijdiasdjmi',
+    PlatformType.ETHEREUM,
+    NetworkType.MAINNET,
     [
       new Handler(
         faker.random.alphaNumeric(),
@@ -38,6 +104,7 @@ export function newMockIntegration(): Integration {
         'event',
         'v1',
         faker.random.words(5),
+        'dep',
         'tsnode8',
         'handler',
       ),
@@ -59,9 +126,9 @@ export function newMockIntegrationSpec(): IntegrationSpec {
       name: 'example',
       compilerVersion: '0.5.8',
     },
-    network: {
-      type: 'klaytn',
-      endpoint: 'http://localhost:8545',
+    blockchain: {
+      platform: 'klaytn',
+      network: 'mainnet',
     },
     handlers: {
       event1: {

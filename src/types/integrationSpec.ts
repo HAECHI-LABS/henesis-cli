@@ -1,4 +1,4 @@
-import { ChainType } from './Integration';
+import { PlatformType, NetworkType } from './Integration';
 
 export interface IntegrationSpec {
   version: string;
@@ -9,9 +9,9 @@ export interface IntegrationSpec {
     name: string;
     compilerVersion: string;
   };
-  network: {
-    endpoint: string;
-    type: ChainType;
+  blockchain: {
+    platform: PlatformType;
+    network: NetworkType;
   };
   handlers: { [key: string]: HandlerSpec };
   webhook: WebhookSpec;

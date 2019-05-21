@@ -17,19 +17,19 @@ describe('integration:status', () => {
           buildMsg(
             res[0].integrationId,
             res[0].name,
-            res[0].subscriber.type,
+            res[0].platform,
             res[0].version,
             res[0].status,
           ) +
           buildMsg(
             res[1].integrationId,
             res[1].name,
-            res[1].subscriber.type,
+            res[1].platform,
             res[1].version,
             res[1].status,
           ) +
           '\n';
-        expect(ctx.stdout).to.equal(expected.substring(0, expected.length-1));
+        expect(ctx.stdout).to.equal(expected.substring(0, expected.length - 1));
       });
   });
 

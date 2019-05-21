@@ -33,7 +33,7 @@ password:
         this.log(`🎉 Login Success from ${userInfo.email} 🎉`);
       } catch (err) {
         configstore.delete('analytics');
-        this.error(err);
+        this.error(err.message);
         await this.config.runHook('analyticsSend', { error: err });
         this.exit(1);
       }

@@ -26,7 +26,7 @@ export default class Describe extends Command {
       this.log(JSON.stringify(integration, undefined, 2));
     } catch (err) {
       await this.config.runHook('analyticsSend', { error: err });
-      this.error(err, { exit: 1 });
+      this.error(err.message, { exit: 1 });
     }
   }
 }

@@ -6,7 +6,6 @@ import {
   HandlerSpec,
   Integration,
   IntegrationSpec,
-  Subscriber,
   Webhook,
 } from '../../types';
 import integrationRpc from '../../rpc/integration';
@@ -52,22 +51,22 @@ export default class Deploy extends Command {
       }
     } catch (err) {
       await this.config.runHook('analyticsSend', { error: err });
-      this.error(err, { exit: 1 });
+      this.error(err.message, { exit: 1 });
     }
   }
 }
 
-async function getAbiString(
+async function getAbi(
   path: string,
   compilerVersion: string,
   contractName: string,
-): Promise<string> {
+): Promise<any> {
   const result: CompileResult = await compileSol(path, {
     solcVersion: compilerVersion,
     evmVersion: 'byzantium',
   } as Option);
 
-  return JSON.stringify(result.getAbi(contractName));
+  return result.getAbi(contractName);
 }
 
 async function toHandlers(handlerSpecs: {
@@ -83,6 +82,7 @@ async function toHandlers(handlerSpecs: {
         handlerSpecs[name].event,
         handlerSpecs[name].version,
         code,
+        handlerSpecs[name].dep,
         handlerSpecs[name].runtime,
         handlerSpecs[name].function,
       ),
@@ -93,7 +93,7 @@ async function toHandlers(handlerSpecs: {
 }
 
 async function toIntegration(spec: IntegrationSpec): Promise<Integration> {
-  const abiString: string = await getAbiString(
+  const abi: any = await getAbi(
     spec.contract.path,
     spec.contract.compilerVersion,
     spec.contract.name,
@@ -104,12 +104,10 @@ async function toIntegration(spec: IntegrationSpec): Promise<Integration> {
     0,
     spec.name,
     spec.version,
-    new Subscriber(
-      spec.network.endpoint,
-      spec.contract.address,
-      abiString,
-      spec.network.type,
-    ),
+    abi,
+    spec.contract.address,
+    spec.blockchain.platform,
+    spec.blockchain.network,
     handlers,
     new Webhook(spec.webhook.url, spec.webhook.method, spec.webhook.headers),
     '',

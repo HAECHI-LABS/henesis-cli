@@ -15,7 +15,7 @@ const defaultSpecFile = './henesis.yaml';
 
 export default class Deploy extends Command {
   public static description = 'deploy a integration';
-  public static examples = [`$ ql-cli integration:deploy`];
+  public static examples = [`$ henesis integration:deploy`];
   public static flags = {
     file: flags.string({ char: 'f', default: defaultSpecFile }),
     update: flags.boolean({ char: 'u' }),

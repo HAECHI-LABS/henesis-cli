@@ -3,7 +3,7 @@ import integrationRpc from '../../rpc/integration';
 
 export default class Status extends Command {
   public static description = 'get integrations';
-  public static examples = [`$ ql-cli integration:list`];
+  public static examples = [`$ henesis integration:list`];
   public static flags = {};
   public static args = [];
 

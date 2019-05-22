@@ -61,7 +61,7 @@
 	},
 	"files": [ "/bin", "/lib", "/npm-shrinkwrap.json", "/oclif.manifest.json" ],
 	"homepage": "https://github.com/HAECHI-LABS/henesis-cli",
-	"keywords": [ "oclif" ],
+	"keywords": [ "oclif", "blockchain", "ethereum", "cli", "henssis", "SmartContract", "smart constract", "haechi" ],
 	"license": "LGPL3",
 	"main": "lib/index.js",
 	"oclif": {

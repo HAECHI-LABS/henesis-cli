@@ -73,7 +73,7 @@ describe('IntegrationRpc', () => {
     it('should get a integration by name', async () => {
       const integration = newMockIntegration();
       await mockServer
-        .get('/integrations/v1/search/findByName')
+        .get('/integrations/v1/findByName')
         .withQuery({ name: integration.name })
         .thenJSON(200, integration);
 

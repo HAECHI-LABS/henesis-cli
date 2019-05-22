@@ -1,6 +1,23 @@
 import { Command } from '@oclif/command';
 import integrationRpc from '../../rpc/integration';
 
+export function buildMsg(
+  id: string,
+  name: string,
+  network: string,
+  version: string,
+  status: string,
+): string {
+  return (
+    id.padEnd(20) +
+    name.padEnd(15) +
+    network.padEnd(15) +
+    version.padEnd(15) +
+    status.padEnd(15) +
+    '\n'
+  );
+}
+
 export default class Status extends Command {
   public static description = 'get integrations';
   public static examples = [`$ henesis integration:list`];
@@ -31,21 +48,4 @@ export default class Status extends Command {
       this.error(err.message, { exit: 1 });
     }
   }
-}
-
-export function buildMsg(
-  id: string,
-  name: string,
-  network: string,
-  version: string,
-  status: string,
-): string {
-  return (
-    id.padEnd(20) +
-    name.padEnd(15) +
-    network.padEnd(15) +
-    version.padEnd(15) +
-    status.padEnd(15) +
-    '\n'
-  );
 }

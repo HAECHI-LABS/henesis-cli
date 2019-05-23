@@ -1,22 +1,33 @@
 import { Command } from '@oclif/command';
+import { cli } from 'cli-ux';
 import integrationRpc from '../../rpc/integration';
 
-export function buildMsg(
-  id: string,
-  name: string,
-  network: string,
-  version: string,
-  status: string,
-): string {
-  return (
-    id.padEnd(20) +
-    name.padEnd(15) +
-    network.padEnd(15) +
-    version.padEnd(15) +
-    status.padEnd(15) +
-    '\n'
-  );
-}
+export const columns = {
+  integrationId: {
+    header: 'Id',
+    minWidth: 15,
+  },
+  name: {
+    header: 'Name',
+    minWidth: 10,
+  },
+  platform: {
+    header: 'Platform',
+    minWidth: 10,
+  },
+  network: {
+    header: 'Network',
+    minWidth: 10,
+  },
+  version: {
+    header: 'Version',
+    minWidth: 10,
+  },
+  status: {
+    header: 'Status',
+    minWidth: 10,
+  },
+};
 
 export default class Status extends Command {
   public static description = 'get integrations';
@@ -24,25 +35,16 @@ export default class Status extends Command {
   public static flags = {};
   public static args = [];
 
-  public async run() {
+  public async run(): Promise<void> {
     try {
       const integrations = await integrationRpc.getIntegrations();
-      let msg = buildMsg('ID', 'Name', 'Network', 'Version', 'Status');
-      for (let integration of integrations) {
-        msg =
-          msg +
-          buildMsg(
-            integration.integrationId,
-            integration.name,
-            integration.platform,
-            integration.version,
-            integration.status,
-          );
-      }
+
+      cli.table(integrations, columns, {
+        printLine: this.log,
+      });
       await this.config.runHook('analyticsSend', {
         command: 'integration:list',
       });
-      this.log(msg.substring(0, msg.length - 1));
     } catch (err) {
       await this.config.runHook('analyticsSend', { error: err });
       this.error(err.message, { exit: 1 });

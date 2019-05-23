@@ -23,7 +23,7 @@ export function newMockIntegration(): Integration {
   return new Integration(
     faker.random.alphaNumeric(15),
     faker.random.number(2),
-    faker.name.firstName(),
+    'asdf',
     'v1',
     [
       {

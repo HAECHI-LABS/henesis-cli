@@ -15,6 +15,10 @@ export const columns = {
     header: 'Platform',
     minWidth: 10,
   },
+  network: {
+    header: 'Network',
+    minWidth: 10,
+  },
   version: {
     header: 'Version',
     minWidth: 10,

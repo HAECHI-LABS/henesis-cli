@@ -1,5 +1,5 @@
 import { cli } from 'cli-ux';
-import configstore from '../../configstore';
+import configstore from '../../common/configstore';
 
 const hook = async function({}): Promise<void> {
   const isAgree = configstore.get('analytics');

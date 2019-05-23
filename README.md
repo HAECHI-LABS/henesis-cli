@@ -1,4 +1,5 @@
-# henesis-cli
+henesis-cli
+===========
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 
@@ -104,4 +105,3 @@ There are tasks to be done before the deploy command.
 $ henesis logout
 🤗 Logout Success 👍
 ```
-

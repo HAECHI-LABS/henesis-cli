@@ -8,7 +8,7 @@ declare var require: (moduleId: string) => any;
 export interface Option {
   evmVersion: string;
   solcVersion: string;
-  optimizer: Optimizer;
+  optimizer?: Optimizer;
 }
 
 export interface Optimizer {
@@ -31,16 +31,16 @@ export interface CompiledOutputs {
 }
 
 export interface CompiledContract {
-  abi: Object[];
-  devdoc: Object;
-  evm: Object;
+  abi: Record<string, any>[];
+  devdoc: Record<string, any>;
+  evm: Record<string, any>;
   metadata: string;
-  userdoc: Object;
+  userdoc: Record<string, any>;
 }
 
 export interface CompiledSource {
-  ast: Object;
-  legacyAST: Object;
+  ast: Record<string, any>;
+  legacyAST: Record<string, any>;
   id: number;
 }
 

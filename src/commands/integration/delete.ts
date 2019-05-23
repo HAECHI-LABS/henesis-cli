@@ -3,7 +3,7 @@ import integrationRpc from '../../rpc/integration';
 
 export default class Delete extends Command {
   public static description = 'delete a integration';
-  public static examples = [`$ ql-cli integration:delete`];
+  public static examples = [`$ henesis integration:delete`];
   public static flags = {};
   public static args = [{ name: 'integrationId' }];
 

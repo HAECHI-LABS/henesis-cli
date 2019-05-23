@@ -9,52 +9,9 @@ import {
   Webhook,
 } from '../../types';
 import integrationRpc from '../../rpc/integration';
-import { CompileResult, compileSol, Option } from '../../compiler';
+import { CompileResult, compileSol } from '../../compiler';
 
 const defaultSpecFile = './henesis.yaml';
-
-export default class Deploy extends Command {
-  public static description = 'deploy a integration';
-  public static examples = [`$ ql-cli integration:deploy`];
-  public static flags = {
-    file: flags.string({ char: 'f', default: defaultSpecFile }),
-    update: flags.boolean({ char: 'u' }),
-  };
-  public static args = [];
-
-  public async run() {
-    const { flags } = this.parse(Deploy);
-    try {
-      const integrationSpec: IntegrationSpec = yaml.safeLoad(
-        fs.readFileSync(flags.file || defaultSpecFile, 'utf8'),
-      );
-
-      await this.config.runHook('analyticsSend', {
-        command: 'integration:deploy',
-      });
-
-      if (flags.update) {
-        const integration = await integrationRpc.getIntegrationByName(
-          integrationSpec.name,
-        );
-        await integrationRpc.updateIntegration(
-          integration.integrationId,
-          await toIntegration(integrationSpec),
-        );
-        this.log(`${integration.integrationId} has been updated`);
-      } else {
-        const integration = await integrationRpc.createIntegration(
-          await toIntegration(integrationSpec),
-        );
-        this.log(`${integration.integrationId} has been deployed`);
-        return;
-      }
-    } catch (err) {
-      await this.config.runHook('analyticsSend', { error: err });
-      this.error(err.message, { exit: 1 });
-    }
-  }
-}
 
 async function getAbi(
   path: string,
@@ -64,7 +21,7 @@ async function getAbi(
   const result: CompileResult = await compileSol(path, {
     solcVersion: compilerVersion,
     evmVersion: 'byzantium',
-  } as Option);
+  });
 
   return result.getAbi(contractName);
 }
@@ -112,4 +69,47 @@ async function toIntegration(spec: IntegrationSpec): Promise<Integration> {
     new Webhook(spec.webhook.url, spec.webhook.method, spec.webhook.headers),
     '',
   );
+}
+
+export default class Deploy extends Command {
+  public static description = 'deploy a integration';
+  public static examples = [`$ henesis integration:deploy`];
+  public static flags = {
+    file: flags.string({ char: 'f', default: defaultSpecFile }),
+    update: flags.boolean({ char: 'u' }),
+  };
+  public static args = [];
+
+  public async run() {
+    const { flags } = this.parse(Deploy);
+    try {
+      const integrationSpec: IntegrationSpec = yaml.safeLoad(
+        fs.readFileSync(flags.file || defaultSpecFile, 'utf8'),
+      );
+
+      await this.config.runHook('analyticsSend', {
+        command: 'integration:deploy',
+      });
+
+      if (flags.update) {
+        const integration = await integrationRpc.getIntegrationByName(
+          integrationSpec.name,
+        );
+        await integrationRpc.updateIntegration(
+          integration.integrationId,
+          await toIntegration(integrationSpec),
+        );
+        this.log(`${integration.integrationId} has been updated`);
+      } else {
+        const integration = await integrationRpc.createIntegration(
+          await toIntegration(integrationSpec),
+        );
+        this.log(`${integration.integrationId} has been deployed`);
+        return;
+      }
+    } catch (err) {
+      await this.config.runHook('analyticsSend', { error: err });
+      this.error(err.message, { exit: 1 });
+    }
+  }
 }

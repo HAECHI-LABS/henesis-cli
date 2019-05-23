@@ -56,9 +56,7 @@ describe('integration:deploy', () => {
       .nock('http://localhost:8080', api => {
         api.put(`/integrations/v1/${res.integrationId}`).reply(200, res);
         api
-          .get(
-            `/integrations/v1/search/findByName?name=${integrationSpec.name}`,
-          )
+          .get(`/integrations/v1/findByName?name=${integrationSpec.name}`)
           .reply(200, res);
       })
       .stdout()

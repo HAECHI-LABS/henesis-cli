@@ -68,15 +68,15 @@ describe('IntegrationRpc', () => {
       expect(response).to.deep.equal(integration);
     });
   });
-  
+
   describe('#getIntegrationByName()', async () => {
     it('should get a integration by name', async () => {
       const integration = newMockIntegration();
       await mockServer
-        .get('/integrations/v1/search/findByName')
-        .withQuery({"name":integration.name})
+        .get('/integrations/v1/findByName')
+        .withQuery({ name: integration.name })
         .thenJSON(200, integration);
-      
+
       const response: Integration | null = await integrationRpc.getIntegrationByName(
         integration.name,
       );

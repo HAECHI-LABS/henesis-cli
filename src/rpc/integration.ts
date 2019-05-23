@@ -38,7 +38,7 @@ export class IntegrationRpc {
    */
   public async getIntegrationByName(name: string): Promise<Integration> {
     const json = await getWretcher()
-      .url(this.server + '/search/findByName')
+      .url(this.server + '/findByName')
       .query({ name: name })
       .get()
       .json()

@@ -10,7 +10,7 @@ export default class Init extends Command {
   public static description = 'describe the command here';
 
   public static examples = [
-    `$ cli init -n henesis
+    `$ henesis init -n henesis
 `,
   ];
 

@@ -2,7 +2,6 @@ import {
   PlatformType,
   NetworkType,
   Handler,
-  HandlerSpec,
   Integration,
   IntegrationSpec,
   Webhook,
@@ -127,8 +126,8 @@ export function newMockIntegrationSpec(): IntegrationSpec {
       compilerVersion: '0.5.8',
     },
     blockchain: {
-      platform: 'klaytn',
-      network: 'mainnet',
+      platform: PlatformType.KLAYTN,
+      network: NetworkType.MAINNET,
     },
     handlers: {
       event1: {
@@ -138,7 +137,7 @@ export function newMockIntegrationSpec(): IntegrationSpec {
         path: __dirname + '/../../templates/handler/execution.ts',
         dep: __dirname + '/../../templates/handler/package.json',
         function: 'excution',
-      } as HandlerSpec,
+      },
     },
     webhook: {
       url: 'https://localhost:8080',
@@ -147,5 +146,5 @@ export function newMockIntegrationSpec(): IntegrationSpec {
         Authorization: 'Bearer aisdjiajdais',
       },
     },
-  } as IntegrationSpec;
+  };
 }

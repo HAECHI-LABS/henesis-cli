@@ -1,11 +1,11 @@
 {
-	"name": "cli",
-	"version": "0.0.0",
-	"author": "Choi Yoons @Nipol",
+	"name": "henesis-cli",
+	"version": "0.1.0",
+	"author": "Haechi labs Team",
 	"bin": {
 		"cli": "./bin/run"
 	},
-	"bugs": "https://github.com/Nipol/cli/issues",
+	"bugs": "https://github.com/HAECHI-LABS/henesis-cli/issues",
 	"dependencies": {
 		"@oclif/command": "^1.5.13",
 		"@oclif/config": "^1.12.12",
@@ -57,26 +57,17 @@
 		"typescript": "^3.4.3"
 	},
 	"engines": {
-		"node": ">=8.0.0"
+		"node": ">=10.0.0"
 	},
-	"files": [
-		"/bin",
-		"/lib",
-		"/npm-shrinkwrap.json",
-		"/oclif.manifest.json"
-	],
-	"homepage": "https://github.com/Nipol/cli",
-	"keywords": [
-		"oclif"
-	],
+	"files": [ "/bin", "/lib", "/npm-shrinkwrap.json", "/oclif.manifest.json" ],
+	"homepage": "https://github.com/HAECHI-LABS/henesis-cli",
+	"keywords": [ "oclif", "blockchain", "ethereum", "cli", "henssis", "SmartContract", "smart constract", "haechi" ],
 	"license": "LGPL3",
 	"main": "lib/index.js",
 	"oclif": {
 		"commands": "./lib/commands",
-		"bin": "cli",
-		"plugins": [
-			"@oclif/plugin-help"
-		],
+		"bin": "henesis",
+		"plugins": [ "@oclif/plugin-help" ],
 		"hooks": {
 			"init": "./lib/hooks/init/wretch",
 			"analyticsCheck": "./lib/hooks/analytics/check",
@@ -88,7 +79,7 @@
 			}
 		}
 	},
-	"repository": "Nipol/cli",
+	"repository": "HAECHI-LABS/henesis-cli",
 	"scripts": {
 		"postpack": "rm -f oclif.manifest.json",
 		"prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",

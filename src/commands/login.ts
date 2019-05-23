@@ -7,7 +7,7 @@ export default class Login extends Command {
   public static description = 'Perform a login';
 
   public static examples = [
-    `$ cli login
+    `$ henesis login
 email:
 password: 
 `,

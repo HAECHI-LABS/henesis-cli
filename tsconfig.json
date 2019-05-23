@@ -15,7 +15,7 @@
     "resolveJsonModule":true
   },
   "include": [
-    "src/**/*", "templates"
+    "src/**/*"
   ],
   "exclude": [
     "node_modules",
@@ -25,7 +25,8 @@
     "coverage",
     "*.config.js",
     "*.babel.js",
-    "specs"
+    "specs",
+    "templates"
   ],
   "types" : ["mocha"]
 }

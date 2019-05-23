@@ -2,7 +2,7 @@ import { Command, flags } from '@oclif/command';
 import { existsSync, writeFileSync, mkdirSync, readFileSync } from 'fs';
 import { join } from 'path';
 
-const TEMPLATE_DIR = join(__dirname, '..', 'templates');
+const TEMPLATE_DIR = join(__dirname, '..', '..', 'templates');
 const MODE_0666 = parseInt('0666', 8);
 
 export default class Init extends Command {

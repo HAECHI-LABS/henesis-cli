@@ -14,6 +14,7 @@
 		"@types/js-yaml": "^3.12.1",
 		"@types/universal-analytics": "^0.4.2",
 		"class-transformer": "^0.2.0",
+		"cli-ux": "^5.2.1",
 		"configstore": "^4.0.0",
 		"find-cache-dir": "^3.0.0",
 		"find-node-modules": "^2.0.0",

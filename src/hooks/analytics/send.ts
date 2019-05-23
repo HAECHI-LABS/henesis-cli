@@ -1,4 +1,4 @@
-import configstore from '../../configstore';
+import configstore from '../../common/configstore';
 import * as ua from 'universal-analytics';
 
 const hook = async function(argv: {

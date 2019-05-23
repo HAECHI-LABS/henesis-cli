@@ -1,6 +1,6 @@
 import { Hook } from '@oclif/config';
 import wretch from 'wretch';
-import configstore from '../../configstore';
+import configstore from '../../common/configstore';
 import { setWretcher } from '../../rpc/wretch';
 
 // set for nodejs

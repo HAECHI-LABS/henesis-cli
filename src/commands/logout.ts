@@ -1,5 +1,5 @@
 import { Command } from '@oclif/command';
-import configstore from '../configstore';
+import configstore from '../common/configstore';
 
 export default class Logout extends Command {
   public static description = 'Perform a logout';

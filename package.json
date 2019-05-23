@@ -1,9 +1,9 @@
 {
-	"name": "henesis-cli",
-	"version": "0.4.0",
+	"name": "@haechi-labs/henesis-cli",
+	"version": "1.0.0-beta",
 	"author": "Haechi labs Team",
 	"bin": {
-		"cli": "./bin/run"
+		"henesis": "./bin/run"
 	},
 	"bugs": "https://github.com/HAECHI-LABS/henesis-cli/issues",
 	"dependencies": {

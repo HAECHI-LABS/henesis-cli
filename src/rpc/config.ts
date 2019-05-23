@@ -1,2 +1,2 @@
-export const baseUrl = 'http://localhost:8080';
+export const baseUrl = 'https://api.henesis.io';
 export const rpcVersion = 'v1';

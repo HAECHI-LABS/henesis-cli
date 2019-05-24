@@ -1,13 +1,7 @@
 henesis-cli 
 ===========
 
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-
-[![Version](https://img.shields.io/npm/v/cli.svg)](https://www.npmjs.com/package/@haechi-labs/henesis-cli)
-
-[![Downloads/week](https://img.shields.io/npm/dw/cli.svg)](https://www.npmjs.com/package/@haechi-labs/henesis-cli)
-
-[![License](https://img.shields.io/npm/l/cli.svg)](https://github.com/HAECHI-LABS/henesis-cli/blob/master/package.json)
+[![License](https://img.shields.io/npm/l/@haechi-labs/henesis-cli.svg)](https://github.com/HAECHI-LABS/henesis-cli/blob/master/package.json) [![Version](https://img.shields.io/npm/v/@haechi-labs/henesis-cli.svg)](https://www.npmjs.com/package/@haechi-labs/henesis-cli) [![Platform](https://img.shields.io/node/v/@haechi-labs/henesis-cli.svg)](https://github.com/HAECHI-LABS/henesis-cli/blob/master/package.json) [![ci](https://travis-ci.com/HAECHI-LABS/henesis-cli.svg?branch=master)]()
 
 ## Getting Started
 
@@ -21,7 +15,7 @@ $ npm install -g @haechi-labs/henesis-cli
 $ henesis help
 
 VERSION
-  henesis-cli/0.1.0 darwin-x64 node-v10.15.3
+  @haechi-labs/henesis-cli/1.0.0-beta darwin-x64 node-v10.15.3
 
 USAGE
   $ henesis [COMMAND]

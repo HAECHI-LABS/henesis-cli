@@ -1,9 +1,9 @@
 {
-	"name": "henesis-cli",
-	"version": "0.4.0",
+	"name": "@haechi-labs/henesis-cli",
+	"version": "1.0.0-beta",
 	"author": "Haechi labs Team",
 	"bin": {
-		"cli": "./bin/run"
+		"henesis": "./bin/run"
 	},
 	"bugs": "https://github.com/HAECHI-LABS/henesis-cli/issues",
 	"dependencies": {
@@ -85,7 +85,7 @@
 	"scripts": {
 		"postpack": "rm -f oclif.manifest.json",
 		"prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-		"test": "nyc --extension .ts mocha --forbid-only \"src/**/*.spec.ts\"",
+		"test": "export TEST='true' && nyc --extension .ts mocha --forbid-only \"src/**/*.spec.ts\"",
 		"version": "oclif-dev readme && git add README.md",
 		"lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
 	},

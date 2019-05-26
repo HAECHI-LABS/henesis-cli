@@ -64,10 +64,8 @@ export class CompileResult {
 
   public getAbi(contractName: string): any {
     if (typeof this.contracts[contractName] === 'undefined') {
-      throw new Error('contract name is invalid');
-      return undefined;
+      return undefined
     }
-
     return this.contracts[contractName].abi;
   }
 }

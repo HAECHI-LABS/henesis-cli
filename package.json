@@ -1,6 +1,6 @@
 {
 	"name": "@haechi-labs/henesis-cli",
-	"version": "1.0.0-beta",
+	"version": "1.0.0-beta.6",
 	"author": "Haechi labs Team",
 	"bin": {
 		"henesis": "./bin/run"
@@ -19,6 +19,7 @@
 		"find-cache-dir": "^3.0.0",
 		"find-node-modules": "^2.0.0",
 		"form-data": "^2.3.3",
+		"js-yaml": "^3.13.1",
 		"nock": "^10.0.6",
 		"node-fetch": "^2.5.0",
 		"ora": "^3.4.0",
@@ -44,6 +45,7 @@
 		"@typescript-eslint/eslint-plugin": "^1.7.0",
 		"@typescript-eslint/parser": "^1.7.0",
 		"chai": "^4.2.0",
+		"cp-cli": "^2.0.0",
 		"eslint": "^5.16.0",
 		"eslint-config-prettier": "^4.2.0",
 		"eslint-plugin-prettier": "^3.0.1",
@@ -54,14 +56,13 @@
 		"nyc": "^14.1.0",
 		"prettier": "^1.17.0",
 		"rimraf": "^2.6.3",
-		"ts-node": "^8.0.3",
-		"typescript": "^3.4.3",
-		"cp-cli": "^2.0.0"
+		"ts-node": "^8.2.0",
+		"typescript": "^3.4.3"
 	},
 	"engines": {
 		"node": ">=10.0.0"
 	},
-	"files": [ "/bin", "/lib", "/npm-shrinkwrap.json", "/oclif.manifest.json", "/templates" ],
+	"files": [ "/bin", "/lib", "/npm-shrinkwrap.json", "/oclif.manifest.json", "/templates", "/templates20" ],
 	"homepage": "https://github.com/HAECHI-LABS/henesis-cli",
 	"keywords": [ "oclif", "blockchain", "ethereum", "cli", "henssis", "SmartContract", "smart constract", "haechi" ],
 	"license": "LGPL3",
@@ -83,8 +84,9 @@
 	},
 	"repository": "HAECHI-LABS/henesis-cli",
 	"scripts": {
+		"tsc": "tsc -b",
 		"postpack": "rm -f oclif.manifest.json",
-		"prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+		"prepack": "tsc -b && oclif-dev manifest && oclif-dev readme",
 		"test": "export TEST='true' && nyc --extension .ts mocha --forbid-only \"src/**/*.spec.ts\"",
 		"version": "oclif-dev readme && git add README.md",
 		"lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"

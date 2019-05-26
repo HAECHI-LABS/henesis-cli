@@ -1,10 +1,10 @@
 version: v1
-name: projectname
+name: erc20-sample
 
 contract:
   address: '0x'
-  path: ./contract/example.sol
-  name: example
+  path: ./contract/ERC20.sol
+  name: ERC20
   compilerVersion: 0.5.8
 
 blockchain:
@@ -12,21 +12,21 @@ blockchain:
   network: mainnet
 
 handlers:
-  event1:
-    event: Execution(address)
+  transfer:
+    event: Transfer(address,address,uint)
     version: v1
     runtime: tsnode8
-    path: ./handler/execution.ts
+    path: ./handler/ERC20-transfer.ts
     dep: ./handler/package.json
-    function: execution
+    function: transfer
 
-  event2:
-    event: Execution(address,address)
+  approval:
+    event: Approval(address,address,uint)
     version: v1
     runtime: tsnode8
-    path: ./handler/execution2.ts
+    path: ./handler/ERC20-approval.ts
     dep: ./handler/package.json
-    function: execution2
+    function: approval
 
 webhook:
   url: https://localhost:8080

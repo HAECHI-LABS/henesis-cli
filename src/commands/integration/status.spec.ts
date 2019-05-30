@@ -18,7 +18,7 @@ describe('integration:status', (): void => {
           'shows integration lists',
           (ctx): void => {
             expect(ctx.stdout).to.equal(
-              `Id              Name      Platform  Network   Version   Status    \n${
+              `https://dashbard.henesis.io\nYou can login with the same email and password as henesis.\nId              Name      Platform  Network   Version   Status    \n${
                 res[0].integrationId
               } asdf      ethereum  mainnet   v1        Starting  \n${
                 res[1].integrationId

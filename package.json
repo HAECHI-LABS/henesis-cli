@@ -1,6 +1,6 @@
 {
 	"name": "@haechi-labs/henesis-cli",
-	"version": "1.0.0-beta.6",
+	"version": "1.0.0-beta.8",
 	"author": "Haechi labs Team",
 	"bin": {
 		"henesis": "./bin/run"
@@ -64,30 +64,22 @@
 	},
 	"files": [ "/bin", "/lib", "/npm-shrinkwrap.json", "/oclif.manifest.json", "/templates", "/templates20" ],
 	"homepage": "https://github.com/HAECHI-LABS/henesis-cli",
-	"keywords": [
-		"oclif",
-		"blockchain",
-		"ethereum",
-		"cli",
-		"henssis",
-		"SmartContract",
-		"smart constract",
-		"haechi"
-	],
+	"keywords": [ "oclif", "blockchain", "ethereum", "cli", "henssis", "SmartContract", "smart constract", "haechi" ],
 	"license": "LGPL3",
 	"main": "lib/index.js",
 	"oclif": {
 		"commands": "./lib/commands",
 		"bin": "henesis",
-		"plugins": [
-			"@oclif/plugin-help"
-		],
+		"plugins": [ "@oclif/plugin-help" ],
 		"hooks": {
 			"init": "./lib/hooks/init/wretch",
 			"analyticsCheck": "./lib/hooks/analytics/check",
 			"analyticsSend": "./lib/hooks/analytics/send"
 		},
 		"topics": {
+			"help": {
+				"description": "henesis cli"
+			},
 			"integration": {
 				"description": "manage integrations"
 			}

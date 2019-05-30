@@ -24,7 +24,7 @@ describe('integration:deploy', () => {
         api.post('/integrations/v1').reply(200, res),
       )
       .stdout()
-      .command([`integration:deploy`, `--file=${specPath}`])
+      .command([`integration:deploy`, `--path=${specPath}`])
       .it('should deploy a integration', ctx => {
         expect(ctx.stdout).to.equal(`${res.integrationId} has been deployed\n`);
       });
@@ -60,9 +60,11 @@ describe('integration:deploy', () => {
           .reply(200, res);
       })
       .stdout()
-      .command([`integration:deploy`, `--file=${specPath}`, `-u`])
+      .command([`integration:deploy`, `--path=${specPath}`, `-f`])
       .it('should deploy a integration with update option', ctx => {
-        expect(ctx.stdout).to.equal(`${res.integrationId} has been updated\n`);
+        expect(ctx.stdout).to.equal(
+          `${res.integrationId} has been deployed with force\n`,
+        );
       });
   });
 });

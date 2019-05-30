@@ -20,12 +20,14 @@
     "node_modules",
     "build",
     "dist",
+    "lib",
     "__mocks__",
     "coverage",
     "*.config.js",
     "*.babel.js",
     "specs",
-    "templates"
+    "templates",
+    "templates20"
   ],
   "types" : ["mocha"]
 }

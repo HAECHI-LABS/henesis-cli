@@ -7,7 +7,8 @@ const TEMPLATE_ERC20_DIR = join(__dirname, '..', '..', 'templates20');
 const MODE_0666 = parseInt('0666', 8);
 
 export default class Init extends Command {
-  public static description = 'describe the command here';
+  public static description =
+    'Create the folder structure required for your project.';
 
   public static examples = [
     `$ henesis init -n henesis
@@ -65,49 +66,49 @@ export default class Init extends Command {
 
     // TODO: with force.
     if (flags.erc20 === true) {
-      mkdirSync(`${destinationPath}/handler`);
+      mkdirSync(`${destinationPath}/handlers`);
       writeFileSync(
-        join(`${destinationPath}/handler`, 'ERC20-approval.ts'),
-        readFileSync(join(`${dir}/handler`, 'ERC20-approval.ts')),
+        join(`${destinationPath}/handlers`, 'ERC20-approval.ts'),
+        readFileSync(join(`${dir}/handlers`, 'ERC20-approval.ts')),
         { mode: MODE_0666 },
       );
       writeFileSync(
-        join(`${destinationPath}/handler`, 'ERC20-transfer.ts'),
-        readFileSync(join(`${dir}/handler`, 'ERC20-transfer.ts')),
+        join(`${destinationPath}/handlers`, 'ERC20-transfer.ts'),
+        readFileSync(join(`${dir}/handlers`, 'ERC20-transfer.ts')),
         { mode: MODE_0666 },
       );
       writeFileSync(
-        join(`${destinationPath}/handler`, 'package.json'),
-        readFileSync(join(`${dir}/handler`, 'package.json')),
+        join(`${destinationPath}/handlers`, 'package.json'),
+        readFileSync(join(`${dir}/handlers`, 'package.json')),
         { mode: MODE_0666 },
       );
-      mkdirSync(`${destinationPath}/contract`);
+      mkdirSync(`${destinationPath}/contracts`);
       writeFileSync(
-        join(`${destinationPath}/contract`, 'ERC20.sol'),
-        readFileSync(join(`${dir}/contract`, 'ERC20.sol')),
+        join(`${destinationPath}/contracts`, 'ERC20.sol'),
+        readFileSync(join(`${dir}/contracts`, 'ERC20.sol')),
         { mode: MODE_0666 },
       );
     } else {
-      mkdirSync(`${destinationPath}/handler`);
+      mkdirSync(`${destinationPath}/handlers`);
       writeFileSync(
-        join(`${destinationPath}/handler`, 'execution.ts'),
-        readFileSync(join(`${dir}/handler`, 'execution.ts')),
+        join(`${destinationPath}/handlers`, 'execution.ts'),
+        readFileSync(join(`${dir}/handlers`, 'execution.ts')),
         { mode: MODE_0666 },
       );
       writeFileSync(
-        join(`${destinationPath}/handler`, 'execution2.ts'),
-        readFileSync(join(`${dir}/handler`, 'execution2.ts')),
+        join(`${destinationPath}/handlers`, 'execution2.ts'),
+        readFileSync(join(`${dir}/handlers`, 'execution2.ts')),
         { mode: MODE_0666 },
       );
       writeFileSync(
-        join(`${destinationPath}/handler`, 'package.json'),
-        readFileSync(join(`${dir}/handler`, 'package.json')),
+        join(`${destinationPath}/handlers`, 'package.json'),
+        readFileSync(join(`${dir}/handlers`, 'package.json')),
         { mode: MODE_0666 },
       );
-      mkdirSync(`${destinationPath}/contract`);
+      mkdirSync(`${destinationPath}/contracts`);
       writeFileSync(
-        join(`${destinationPath}/contract`, 'example.sol'),
-        readFileSync(join(`${dir}/contract`, 'example.sol')),
+        join(`${destinationPath}/contracts`, 'example.sol'),
+        readFileSync(join(`${dir}/contracts`, 'example.sol')),
         { mode: MODE_0666 },
       );
     }

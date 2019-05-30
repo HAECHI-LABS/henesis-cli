@@ -21,6 +21,7 @@ USAGE
   $ henesis [COMMAND]
 
 COMMANDS
+  changepw     Perform a change password
   help         display help for cli
   init         describe the command here
   integration  manage integrations
@@ -92,8 +93,21 @@ There are tasks to be done before the deploy command.
 - You can run the deploy command and check the status of the distribution through the status command.
 
 
+4. change password
 
-4. logout
+*_**You must be logged in to use this feature.**_*
+
+```sh-session
+$ henesis changepw
+Password: ******
+New Password: ******
+Again New Password: ******
+🦄 Password changed!
+
+```
+
+
+5. logout
 
 ```sh-session
 $ henesis logout

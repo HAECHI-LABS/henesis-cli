@@ -58,7 +58,7 @@ export class Handler {
   public code: string;
   public dep: string;
   public runtime: string;
-  public 'function': string;
+  public function: string;
 
   public constructor(
     id: string,
@@ -72,7 +72,7 @@ export class Handler {
   ) {
     this.id = id;
     this.name = name;
-    this.event = event;
+    this.event = event.replace(/ /gi, '');
     this.version = version;
     this.code = code;
     this.dep = dep;

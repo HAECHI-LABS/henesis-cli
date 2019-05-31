@@ -4,7 +4,7 @@ import configstore from '../common/configstore';
 import { default as UserRPC } from '../rpc/user';
 
 export default class Changepw extends Command {
-  public static description = 'Perform a change password';
+  public static description = 'Change password';
 
   public static examples = [
     `$ henesis user:changepw

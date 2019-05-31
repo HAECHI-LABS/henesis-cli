@@ -14,6 +14,7 @@ blockchain:
 handlers:
   transfer:
     event: Transfer(address,address,uint256)
+    # If you want to include additional logic, you need to uncomment it.
     # version: v1
     # runtime: tsnode8
     # path: ./handlers/ERC20-transfer.ts
@@ -22,6 +23,7 @@ handlers:
 
   approval:
     event: Approval(address,address,uint256)
+    # If you want to include additional logic, you need to uncomment it.
     # version: v1
     # runtime: tsnode8
     # path: ./handlers/ERC20-approval.ts

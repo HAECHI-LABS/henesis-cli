@@ -14,6 +14,7 @@ blockchain:
 handlers:
   event1:
     event: Execution(address)
+    # If you want to include additional logic, you need to uncomment it.
     # version: v1
     # runtime: tsnode8
     # path: ./handlers/execution.ts
@@ -22,6 +23,7 @@ handlers:
 
   event2:
     event: Execution(address,address)
+    # If you want to include additional logic, you need to uncomment it.
     # version: v1
     # runtime: tsnode8
     # path: ./handlers/execution2.ts

@@ -1,4 +1,6 @@
-exports.transfer = (event: any): any => {
-  console.log('event', event);
-  return event;
+import { Ethereum } from '@haechi-labs/henesis-sdk';
+
+exports.transfer = (web3: any, data: Ethereum.Data): any => {
+  console.log('event', data);
+  return data;
 };

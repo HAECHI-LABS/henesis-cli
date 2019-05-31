@@ -90,7 +90,7 @@
 		"tsc": "tsc -b",
 		"postpack": "rm -f oclif.manifest.json",
 		"prepack": "tsc -b && oclif-dev manifest && oclif-dev readme",
-		"test": "export TEST='true' && nyc --extension .ts mocha --forbid-only \"src/**/*.spec.ts\"",
+		"test": "export HENESIS_TEST='true' && nyc --extension .ts mocha --forbid-only \"src/**/*.spec.ts\"",
 		"version": "oclif-dev readme && git add README.md",
 		"lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
 	},

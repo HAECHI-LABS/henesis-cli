@@ -1,4 +1,4 @@
-export const baseUrl = process.env.TEST
+export const baseUrl = process.env.HENESIS_TEST
   ? 'http://localhost:8080'
-  : 'http://api.henesis.io';
+  : 'https//api.henesis.io';
 export const rpcVersion = 'v1';

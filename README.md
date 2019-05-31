@@ -15,15 +15,15 @@ $ npm install -g @haechi-labs/henesis-cli
 $ henesis help
 
 VERSION
-  @haechi-labs/henesis-cli/1.0.0-beta darwin-x64 node-v10.15.3
+  @haechi-labs/henesis-cli/1.0.0-beta.9 darwin-x64 node-v10.15.3
 
 USAGE
   $ henesis [COMMAND]
 
 COMMANDS
-  changepw     Perform a change password
+  changepw     change password
   help         display help for cli
-  init         describe the command here
+  init         create the folder structure required for your project
   integration  manage integrations
   login        Perform a login
   logout       Perform a logout

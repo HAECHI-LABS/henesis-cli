@@ -3,7 +3,7 @@ name: erc20-sample
 
 contract:
   address: '0x'
-  path: ./contract/ERC20.sol
+  path: ./contracts/ERC20.sol
   name: ERC20
   compilerVersion: 0.5.8
 
@@ -13,20 +13,22 @@ blockchain:
 
 handlers:
   transfer:
-    event: Transfer(address,address,uint)
-    version: v1
-    runtime: tsnode8
-    path: ./handler/ERC20-transfer.ts
-    dep: ./handler/package.json
-    function: transfer
+    event: Transfer(address,address,uint256)
+    # If you want to include additional logic, you need to uncomment it.
+    # version: v1
+    # runtime: tsnode8
+    # path: ./handlers/ERC20-transfer.ts
+    # dep: ./handlers/package.json
+    # function: transfer
 
   approval:
-    event: Approval(address,address,uint)
-    version: v1
-    runtime: tsnode8
-    path: ./handler/ERC20-approval.ts
-    dep: ./handler/package.json
-    function: approval
+    event: Approval(address,address,uint256)
+    # If you want to include additional logic, you need to uncomment it.
+    # version: v1
+    # runtime: tsnode8
+    # path: ./handlers/ERC20-approval.ts
+    # dep: ./handlers/package.json
+    # function: approval
 
 webhook:
   url: https://localhost:8080

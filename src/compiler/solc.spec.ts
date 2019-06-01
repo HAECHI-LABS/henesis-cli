@@ -11,7 +11,7 @@ import { fancy } from 'fancy-test';
 describe('solc', () => {
   describe('#compileSol()', () => {
     it('should compile solidity code', async () => {
-      const path = __dirname + '/../../templates/contract/example.sol';
+      const path = __dirname + '/../../templates/contracts/example.sol';
       const result: CompileResult = await compileSol(path, {
         solcVersion: '0.5.8',
       } as Option);

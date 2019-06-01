@@ -15,14 +15,15 @@ $ npm install -g @haechi-labs/henesis-cli
 $ henesis help
 
 VERSION
-  @haechi-labs/henesis-cli/1.0.0-beta darwin-x64 node-v10.15.3
+  @haechi-labs/henesis-cli/1.0.0-beta.9 darwin-x64 node-v10.15.3
 
 USAGE
   $ henesis [COMMAND]
 
 COMMANDS
+  changepw     change password
   help         display help for cli
-  init         describe the command here
+  init         create the folder structure required for your project
   integration  manage integrations
   login        Perform a login
   logout       Perform a logout
@@ -92,8 +93,21 @@ There are tasks to be done before the deploy command.
 - You can run the deploy command and check the status of the distribution through the status command.
 
 
+4. change password
 
-4. logout
+*_**You must be logged in to use this feature.**_*
+
+```sh-session
+$ henesis changepw
+Password: ******
+New Password: ******
+Again New Password: ******
+🦄 Password changed!
+
+```
+
+
+5. logout
 
 ```sh-session
 $ henesis logout

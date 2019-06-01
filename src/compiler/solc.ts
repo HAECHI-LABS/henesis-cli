@@ -91,9 +91,15 @@ export const compileSol = async (
   if (output.errors) {
     let errMsg = '';
     for (let i = 0; i < output.errors.length; i++) {
+      if (output.errors[i].severity === "warning"){
+        continue
+      }
       errMsg = errMsg + (output.errors[i].message + '\n');
     }
-    throw new Error(`Compilation Error! ${errMsg}`);
+    
+    if (errMsg !== ''){
+      throw new Error(`Compilation Error! ${errMsg}`);
+    }
   }
 
   return new CompileResult(output.contracts[file], output.sources[file]);

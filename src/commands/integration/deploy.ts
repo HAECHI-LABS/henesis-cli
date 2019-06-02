@@ -10,6 +10,7 @@ import {
 } from '../../types';
 import integrationRpc from '../../rpc/integration';
 import { CompileResult, compileSol } from '../../compiler';
+import { Status } from '../../types/Integration';
 
 const defaultSpecFile = './henesis.yaml';
 
@@ -106,7 +107,7 @@ async function toIntegration(spec: IntegrationSpec): Promise<Integration> {
     spec.blockchain.network,
     handlers,
     new Webhook(spec.webhook.url, spec.webhook.method, spec.webhook.headers),
-    '',
+    new Status(0,"Unavailable"),
   );
 }
 

@@ -1,5 +1,6 @@
 import { expect, test } from '@oclif/test';
 
+process.env.HENESIS_TEST = "true";
 describe('integration:delete', () => {
   context('when no error occurred', () => {
     const id = 'integrationId';

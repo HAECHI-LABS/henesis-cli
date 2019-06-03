@@ -48,7 +48,7 @@ async function toIntegration(spec: IntegrationSpec): Promise<Integration> {
       typeof handlerSpec.dep === 'undefined'
     ) {
       const code =
-        "exports.a = (web3:any, event: any): any => {\n  console.log('event', event);\n  return event;\n};\n";
+        "exports.template = (web3:any, event: any, blockMeta:any, userMeta:any): any => {\n  console.log('event', event.payload);\n  return event.payload;\n};\n";
       const dep =
         '{\n\t"name": "henesis",\n\t"version": "1.0.0",\n\t"description": "",\n\t"main": "index.js",\n\t"scripts": {\n\t\t"test": "echo \\"Error: no test specified\\" && exit 1"\n\t},\n\t"author": "",\n\t"license": "ISC"\n}\n';
       return new Handler(
@@ -59,7 +59,7 @@ async function toIntegration(spec: IntegrationSpec): Promise<Integration> {
         code,
         dep,
         'tsnode8',
-        'a',
+        'template',
       );
     }
 
@@ -107,7 +107,7 @@ async function toIntegration(spec: IntegrationSpec): Promise<Integration> {
     spec.blockchain.network,
     handlers,
     new Webhook(spec.webhook.url, spec.webhook.method, spec.webhook.headers),
-    new Status(0,"Unavailable"),
+    new Status(0, 'Unavailable'),
   );
 }
 

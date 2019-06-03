@@ -2,7 +2,7 @@ import { Ethereum } from '@haechi-labs/henesis-sdk';
 
 exports.transfer = (
   web3: any,
-  event: Ethereum.Data,
+  event: Ethereum.Event,
   blockMeta: Ethereum.BlockMeta,
   userMeta: Ethereum.UserMeta,
 ): any => {

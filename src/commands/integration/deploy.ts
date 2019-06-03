@@ -48,7 +48,7 @@ async function toIntegration(spec: IntegrationSpec): Promise<Integration> {
       typeof handlerSpec.dep === 'undefined'
     ) {
       const code =
-        "exports.template = (web3:any, event: any, blockMeta, userMeta): any => {\n  console.log('event', event.payload);\n  return event.payload;\n};\n";
+        "exports.template = (web3:any, event: any, blockMeta:any, userMeta:any): any => {\n  console.log('event', event.payload);\n  return event.payload;\n};\n";
       const dep =
         '{\n\t"name": "henesis",\n\t"version": "1.0.0",\n\t"description": "",\n\t"main": "index.js",\n\t"scripts": {\n\t\t"test": "echo \\"Error: no test specified\\" && exit 1"\n\t},\n\t"author": "",\n\t"license": "ISC"\n}\n';
       return new Handler(

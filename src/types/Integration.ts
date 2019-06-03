@@ -21,7 +21,7 @@ export class Integration {
   public network: NetworkType;
   public handlers: Handler[];
   public webhook: Webhook;
-  public status: string;
+  public status: Status;
 
   public constructor(
     integrationId: string,
@@ -34,7 +34,7 @@ export class Integration {
     network: NetworkType,
     handlers: Handler[],
     webhook: Webhook,
-    status: string,
+    status: Status,
   ) {
     this.integrationId = integrationId;
     this.userId = userId;
@@ -94,5 +94,18 @@ export class Webhook {
     this.url = url;
     this.method = method;
     this.headers = headers;
+  }
+}
+
+export class Status {
+  public ready: number;
+  public state: string;
+  
+  public constructor(
+    ready: number,
+    state: string,
+  ) {
+    this.ready = ready;
+    this.state = state;
   }
 }

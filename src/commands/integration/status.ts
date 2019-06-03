@@ -23,9 +23,17 @@ export const columns = {
     header: 'Version',
     minWidth: 10,
   },
-  status: {
-    header: 'Status',
+  state: {
+    header: 'State',
+    minWidth: 15,
+    get: (row: any) => row.status && row.status.state
+  },
+  ready: {
+    header: 'Ready',
     minWidth: 10,
+    get: (row: any): any => {
+      return `${row.status.ready}/${row.handlers.length}`
+    }
   },
 };
 

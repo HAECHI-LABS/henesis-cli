@@ -8,6 +8,7 @@ import {
   LoginResponse,
 } from '../types';
 import * as faker from 'faker';
+import { Status } from '../types/Integration';
 
 export function newMockLogin(): LoginResponse {
   return new LoginResponse(
@@ -111,7 +112,7 @@ export function newMockIntegration(): Integration {
     new Webhook(faker.internet.ip(), 'POST', {
       Authorization: 'Bear ashd8uado9012i31kod',
     }),
-    'Starting',
+    new Status(0,"Unavailable"),
   );
 }
 

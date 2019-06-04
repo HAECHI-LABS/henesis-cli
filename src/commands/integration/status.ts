@@ -47,8 +47,8 @@ export default class Status extends Command {
     try {
       const integrations = await integrationRpc.getIntegrations();
 
-      cli.url('View Dashboard,', 'https://dashbard.henesis.io');
-      this.log('You can login with the same email and password as henesis.');
+      cli.url('View Dashboard', 'https://dashboard.henesis.io');
+      this.log('└─ You can login with the same email and password as henesis.');
 
       cli.table(integrations, columns, {
         printLine: this.log,

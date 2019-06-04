@@ -15,7 +15,7 @@ $ npm install -g @haechi-labs/henesis-cli
 $ henesis help
 
 VERSION
-  @haechi-labs/henesis-cli/1.0.0-beta.9 darwin-x64 node-v10.15.3
+  @haechi-labs/henesis-cli/1.0.0-beta.12 darwin-x64 node-v10.15.3
 
 USAGE
   $ henesis [COMMAND]
@@ -31,7 +31,27 @@ COMMANDS
 
 ### Usage
 
-1. login
+1. help
+
+Use help as:
+```sh-session
+  $ henesis help [COMMAND]
+```
+For example, you can call `help` about `integration:delete` command like:
+```
+$ henesis help integration:delete
+delete a integration
+
+USAGE
+  $ henesis integration:delete [INTEGRATIONID]
+
+EXAMPLE
+  $ henesis integration:delete
+```
+
+
+
+2. login
 
 ```sh-session
 $ henesis login
@@ -45,7 +65,7 @@ password: ***********
 
 
 
-2. init
+3. init
 
 *_**The directory in which the init command is run must be empty.**_*
 
@@ -68,7 +88,7 @@ sample-project/
 
 
 
-3. integration
+4. integration
 
 *_**You can use command where the henesis.yaml file exists.**_*
 
@@ -93,7 +113,7 @@ There are tasks to be done before the deploy command.
 - You can run the deploy command and check the status of the distribution through the status command.
 
 
-4. change password
+5. change password
 
 *_**You must be logged in to use this feature.**_*
 
@@ -107,7 +127,7 @@ Again New Password: ******
 ```
 
 
-5. logout
+6. logout
 
 ```sh-session
 $ henesis logout

@@ -1,9 +1,9 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
+declare var require: (moduleId: string) => any;
 const findNodeModules = require('find-node-modules');
 const CompilerSupplier = require('./compilerSupplier');
-declare var require: (moduleId: string) => any;
 
 export interface Option {
   evmVersion: string;
@@ -53,7 +53,7 @@ export interface CompiledError {
 }
 
 export class CompileResult {
-  constructor(
+  public constructor(
     public contracts: {
       [contract: string]: CompiledContract;
     },
@@ -64,46 +64,39 @@ export class CompileResult {
 
   public getAbi(contractName: string): any {
     if (typeof this.contracts[contractName] === 'undefined') {
-      return undefined
+      return undefined;
     }
     return this.contracts[contractName].abi;
   }
 }
 
-export const compileSol = async (
-  file: string,
-  option: Option,
-): Promise<CompileResult> => {
-  if (!file.endsWith('.sol')) {
-    throw new Error('it is not a solidity file.');
-  }
-
-  const output = await compile(
-    Object.assign(
-      {},
-      {
-        [file]: { content: fs.readFileSync(file, 'utf8') },
-      },
-    ),
-    option,
-  );
-
-  if (output.errors) {
-    let errMsg = '';
-    for (let i = 0; i < output.errors.length; i++) {
-      if (output.errors[i].severity === "warning"){
-        continue
-      }
-      errMsg = errMsg + (output.errors[i].message + '\n');
+function findImportPath(filePath: string) {
+  // find recursively to find .sol file
+  if (fs.existsSync(filePath)) {
+    return filePath;
+  } else {
+    // find .sol file from node_modules
+    const nodeModules = findNodeModules();
+    for (let nodeModule of nodeModules) {
+      const modulePath = path.join(nodeModule, filePath);
+      if (fs.existsSync(modulePath)) return modulePath;
     }
-    
-    if (errMsg !== ''){
-      throw new Error(`Compilation Error! ${errMsg}`);
-    }
+    throw new Error(`Module path, ${filePath} is not found`);
   }
+}
 
-  return new CompileResult(output.contracts[file], output.sources[file]);
-};
+function findImports(filePath: string) {
+  return {
+    contents: fs.readFileSync(findImportPath(filePath), 'utf8'),
+  };
+}
+
+async function getSolc(version: string): Promise<any> {
+  const supplier = new CompilerSupplier({
+    version: version,
+  });
+  return supplier.load();
+}
 
 const compile = async (
   source: { [x: string]: { content: string } },
@@ -130,30 +123,37 @@ const compile = async (
   );
 };
 
-function findImports(filePath: string) {
-  return {
-    contents: fs.readFileSync(findImportPath(filePath), 'utf8'),
-  };
-}
-
-function findImportPath(filePath: string) {
-  // find recursively to find .sol file
-  if (fs.existsSync(filePath)) {
-    return filePath;
-  } else {
-    // find .sol file from node_modules
-    const nodeModules = findNodeModules();
-    for (let nodeModule of nodeModules) {
-      const modulePath = path.join(nodeModule, filePath);
-      if (fs.existsSync(modulePath)) return modulePath;
-    }
-    throw new Error(`Module path, ${filePath} is not found`);
+export const compileSol = async (
+  file: string,
+  option: Option,
+): Promise<CompileResult> => {
+  if (!file.endsWith('.sol')) {
+    throw new Error('it is not a solidity file.');
   }
-}
 
-async function getSolc(version: string): Promise<any> {
-  const supplier = new CompilerSupplier({
-    version: version,
-  });
-  return supplier.load();
-}
+  const output = await compile(
+    Object.assign(
+      {},
+      {
+        [file]: { content: fs.readFileSync(file, 'utf8') },
+      },
+    ),
+    option,
+  );
+
+  if (output.errors) {
+    let errMsg = '';
+    for (let i = 0; i < output.errors.length; i++) {
+      if (output.errors[i].severity === 'warning') {
+        continue;
+      }
+      errMsg = errMsg + (output.errors[i].message + '\n');
+    }
+
+    if (errMsg !== '') {
+      throw new Error(`Compilation Error! ${errMsg}`);
+    }
+  }
+
+  return new CompileResult(output.contracts[file], output.sources[file]);
+};

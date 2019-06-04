@@ -93,9 +93,9 @@ describe('IntegrationRpc', () => {
         .thenJSON(200, integration);
       const response: Integration | null = await integrationRpc.updateIntegration(
         integration.integrationId,
-        {
+        ({
           version: 'v3',
-        } as Integration,
+        } as any) as Integration,
       );
       expect(response).to.deep.equal(integration);
     });

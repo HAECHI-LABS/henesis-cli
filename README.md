@@ -15,7 +15,7 @@ $ npm install -g @haechi-labs/henesis-cli
 $ henesis help
 
 VERSION
-  @haechi-labs/henesis-cli/1.0.0-beta.13 darwin-x64 node-v10.15.3
+  @haechi-labs/henesis-cli/1.0.0-beta.14 darwin-x64 node-v10.15.3
 
 USAGE
   $ henesis [COMMAND]

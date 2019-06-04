@@ -1,7 +1,7 @@
 import { expect, test } from '@oclif/test';
 import { newMockIntegration } from '../../mock';
 
-process.env.HENESIS_TEST = "true";
+process.env.HENESIS_TEST = 'true';
 describe('integration:describe', () => {
   context('when no error occurred', () => {
     const integration = newMockIntegration();

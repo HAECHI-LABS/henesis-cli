@@ -26,14 +26,14 @@ export const columns = {
   state: {
     header: 'State',
     minWidth: 15,
-    get: (row: any) => row.status && row.status.state
+    get: (row: any) => row.status && row.status.state,
   },
   ready: {
     header: 'Ready',
     minWidth: 10,
     get: (row: any): any => {
-      return `${row.status.ready}/${row.handlers.length}`
-    }
+      return `${row.status.ready}/${row.handlers.length}`;
+    },
   },
 };
 

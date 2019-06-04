@@ -4,7 +4,7 @@ import { IntegrationSpec } from '../../types';
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
 
-process.env.HENESIS_TEST = "true";
+process.env.HENESIS_TEST = 'true';
 describe('integration:deploy', () => {
   const specPath = './henesis.yaml';
   let integrationSpec: IntegrationSpec;

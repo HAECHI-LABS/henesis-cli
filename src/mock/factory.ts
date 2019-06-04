@@ -112,7 +112,7 @@ export function newMockIntegration(): Integration {
     new Webhook(faker.internet.ip(), 'POST', {
       Authorization: 'Bear ashd8uado9012i31kod',
     }),
-    new Status(0,"Unavailable"),
+    new Status(0, 'Unavailable'),
   );
 }
 

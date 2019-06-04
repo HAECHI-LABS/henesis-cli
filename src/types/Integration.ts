@@ -100,11 +100,8 @@ export class Webhook {
 export class Status {
   public ready: number;
   public state: string;
-  
-  public constructor(
-    ready: number,
-    state: string,
-  ) {
+
+  public constructor(ready: number, state: string) {
     this.ready = ready;
     this.state = state;
   }

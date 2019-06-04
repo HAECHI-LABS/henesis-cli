@@ -21,7 +21,7 @@ password:
     const user = configstore.get('user');
 
     if (user) {
-      this.log(`You already Logged in ${user.email}`);
+      this.log(`You are already logged in as ${user.email}`);
     } else {
       await this.config.runHook('analyticsCheck', {});
       const email = await cli.prompt('email');

@@ -1,5 +1,6 @@
 import { Command, flags } from '@oclif/command';
 import integrationRpc from '../../rpc/integration';
+import { MISSING_INTEGRATIONID_ARGS } from '../../errors';
 
 export default class Describe extends Command {
   public static description = 'describe a integration';
@@ -11,9 +12,9 @@ export default class Describe extends Command {
     const { args } = this.parse(Describe);
     if (args.integrationId === undefined) {
       await this.config.runHook('analyticsSend', {
-        error: 'integrationId is undefined',
+        error: MISSING_INTEGRATIONID_ARGS,
       });
-      this.error('integrationId is undefined', { exit: 1 });
+      this.error(MISSING_INTEGRATIONID_ARGS, { exit: 1 });
     }
 
     try {

@@ -3,7 +3,7 @@ import integrationRpc from '../../rpc/integration';
 
 export default class Describe extends Command {
   public static description = 'describe a integration';
-  public static examples = [`$ henesis integration:describe`];
+  public static examples = [`$ henesis integration:describe  my-integration-id-xqxz`];
   public static flags = {};
   public static args = [{ name: 'integrationId' }];
 

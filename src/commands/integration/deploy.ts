@@ -14,6 +14,25 @@ import { Status } from '../../types/Integration';
 
 const defaultSpecFile = './henesis.yaml';
 
+function getEvmVersion(compilerVersion: string): string {
+  let evmVersion = 'petersburg';
+  const rawVersions: string[] = compilerVersion.split('.');
+
+  const versions: number[] = [
+    parseInt(rawVersions[0]),
+    parseInt(rawVersions[1]),
+    parseInt(rawVersions[2].split('-')[0]),
+  ];
+
+  if (versions[1] <= 5) {
+    if (versions[2] < 5) {
+      evmVersion = 'byzantium';
+    }
+  }
+
+  return evmVersion;
+}
+
 async function getAbi(
   path: string,
   compilerVersion: string,
@@ -21,7 +40,7 @@ async function getAbi(
 ): Promise<any> {
   const result: CompileResult = await compileSol(path, {
     solcVersion: compilerVersion,
-    evmVersion: 'petersburg',
+    evmVersion: getEvmVersion(compilerVersion),
   });
 
   return result.getAbi(contractName);

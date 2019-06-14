@@ -113,7 +113,7 @@ async function toIntegration(spec: IntegrationSpec): Promise<Integration> {
 
 export default class Deploy extends Command {
   public static description = 'deploy a integration';
-  public static examples = [`$ henesis integration:deploy`];
+  public static examples = [`$ henesis integration:deploy my-integration-id-xqxz`];
   public static flags = {
     help: flags.help({ char: 'h' }),
     path: flags.string({

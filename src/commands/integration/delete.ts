@@ -5,7 +5,7 @@ import * as err from '../../errors';
 
 export default class Delete extends Command {
   public static description = 'delete a integration';
-  public static examples = [`$ henesis integration:delete`];
+  public static examples = [`$ henesis integration:delete my-integration-id-xqxz`];
   public static flags = {};
   public static args = [{ name: 'integrationId' }];
 

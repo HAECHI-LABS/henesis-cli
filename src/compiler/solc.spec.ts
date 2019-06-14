@@ -4,6 +4,7 @@ import {
   CompileResult,
   CompiledContract,
   CompiledSource,
+  getLatestEvmVersion,
 } from './solc';
 import { expect } from '@oclif/test';
 import { fancy } from 'fancy-test';
@@ -28,6 +29,26 @@ describe('solc', () => {
         .catch('it is not a solidity file.')
         .it('should throw not sol file error');
     });
+
+    context('when evm version is different', () => {
+      it('should compile 0.5.4 version solidity code', async () => {
+        const path = __dirname + '/../mock/example.sol';
+        const result: CompileResult = await compileSol(path, ({
+          solcVersion: '0.5.4',
+        } as any) as Option);
+        expect(result.contracts).to.not.equal(undefined);
+        expect(result.sources).to.not.equal(undefined);
+      }).timeout(10000);
+
+      it('should compile 0.5.5 version solidity code', async () => {
+        const path = __dirname + '/../mock/example.sol';
+        const result: CompileResult = await compileSol(path, ({
+          solcVersion: '0.5.5',
+        } as any) as Option);
+        expect(result.contracts).to.not.equal(undefined);
+        expect(result.sources).to.not.equal(undefined);
+      }).timeout(10000);
+    });
   });
 
   describe('CompileResult', () => {
@@ -44,9 +65,19 @@ describe('solc', () => {
         };
         result = new CompileResult(contracts, sources);
       });
+
       it('should get abi', () => {
         expect(result.getAbi(contractName)).to.deep.equal(abi);
       });
+    });
+  });
+
+  describe('#getLatestEvmVersion()', () => {
+    it('should return appropriate evm version', () => {
+      expect(getLatestEvmVersion('0.4.4')).to.equal('byzantium');
+      expect(getLatestEvmVersion('0.5.4')).to.equal('byzantium');
+      expect(getLatestEvmVersion('0.5.5')).to.equal('petersburg');
+      expect(getLatestEvmVersion('0.5.8')).to.equal('petersburg');
     });
   });
 });

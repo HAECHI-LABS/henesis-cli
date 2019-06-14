@@ -1,5 +1,7 @@
 import { Command, flags } from '@oclif/command';
 import integrationRpc from '../../rpc/integration';
+import { MISSING_INTEGRATIONID_ARGS } from '../../errors';
+import * as err from '../../errors';
 
 export default class Delete extends Command {
   public static description = 'delete a integration';
@@ -10,7 +12,7 @@ export default class Delete extends Command {
   public async run() {
     const { args } = this.parse(Delete);
     if (args.integrationId === undefined) {
-      this.error('integrationId is undefined', { exit: 1 });
+      this.error(MISSING_INTEGRATIONID_ARGS, { exit: 1 });
     }
 
     try {

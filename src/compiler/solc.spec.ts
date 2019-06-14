@@ -4,6 +4,7 @@ import {
   CompileResult,
   CompiledContract,
   CompiledSource,
+  getLatestEvmVersion,
 } from './solc';
 import { expect } from '@oclif/test';
 import { fancy } from 'fancy-test';
@@ -44,9 +45,19 @@ describe('solc', () => {
         };
         result = new CompileResult(contracts, sources);
       });
+
       it('should get abi', () => {
         expect(result.getAbi(contractName)).to.deep.equal(abi);
       });
+    });
+  });
+
+  describe('#getLatestEvmVersion()', () => {
+    it('should return appropriate evm version', () => {
+      expect(getLatestEvmVersion('0.4.4')).to.equal('byzantium');
+      expect(getLatestEvmVersion('0.5.4')).to.equal('byzantium');
+      expect(getLatestEvmVersion('0.5.5')).to.equal('petersburg');
+      expect(getLatestEvmVersion('0.5.8')).to.equal('petersburg');
     });
   });
 });

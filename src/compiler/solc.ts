@@ -98,6 +98,25 @@ async function getSolc(version: string): Promise<any> {
   return supplier.load();
 }
 
+export function getLatestEvmVersion(compilerVersion: string): string {
+  let evmVersion = 'petersburg';
+  const rawVersions: string[] = compilerVersion.split('.');
+
+  const versions: number[] = [
+    parseInt(rawVersions[0]),
+    parseInt(rawVersions[1]),
+    parseInt(rawVersions[2].split('-')[0]),
+  ];
+
+  if (versions[1] <= 5) {
+    if (versions[2] < 5) {
+      evmVersion = 'byzantium';
+    }
+  }
+
+  return evmVersion;
+}
+
 const compile = async (
   source: { [x: string]: { content: string } },
   option: Option,

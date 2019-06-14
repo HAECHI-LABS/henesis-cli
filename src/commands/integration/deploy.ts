@@ -9,7 +9,7 @@ import {
   Webhook,
 } from '../../types';
 import integrationRpc from '../../rpc/integration';
-import { CompileResult, compileSol } from '../../compiler';
+import { CompileResult, compileSol, getLatestEvmVersion } from '../../compiler';
 import { Status } from '../../types/Integration';
 
 const defaultSpecFile = './henesis.yaml';
@@ -21,7 +21,7 @@ async function getAbi(
 ): Promise<any> {
   const result: CompileResult = await compileSol(path, {
     solcVersion: compilerVersion,
-    evmVersion: 'petersburg',
+    evmVersion: getLatestEvmVersion(compilerVersion),
   });
 
   return result.getAbi(contractName);

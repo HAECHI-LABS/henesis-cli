@@ -34,7 +34,7 @@ function CompilerSupplier(_config) {
 }
 
 CompilerSupplier.prototype.cachePath = findCacheDir({
-  name: 'vvisp',
+  name: 'henesis',
   cwd: __dirname,
   create: true,
 });
@@ -431,7 +431,7 @@ CompilerSupplier.prototype.normalizeVersion = function(version) {
  * @return {String}          path
  */
 CompilerSupplier.prototype.resolveCache = function(fileName) {
-  const thunk = findCacheDir({ name: 'vvisp', cwd: __dirname, thunk: true });
+  const thunk = findCacheDir({ name: 'henesis', cwd: __dirname, thunk: true });
   return thunk(fileName);
 };
 
@@ -505,14 +505,14 @@ CompilerSupplier.prototype.removeListener = function() {
  * @return {Error}
  */
 CompilerSupplier.prototype.errors = function(kind, input, err) {
-  const info = 'Run `vvisp compile --list` to see available versions.';
+  const info = 'Run `henesis compile --list` to see available versions.';
 
   const kinds = {
     noPath: 'Could not find compiler at: ' + input,
     noVersion:
       `Could not find a compiler version matching ${input}. ` +
       `Please ensure you are specifying a valid version, constraint or ` +
-      `build in the vvisp config. ${info}`,
+      `build in the henesis config. ${info}`,
     noRequest:
       'Failed to complete request to: ' +
       input +

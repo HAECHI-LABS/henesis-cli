@@ -29,26 +29,6 @@ describe('solc', () => {
         .catch('it is not a solidity file.')
         .it('should throw not sol file error');
     });
-
-    context('when evm version is different', () => {
-      it('should compile 0.5.4 version solidity code', async () => {
-        const path = __dirname + '/../mock/example.sol';
-        const result: CompileResult = await compileSol(path, ({
-          solcVersion: '0.5.4',
-        } as any) as Option);
-        expect(result.contracts).to.not.equal(undefined);
-        expect(result.sources).to.not.equal(undefined);
-      }).timeout(10000);
-
-      it('should compile 0.5.5 version solidity code', async () => {
-        const path = __dirname + '/../mock/example.sol';
-        const result: CompileResult = await compileSol(path, ({
-          solcVersion: '0.5.5',
-        } as any) as Option);
-        expect(result.contracts).to.not.equal(undefined);
-        expect(result.sources).to.not.equal(undefined);
-      }).timeout(10000);
-    });
   });
 
   describe('CompileResult', () => {

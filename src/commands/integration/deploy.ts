@@ -11,6 +11,7 @@ import {
 import integrationRpc from '../../rpc/integration';
 import { CompileResult, compileSol, getLatestEvmVersion } from '../../compiler';
 import { Status } from '../../types/Integration';
+import { cli } from 'cli-ux';
 
 const defaultSpecFile = './henesis.yaml';
 
@@ -113,7 +114,9 @@ async function toIntegration(spec: IntegrationSpec): Promise<Integration> {
 
 export default class Deploy extends Command {
   public static description = 'deploy a integration';
-  public static examples = [`$ henesis integration:deploy my-integration-id-xqxz`];
+  public static examples = [
+    `$ henesis integration:deploy my-integration-id-xqxz`,
+  ];
   public static flags = {
     help: flags.help({ char: 'h' }),
     path: flags.string({
@@ -136,6 +139,8 @@ export default class Deploy extends Command {
       const integrationSpec: IntegrationSpec = yaml.safeLoad(
         fs.readFileSync(flags.path || defaultSpecFile, 'utf8'),
       );
+
+      cli.action.start('Starting deploy');
 
       await this.config.runHook('analyticsSend', {
         command: 'integration:deploy',
@@ -161,5 +166,6 @@ export default class Deploy extends Command {
       await this.config.runHook('analyticsSend', { error: err });
       this.error(err.message, { exit: 1 });
     }
+    cli.action.stop('✅');
   }
 }

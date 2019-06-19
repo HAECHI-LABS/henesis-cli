@@ -108,7 +108,7 @@ export function getLatestEvmVersion(compilerVersion: string): string {
     parseInt(rawVersions[2].split('-')[0]),
   ];
 
-  // < 0.5.4: byzantium
+  // <= 0.5.4: byzantium
   if ((versions[1] === 5 && versions[2] <= 4) || versions[1] < 5) {
     evmVersion = 'byzantium';
   } else {

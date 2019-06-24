@@ -72,8 +72,7 @@
 		"bin": "henesis",
 		"plugins": [ "@oclif/plugin-help" ],
 		"hooks": {
-			"init": "./lib/hooks/init/wretch",
-			"analyticsSend": "./lib/hooks/analytics/send"
+			"init": "./lib/hooks/init/wretch"
 		},
 		"topics": {
 			"integration": {

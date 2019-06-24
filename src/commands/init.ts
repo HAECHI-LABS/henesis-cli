@@ -1,6 +1,7 @@
-import { Command, flags } from '@oclif/command';
+import { flags } from '@oclif/command';
 import { existsSync, writeFileSync, mkdirSync, readFileSync } from 'fs';
 import { join } from 'path';
+import Command from './base';
 
 const TEMPLATE_DIR = join(__dirname, '..', '..', 'templates');
 const TEMPLATE_ERC20_DIR = join(__dirname, '..', '..', 'templates20');
@@ -47,10 +48,6 @@ export default class Init extends Command {
 
     if (existsSync(destinationPath) && flags.force === false) {
       this.error(`The directory exists at the current directory.`);
-      await this.config.runHook('analyticsSend', {
-        error: `The directory exists at the current directory.`,
-      });
-      this.exit(-1);
     }
 
     const dir = flags.erc20 ? TEMPLATE_ERC20_DIR : TEMPLATE_DIR;
@@ -113,7 +110,6 @@ export default class Init extends Command {
       );
     }
 
-    await this.config.runHook('analyticsSend', { command: 'init' });
     this.log(`${name} directory has been created.`);
   }
 }

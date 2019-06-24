@@ -73,7 +73,6 @@
 		"plugins": [ "@oclif/plugin-help" ],
 		"hooks": {
 			"init": "./lib/hooks/init/wretch",
-			"analyticsCheck": "./lib/hooks/analytics/check",
 			"analyticsSend": "./lib/hooks/analytics/send"
 		},
 		"topics": {

@@ -1,4 +1,4 @@
-import { Command, flags } from '@oclif/command';
+import { flags } from '@oclif/command';
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
 import {
@@ -11,6 +11,8 @@ import {
 import integrationRpc from '../../rpc/integration';
 import { CompileResult, compileSol, getLatestEvmVersion } from '../../compiler';
 import { Status } from '../../types/Integration';
+import { startWait, endWait } from '../../utils';
+import Command from '../base';
 
 const defaultSpecFile = './henesis.yaml';
 
@@ -113,7 +115,9 @@ async function toIntegration(spec: IntegrationSpec): Promise<Integration> {
 
 export default class Deploy extends Command {
   public static description = 'deploy a integration';
-  public static examples = [`$ henesis integration:deploy my-integration-id-xqxz`];
+  public static examples = [
+    `$ henesis integration:deploy my-integration-id-xqxz`,
+  ];
   public static flags = {
     help: flags.help({ char: 'h' }),
     path: flags.string({
@@ -131,15 +135,12 @@ export default class Deploy extends Command {
   public static args = [];
 
   public async run(): Promise<void> {
+    startWait('Deploying');
     const { flags } = this.parse(Deploy);
     try {
       const integrationSpec: IntegrationSpec = yaml.safeLoad(
         fs.readFileSync(flags.path || defaultSpecFile, 'utf8'),
       );
-
-      await this.config.runHook('analyticsSend', {
-        command: 'integration:deploy',
-      });
 
       if (flags.force) {
         const integration = await integrationRpc.getIntegrationByName(
@@ -155,11 +156,11 @@ export default class Deploy extends Command {
           await toIntegration(integrationSpec),
         );
         this.log(`${integration.integrationId} has been deployed`);
+        endWait();
         return;
       }
     } catch (err) {
-      await this.config.runHook('analyticsSend', { error: err });
-      this.error(err.message, { exit: 1 });
+      this.error(err.message);
     }
   }
 }

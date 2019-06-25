@@ -6,7 +6,7 @@ let wretchInstance: Wretcher = wretch().polyfills({
   URLSearchParams: require('url').URLSearchParams,
 });
 
-export const setWretcher = (wretcher: Wretcher) => {
+export const setWretcher = (wretcher: Wretcher): void => {
   wretchInstance = wretcher;
 };
 

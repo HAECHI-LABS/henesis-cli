@@ -1,4 +1,4 @@
-import { Command } from '@oclif/command';
+import Command from '../base';
 import { cli } from 'cli-ux';
 import integrationRpc from '../../rpc/integration';
 
@@ -53,12 +53,8 @@ export default class Status extends Command {
       cli.table(integrations, columns, {
         printLine: this.log,
       });
-      await this.config.runHook('analyticsSend', {
-        command: 'integration:list',
-      });
     } catch (err) {
-      await this.config.runHook('analyticsSend', { error: err });
-      this.error(err.message, { exit: 1 });
+      this.error(err.message);
     }
   }
 }

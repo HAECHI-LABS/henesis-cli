@@ -6,7 +6,7 @@ export default class Config extends Command {
   public static hidden = true;
 
   public static description =
-    'Create the folder structure required for your project.';
+    "It's an internally hidden interface. You can set up endpoints.";
 
   public static examples = [
     `$ henesis config -e https://...

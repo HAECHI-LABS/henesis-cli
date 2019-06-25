@@ -56,7 +56,7 @@ describe('solc', () => {
     it('should return appropriate evm version', () => {
       expect(getLatestEvmVersion('0.4.4')).to.equal('byzantium');
       expect(getLatestEvmVersion('0.4.26')).to.equal('byzantium');
-      expect(getLatestEvmVersion('0.5.4')).to.equal('petersburg');
+      expect(getLatestEvmVersion('0.5.4')).to.equal('byzantium');
       expect(getLatestEvmVersion('0.5.5')).to.equal('petersburg');
       expect(getLatestEvmVersion('0.5.8')).to.equal('petersburg');
     });

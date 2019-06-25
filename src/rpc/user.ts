@@ -49,4 +49,5 @@ export class UserRpc {
   }
 }
 
-export default new UserRpc(baseUrl);
+const url = baseUrl();
+export default new UserRpc(url);

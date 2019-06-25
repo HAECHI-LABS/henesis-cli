@@ -116,5 +116,6 @@ export class IntegrationRpc {
 }
 
 // @ts-ignore
-const integrationRpc = new IntegrationRpc(baseUrl, rpcVersion);
+const url = baseUrl();
+const integrationRpc = new IntegrationRpc(url, rpcVersion);
 export default integrationRpc;

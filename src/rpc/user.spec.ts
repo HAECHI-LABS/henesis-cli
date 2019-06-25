@@ -18,7 +18,8 @@ describe('UserRpc', (): void => {
 
   beforeEach(
     async (): Promise<void> => {
-      userRpc = new UserRpc(baseUrl);
+      const url = baseUrl();
+      userRpc = new UserRpc(url);
       await mockServer.start(8080);
     },
   );

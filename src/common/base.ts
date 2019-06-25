@@ -1,5 +1,5 @@
 import Command from '@oclif/command';
-import configstore from '../common/configstore';
+import configstore from './configstore';
 import * as ua from 'universal-analytics';
 import { confirmPrompt } from '../utils';
 /**

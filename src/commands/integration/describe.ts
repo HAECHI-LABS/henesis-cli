@@ -1,6 +1,6 @@
 import integrationRpc from '../../rpc/integration';
 import { MISSING_INTEGRATIONID_ARGS } from '../../errors';
-import Command from '../base';
+import Command from '../../common/base';
 
 export default class Describe extends Command {
   public static description = 'describe a integration';

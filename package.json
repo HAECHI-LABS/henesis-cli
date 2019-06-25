@@ -29,6 +29,7 @@
 		"request-promise": "^4.2.4",
 		"require-from-string": "^2.0.2",
 		"semver": "^6.0.0",
+		"simple-git": "^1.116.0",
 		"solc": "^0.5.8",
 		"tslib": "^1.9.3",
 		"universal-analytics": "^0.4.20",
@@ -62,7 +63,7 @@
 	"engines": {
 		"node": ">=10.0.0"
 	},
-	"files": [ "/bin", "/lib", "/npm-shrinkwrap.json", "/oclif.manifest.json", "/templates", "/templates20" ],
+	"files": [ "/bin", "/lib", "/npm-shrinkwrap.json", "/oclif.manifest.json", "/templates" ],
 	"homepage": "https://github.com/HAECHI-LABS/henesis-cli",
 	"keywords": [ "oclif", "blockchain", "ethereum", "cli", "henssis", "SmartContract", "smart constract", "haechi" ],
 	"license": "LGPL3",
@@ -85,7 +86,7 @@
 		"tsc": "tsc -b",
 		"postpack": "rm -f oclif.manifest.json",
 		"prepack": "tsc -b && oclif-dev manifest && oclif-dev readme",
-		"test": "export HENESIS_TEST='true' && nyc --extension .ts mocha --forbid-only \"src/**/*.spec.ts\"",
+		"test": "export HENESIS_TEST='true' && nyc --extension .ts mocha --forbid-only \"src/**/*.spec.ts\" --timeout 20000",
 		"version": "oclif-dev readme && git add README.md",
 		"lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
 	},

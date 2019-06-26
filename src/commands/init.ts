@@ -38,6 +38,44 @@ export default class Init extends Command {
 
   public static args = [];
 
+  private async initTemplate(destinationPath: string): Promise<void> {
+    writeFileSync(
+      join(`${destinationPath}`, 'henesis.yaml'),
+      readFileSync(join(`${TEMPLATE_DIR}`, 'henesis.yaml')),
+      {
+        mode: MODE_0666,
+      },
+    );
+
+    // TODO: with force.
+    mkdirSync(`${destinationPath}/handlers`);
+    writeFileSync(
+      join(`${destinationPath}/handlers`, 'execution.ts'),
+      readFileSync(join(`${TEMPLATE_DIR}/handlers`, 'execution.ts')),
+      { mode: MODE_0666 },
+    );
+    writeFileSync(
+      join(`${destinationPath}/handlers`, 'execution2.ts'),
+      readFileSync(join(`${TEMPLATE_DIR}/handlers`, 'execution2.ts')),
+      { mode: MODE_0666 },
+    );
+    writeFileSync(
+      join(`${destinationPath}/handlers`, 'package.json'),
+      readFileSync(join(`${TEMPLATE_DIR}/handlers`, 'package.json')),
+      { mode: MODE_0666 },
+    );
+    mkdirSync(`${destinationPath}/contracts`);
+    writeFileSync(
+      join(`${destinationPath}/contracts`, 'example.sol'),
+      readFileSync(join(`${TEMPLATE_DIR}/contracts`, 'example.sol')),
+      { mode: MODE_0666 },
+    );
+  }
+
+  private async gitInit(url: string, destinationPath: string): Promise<void> {
+    await simplegit().clone(url, destinationPath);
+  }
+
   public async run(): Promise<void> {
     const currentPath = process.cwd() || '.';
     const { flags } = this.parse(Init);
@@ -61,43 +99,12 @@ export default class Init extends Command {
       this.error(`The directory exists at the current directory.`);
     }
 
-    if (typeof flags.git !== 'undefined') {
-      const git = simplegit();
-      mkdirSync(`${destinationPath}`);
-      await git.clone(flags.git as string, destinationPath);
-    } else {
-      mkdirSync(`${destinationPath}`);
-      writeFileSync(
-        join(`${destinationPath}`, 'henesis.yaml'),
-        readFileSync(join(`${TEMPLATE_DIR}`, 'henesis.yaml')),
-        {
-          mode: MODE_0666,
-        },
-      );
+    mkdirSync(`${destinationPath}`);
 
-      // TODO: with force.
-      mkdirSync(`${destinationPath}/handlers`);
-      writeFileSync(
-        join(`${destinationPath}/handlers`, 'execution.ts'),
-        readFileSync(join(`${TEMPLATE_DIR}/handlers`, 'execution.ts')),
-        { mode: MODE_0666 },
-      );
-      writeFileSync(
-        join(`${destinationPath}/handlers`, 'execution2.ts'),
-        readFileSync(join(`${TEMPLATE_DIR}/handlers`, 'execution2.ts')),
-        { mode: MODE_0666 },
-      );
-      writeFileSync(
-        join(`${destinationPath}/handlers`, 'package.json'),
-        readFileSync(join(`${TEMPLATE_DIR}/handlers`, 'package.json')),
-        { mode: MODE_0666 },
-      );
-      mkdirSync(`${destinationPath}/contracts`);
-      writeFileSync(
-        join(`${destinationPath}/contracts`, 'example.sol'),
-        readFileSync(join(`${TEMPLATE_DIR}/contracts`, 'example.sol')),
-        { mode: MODE_0666 },
-      );
+    if (typeof flags.git !== 'undefined') {
+      await this.gitInit(flags.git, destinationPath);
+    } else {
+      await this.initTemplate(destinationPath);
     }
 
     this.log(`${name} directory has been created.`);

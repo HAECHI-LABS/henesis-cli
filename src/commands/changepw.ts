@@ -1,7 +1,7 @@
 import cli from 'cli-ux';
 import configstore from '../common/configstore';
 import { default as UserRPC } from '../rpc/user';
-import Command from './base';
+import Command from '../common/base';
 import { passwordPrompt } from '../utils';
 
 export default class Changepw extends Command {

@@ -8,7 +8,7 @@ describe('login', (): void => {
     .nock(
       'http://localhost:8080',
       (api): Scope =>
-        api.post('/users/login').reply(200, {
+        api.post('/users/v1/login').reply(200, {
           email: 'yoonsung@haechi.io',
           name: 'ys.choi',
           organization: 'haechilabs',

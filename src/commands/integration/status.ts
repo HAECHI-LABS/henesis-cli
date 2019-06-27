@@ -1,4 +1,4 @@
-import Command from '../base';
+import Command from '../../common/base';
 import { cli } from 'cli-ux';
 import integrationRpc from '../../rpc/integration';
 

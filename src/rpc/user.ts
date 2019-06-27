@@ -1,13 +1,13 @@
 import { LoginRequest, LoginResponse, ChangePassword } from '../types';
 import { plainToClass } from 'class-transformer';
-import { baseUrl } from './config';
+import { baseUrl, rpcVersion } from './config';
 import { getWretcher } from './wretch';
 
 export class UserRpc {
   private server: string;
 
-  public constructor(host: string) {
-    this.server = `${host}/users`;
+  public constructor(host: string, version: string) {
+    this.server = `${host}/users/${version}`;
   }
 
   public async login(email: string, password: string): Promise<LoginResponse> {
@@ -49,4 +49,5 @@ export class UserRpc {
   }
 }
 
-export default new UserRpc(baseUrl);
+const url = baseUrl();
+export default new UserRpc(url, rpcVersion);

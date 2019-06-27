@@ -1,6 +1,6 @@
 import integrationRpc from '../../rpc/integration';
 import { MISSING_INTEGRATIONID_ARGS } from '../../errors';
-import Command from '../base';
+import Command from '../../common/base';
 
 export default class Delete extends Command {
   public static description = 'delete a integration';

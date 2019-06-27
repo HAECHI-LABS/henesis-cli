@@ -1,5 +1,5 @@
 import configstore from '../common/configstore';
-import Command from './base';
+import Command from '../common/base';
 
 export default class Logout extends Command {
   public static description = 'Perform a logout';

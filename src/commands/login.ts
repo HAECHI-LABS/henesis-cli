@@ -1,7 +1,7 @@
 import configstore from '../common/configstore';
 import { default as UserRPC } from '../rpc/user';
 import { emailPrompt, passwordPrompt } from '../utils';
-import Command from './base';
+import Command from '../common/base';
 
 export default class Login extends Command {
   public static description = 'Perform a login';

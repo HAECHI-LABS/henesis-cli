@@ -1,6 +1,6 @@
 import { expect } from '@oclif/test';
 import wretch from 'wretch';
-import { baseUrl } from './config';
+import { baseUrl, rpcVersion } from './config';
 import * as mockhttp from 'mockttp';
 import { UserRpc } from './user';
 import { LoginResponse } from '../types';
@@ -18,7 +18,8 @@ describe('UserRpc', (): void => {
 
   beforeEach(
     async (): Promise<void> => {
-      userRpc = new UserRpc(baseUrl);
+      const url = baseUrl();
+      userRpc = new UserRpc(url, rpcVersion);
       await mockServer.start(8080);
     },
   );
@@ -33,7 +34,7 @@ describe('UserRpc', (): void => {
     it('should be failed when Nonexistent User Info.', async (): Promise<
       void
     > => {
-      await mockServer.post('/users/login').thenReply(401);
+      await mockServer.post('/users/v1/login').thenReply(401);
 
       try {
         await userRpc.login('asdf', 'password');
@@ -44,7 +45,7 @@ describe('UserRpc', (): void => {
 
     it('success Login Process.', async (): Promise<void> => {
       const loginData = newMockLogin();
-      await mockServer.post('/users/login').thenJSON(200, loginData);
+      await mockServer.post('/users/v1/login').thenJSON(200, loginData);
       const response: LoginResponse = await userRpc.login(
         loginData.email,
         'password',
@@ -57,7 +58,7 @@ describe('UserRpc', (): void => {
     it('should be failed when different exist password.', async (): Promise<
       void
     > => {
-      await mockServer.patch('/users/passwd').thenReply(403);
+      await mockServer.patch('/users/v1/passwd').thenReply(403);
 
       try {
         await userRpc.changePassword(
@@ -72,7 +73,7 @@ describe('UserRpc', (): void => {
     it('should be failed when jwt Token is expire.', async (): Promise<
       void
     > => {
-      await mockServer.patch('/users/passwd').thenReply(401);
+      await mockServer.patch('/users/v1/passwd').thenReply(401);
 
       try {
         await userRpc.changePassword(

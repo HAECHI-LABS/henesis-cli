@@ -1,7 +1,7 @@
 import { flags } from '@oclif/command';
 import { existsSync, writeFileSync, mkdirSync, readFileSync } from 'fs';
 import { join } from 'path';
-import Command from './base';
+import Command from '../common/base';
 
 const TEMPLATE_DIR = join(__dirname, '..', '..', 'templates');
 const TEMPLATE_ERC20_DIR = join(__dirname, '..', '..', 'templates20');

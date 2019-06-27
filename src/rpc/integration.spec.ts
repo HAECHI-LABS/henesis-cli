@@ -17,7 +17,8 @@ describe('IntegrationRpc', () => {
   const mockServer = mockhttp.getLocal();
   // Start your servers
   beforeEach(async () => {
-    integrationRpc = new IntegrationRpc(baseUrl, rpcVersion);
+    const url = baseUrl();
+    integrationRpc = new IntegrationRpc(url, rpcVersion);
     await mockServer.start(8080);
   });
 

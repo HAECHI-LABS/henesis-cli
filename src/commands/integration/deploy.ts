@@ -12,7 +12,7 @@ import integrationRpc from '../../rpc/integration';
 import { CompileResult, compileSol, getLatestEvmVersion } from '../../compiler';
 import { Status } from '../../types/Integration';
 import { startWait, endWait } from '../../utils';
-import Command from '../base';
+import Command from '../../common/base';
 
 const defaultSpecFile = './henesis.yaml';
 

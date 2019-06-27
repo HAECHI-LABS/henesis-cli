@@ -33,7 +33,7 @@ describe('changepw', (): void => {
       test
         .nock(
           'http://localhost:8080',
-          (api): Scope => api.patch('/users/passwd').reply(200, {}),
+          (api): Scope => api.patch('/users/v1/passwd').reply(200, {}),
         )
         .stub(
           utils,

@@ -86,6 +86,12 @@ sample-project/
 └─ henesis.yaml
 ```
 
+also, You can initialize the template distributed through git.
+
+```sh-session
+$ henesis init -g https://github.com/HAECHI-LABS/henesis-dai.git
+henesis-dai directory has been created.
+```
 
 
 4. integration

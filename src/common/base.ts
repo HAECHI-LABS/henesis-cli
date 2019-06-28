@@ -25,15 +25,6 @@ const osVersionMap: { [os: string]: { [release: string]: string } } = {
     // We stop here because we try to math out the version for anything greater than 10, and it
     // works. Those versions are standardized using a calculation now.
   },
-  win32: {
-    '6.3.9600': 'Windows 8.1',
-    '6.2.9200': 'Windows 8',
-    '6.1.7601': 'Windows 7 SP1',
-    '6.1.7600': 'Windows 7',
-    '6.0.6002': 'Windows Vista SP2',
-    '6.0.6000': 'Windows Vista',
-    '5.1.2600': 'Windows XP',
-  },
 };
 
 /**
@@ -71,7 +62,7 @@ export default abstract class extends Command {
         (v, i): boolean | number | string => (additionals['cd' + i] = v),
       );
 
-      visitor.pageview({ dp: `/command/${name}`, ...additionals });
+      visitor.pageview({ dp: `/command/${name}`, ...additionals }).send();
     }
   }
 
@@ -133,7 +124,7 @@ export default abstract class extends Command {
       // Remove 4 to tie Darwin version to OSX version, add other info.
       const x = parseFloat(os.release());
       if (x > 10) {
-        v = `10_` + (x - 4).toString().replace('.', '_');
+        v = `10_${(x - 4).toString().replace('.', '_')}`;
       }
     }
 

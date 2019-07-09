@@ -64,15 +64,32 @@
 	"engines": {
 		"node": ">=10.0.0"
 	},
-	"files": [ "/bin", "/lib", "/npm-shrinkwrap.json", "/oclif.manifest.json", "/templates" ],
+	"files": [
+		"/bin",
+		"/lib",
+		"/npm-shrinkwrap.json",
+		"/oclif.manifest.json",
+		"/templates"
+	],
 	"homepage": "https://github.com/HAECHI-LABS/henesis-cli",
-	"keywords": [ "oclif", "blockchain", "ethereum", "cli", "henssis", "SmartContract", "smart constract", "haechi" ],
+	"keywords": [
+		"oclif",
+		"blockchain",
+		"ethereum",
+		"cli",
+		"henssis",
+		"SmartContract",
+		"smart constract",
+		"haechi"
+	],
 	"license": "LGPL3",
 	"main": "lib/index.js",
 	"oclif": {
 		"commands": "./lib/commands",
 		"bin": "henesis",
-		"plugins": [ "@oclif/plugin-help" ],
+		"plugins": [
+			"@oclif/plugin-help"
+		],
 		"hooks": {
 			"init": "./lib/hooks/init/wretch"
 		},

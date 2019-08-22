@@ -13,7 +13,7 @@ export const columns = {
   },
   platform: {
     header: 'Platform',
-    minWidth: 10,
+    minWidth: 13,
   },
   network: {
     header: 'Network',
@@ -23,18 +23,23 @@ export const columns = {
     header: 'Version',
     minWidth: 10,
   },
+  provider: {
+    header: 'Provider',
+    minWidth: 13,
+    get: (row: any) => row.provider.type,
+  },
   state: {
     header: 'State',
     minWidth: 15,
     get: (row: any) => row.status && row.status.state,
   },
-  ready: {
-    header: 'Ready',
-    minWidth: 10,
-    get: (row: any): any => {
-      return `${row.status.ready}/${row.handlers.length}`;
-    },
-  },
+  // ready: {
+  //   header: 'Ready',
+  //   minWidth: 10,
+  //   get: (row: any): any => {
+  //     return `${row.status.ready}/${row.handlers.length}`;
+  //   },
+  // },
 };
 
 export default class Status extends Command {
@@ -46,10 +51,6 @@ export default class Status extends Command {
   public async run(): Promise<void> {
     try {
       const integrations = await integrationRpc.getIntegrations();
-
-      cli.url('View Dashboard', 'https://dashboard.henesis.io');
-      this.log('└─ You can login with the same email and password as henesis.');
-
       cli.table(integrations, columns, {
         printLine: this.log,
       });

@@ -8,6 +8,68 @@ export enum PlatformType {
 export enum NetworkType {
   MAINNET = 'mainnet',
   ROPSTEN = 'ropsten',
+  BAOBAB = 'baobab',
+}
+
+export class Provider {
+  public type: string;
+  public connectionLimit?: number;
+  public url?: string;
+  public method?: string;
+  public headers?: { [key: string]: string };
+
+  public constructor(
+    type: string,
+    connectionLimit?: number,
+    url?: string,
+    method?: string,
+    headers?: { [p: string]: string },
+  ) {
+    this.type = type;
+    this.connectionLimit = connectionLimit;
+    this.url = url;
+    this.method = method;
+    this.headers = headers;
+  }
+}
+
+export class Filter {
+  public contracts: Contract[];
+
+  public constructor(contracts: Contract[]) {
+    this.contracts = contracts;
+  }
+}
+
+export class Blockchain {
+  public platform: PlatformType;
+  public network: NetworkType;
+  public interval: number;
+  public threshold: number;
+
+  public constructor(
+    platform: PlatformType,
+    network: NetworkType,
+    interval: number,
+    threshold: number,
+  ) {
+    this.platform = platform;
+    this.network = network;
+    this.interval = interval;
+    this.threshold = threshold;
+  }
+}
+
+export class Contract {
+  public name: string;
+  public address: string;
+  public abi: any;
+
+  public constructor(name: string, address: string, abi: any) {
+    this.name = name;
+    this.address = address;
+    this.abi = abi;
+  }
 }
 
 export class Integration {
@@ -15,12 +77,11 @@ export class Integration {
   public userId: number;
   public name: string;
   public version: string;
-  public abi: any;
   public contractAddress: string;
   public platform: PlatformType;
   public network: NetworkType;
-  public handlers: Handler[];
-  public webhook: Webhook;
+  public filter: Filter;
+  public provider: Provider;
   public status: Status;
 
   public constructor(
@@ -28,81 +89,30 @@ export class Integration {
     userId: number,
     name: string,
     version: string,
-    abi: any,
     contractAddress: string,
     platform: PlatformType,
     network: NetworkType,
-    handlers: Handler[],
-    webhook: Webhook,
+    filter: Filter,
+    provider: Provider,
     status: Status,
   ) {
     this.integrationId = integrationId;
     this.userId = userId;
     this.name = name;
     this.version = version;
-    this.abi = abi;
     this.contractAddress = contractAddress;
     this.platform = platform;
     this.network = network;
-    this.handlers = handlers;
-    this.webhook = webhook;
+    this.filter = filter;
+    this.provider = provider;
     this.status = status;
   }
 }
 
-export class Handler {
-  public id: string;
-  public name: string;
-  public event: string;
-  public version: string;
-  public code: string;
-  public dep: string;
-  public runtime: string;
-  public function: string;
-
-  public constructor(
-    id: string,
-    name: string,
-    event: string,
-    version: string,
-    code: string,
-    dep: string,
-    runtime: string,
-    func: string,
-  ) {
-    this.id = id;
-    this.name = name;
-    this.event = event.replace(/ /gi, '');
-    this.version = version;
-    this.code = code;
-    this.dep = dep;
-    this.runtime = runtime;
-    this.function = func;
-  }
-}
-
-export class Webhook {
-  public url: string;
-  public method: string;
-  public headers: { [key: string]: string };
-
-  public constructor(
-    url: string,
-    method: string,
-    headers: { [key: string]: string },
-  ) {
-    this.url = url;
-    this.method = method;
-    this.headers = headers;
-  }
-}
-
 export class Status {
-  public ready: number;
   public state: string;
 
-  public constructor(ready: number, state: string) {
-    this.ready = ready;
+  public constructor(state: string) {
     this.state = state;
   }
 }

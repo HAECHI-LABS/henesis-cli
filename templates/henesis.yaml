@@ -1,37 +1,28 @@
 version: v1
 name: projectname
 
-contract:
-  address: '0x'
-  path: ./contracts/example.sol
-  name: example
-  compilerVersion: 0.5.8
-
 blockchain:
   platform: ethereum
   network: mainnet
+  threshold: 12
+  interval: 1000
 
-handlers:
-  event1:
-    event: Execution(address)
-    # If you want to include additional logic, you need to uncomment it.
-    # version: v1
-    # runtime: tsnode8
-    # path: ./handlers/execution.ts
-    # dep: ./handlers/package.json
-    # function: execution
+filters:
+  contracts:
+    - address: '0x'
+      path: ./contracts/example.sol
+      name: example
+      compilerVersion: 0.5.8
 
-  event2:
-    event: Execution(address,address)
-    # If you want to include additional logic, you need to uncomment it.
-    # version: v1
-    # runtime: tsnode8
-    # path: ./handlers/execution2.ts
-    # dep: ./handlers/package.json
-    # function: execution2
-
-webhook:
+provider:
+  type: webhook
   url: https://localhost:8080
   method: POST
-  headers: 
+  retry:
+    retryDelay: 1000
+    maxRetries: 3
+  headers:
     Authorization: 'Bearer YOUR-OWN-TOKEN'
+  # if you want to use webSocket, you need to place it
+  # type: webSocket
+  # connectionLimit: 5

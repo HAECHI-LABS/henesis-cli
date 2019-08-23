@@ -47,23 +47,6 @@ export default class Init extends Command {
       },
     );
 
-    // TODO: with force.
-    mkdirSync(`${destinationPath}/handlers`);
-    writeFileSync(
-      join(`${destinationPath}/handlers`, 'execution.ts'),
-      readFileSync(join(`${TEMPLATE_DIR}/handlers`, 'execution.ts')),
-      { mode: MODE_0666 },
-    );
-    writeFileSync(
-      join(`${destinationPath}/handlers`, 'execution2.ts'),
-      readFileSync(join(`${TEMPLATE_DIR}/handlers`, 'execution2.ts')),
-      { mode: MODE_0666 },
-    );
-    writeFileSync(
-      join(`${destinationPath}/handlers`, 'package.json'),
-      readFileSync(join(`${TEMPLATE_DIR}/handlers`, 'package.json')),
-      { mode: MODE_0666 },
-    );
     mkdirSync(`${destinationPath}/contracts`);
     writeFileSync(
       join(`${destinationPath}/contracts`, 'example.sol'),

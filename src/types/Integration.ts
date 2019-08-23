@@ -16,6 +16,10 @@ export class Provider {
   public connectionLimit?: number;
   public url?: string;
   public method?: string;
+  public retry?: {
+    retryDelay: number;
+    maxRetries: number;
+  };
   public headers?: { [key: string]: string };
 
   public constructor(
@@ -23,6 +27,10 @@ export class Provider {
     connectionLimit?: number,
     url?: string,
     method?: string,
+    retry?: {
+      retryDelay: number;
+      maxRetries: number;
+    },
     headers?: { [p: string]: string },
   ) {
     this.type = type;
@@ -30,6 +38,7 @@ export class Provider {
     this.url = url;
     this.method = method;
     this.headers = headers;
+    this.retry = retry;
   }
 }
 
@@ -72,12 +81,54 @@ export class Contract {
   }
 }
 
+export class UpdateIntegrationRequest {
+  public version: string;
+  public blockchain: Blockchain;
+  public filter: Filter;
+  public provider: Provider;
+
+  public constructor(
+    version: string,
+    blockchain: Blockchain,
+    filter: Filter,
+    provider: Provider,
+  ) {
+    this.version = version;
+    this.blockchain = blockchain;
+    this.filter = filter;
+    this.provider = provider;
+  }
+}
+
+export class CreateIntegrationRequest {
+  public name: string;
+  public version: string;
+  public blockchain: Blockchain;
+  public filter: Filter;
+  public provider: Provider;
+
+  public constructor(
+    name: string,
+    version: string,
+    blockchain: Blockchain,
+    filter: Filter,
+    provider: Provider,
+  ) {
+    this.name = name;
+    this.version = version;
+    this.blockchain = blockchain;
+    this.filter = filter;
+    this.provider = provider;
+  }
+}
+
 export class Integration {
   public integrationId: string;
   public userId: number;
   public name: string;
   public version: string;
-  public contractAddress: string;
+  public threshold: number;
+  public interval: number;
   public platform: PlatformType;
   public network: NetworkType;
   public filter: Filter;
@@ -89,7 +140,8 @@ export class Integration {
     userId: number,
     name: string,
     version: string,
-    contractAddress: string,
+    threshold: number,
+    interval: number,
     platform: PlatformType,
     network: NetworkType,
     filter: Filter,
@@ -100,7 +152,8 @@ export class Integration {
     this.userId = userId;
     this.name = name;
     this.version = version;
-    this.contractAddress = contractAddress;
+    this.threshold = threshold;
+    this.interval = interval;
     this.platform = platform;
     this.network = network;
     this.filter = filter;

@@ -5,6 +5,7 @@ import {
   mkdirSync,
   readFileSync,
   constants,
+  writeFileSync,
 } from 'fs';
 import { join } from 'path';
 import Command from '../common/base';
@@ -54,34 +55,11 @@ export default class Init extends Command {
       withForce ? constants.COPYFILE_FICLONE : undefined,
     );
 
-    if (!existsSync(`${destinationPath}/handlers`)) {
-      mkdirSync(`${destinationPath}/handlers`);
-    }
-
-    copyFileSync(
-      join(`${TEMPLATE_DIR}/handlers`, 'execution.ts'),
-      join(`${destinationPath}/handlers`, 'execution.ts'),
-      withForce ? constants.COPYFILE_FICLONE : undefined,
-    );
-
-    copyFileSync(
-      join(`${TEMPLATE_DIR}/handlers`, 'execution2.ts'),
-      join(`${destinationPath}/handlers`, 'execution2.ts'),
-      withForce ? constants.COPYFILE_FICLONE : undefined,
-    );
-
-    copyFileSync(
-      join(`${TEMPLATE_DIR}/handlers`, 'package.json'),
-      join(`${destinationPath}/handlers`, 'package.json'),
-      withForce ? constants.COPYFILE_FICLONE : undefined,
-    );
-
     if (!existsSync(`${destinationPath}/contracts`)) {
       mkdirSync(`${destinationPath}/contracts`);
     }
 
-    copyFileSync(
-      join(`${TEMPLATE_DIR}/contracts`, 'example.sol'),
+    writeFileSync(
       join(`${destinationPath}/contracts`, 'example.sol'),
       withForce ? constants.COPYFILE_FICLONE : undefined,
     );

@@ -33,13 +33,6 @@ export const columns = {
     minWidth: 15,
     get: (row: any) => row.status && row.status.state,
   },
-  // ready: {
-  //   header: 'Ready',
-  //   minWidth: 10,
-  //   get: (row: any): any => {
-  //     return `${row.status.ready}/${row.handlers.length}`;
-  //   },
-  // },
 };
 
 export default class Status extends Command {

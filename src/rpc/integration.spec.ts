@@ -4,7 +4,12 @@ import wretch from 'wretch';
 import { baseUrl, rpcVersion } from './config';
 import { newMockIntegration } from '../mock';
 import * as mockhttp from 'mockttp';
-import { Integration } from '../types';
+import {
+  Blockchain,
+  CreateIntegrationRequest,
+  Integration,
+  UpdateIntegrationRequest,
+} from '../types';
 
 wretch().polyfills({
   fetch: require('node-fetch'),
@@ -12,6 +17,7 @@ wretch().polyfills({
   URLSearchParams: require('url').URLSearchParams,
 });
 
+process.env.HENESIS_TEST = 'true';
 describe('IntegrationRpc', () => {
   let integrationRpc: IntegrationRpc;
   const mockServer = mockhttp.getLocal();
@@ -29,9 +35,11 @@ describe('IntegrationRpc', () => {
   describe('#getIntegrations()', async () => {
     it('should get integration list', async () => {
       const integrations = [newMockIntegration(), newMockIntegration()];
-      await mockServer.get('/integrations/v1').thenJSON(200, integrations);
+      await mockServer.get('/integrations/v1').thenJson(200, integrations);
       const response: Integration[] = await integrationRpc.getIntegrations();
-      expect(response).to.deep.equal(integrations);
+      expect(JSON.stringify(response)).to.deep.equal(
+        JSON.stringify(integrations),
+      );
     });
 
     it('should throw invalid response format error', async () => {
@@ -66,7 +74,9 @@ describe('IntegrationRpc', () => {
       const response: Integration | null = await integrationRpc.getIntegration(
         integration.integrationId,
       );
-      expect(response).to.deep.equal(integration);
+      expect(JSON.stringify(response)).to.deep.equal(
+        JSON.stringify(integration),
+      );
     });
   });
 
@@ -81,7 +91,9 @@ describe('IntegrationRpc', () => {
       const response: Integration | null = await integrationRpc.getIntegrationByName(
         integration.name,
       );
-      expect(response).to.deep.equal(integration);
+      expect(JSON.stringify(response)).to.deep.equal(
+        JSON.stringify(integration),
+      );
     });
   });
 
@@ -96,9 +108,11 @@ describe('IntegrationRpc', () => {
         integration.integrationId,
         ({
           version: 'v3',
-        } as any) as Integration,
+        } as any) as UpdateIntegrationRequest,
       );
-      expect(response).to.deep.equal(integration);
+      expect(JSON.stringify(response)).to.deep.equal(
+        JSON.stringify(integration),
+      );
     });
   });
 
@@ -107,9 +121,22 @@ describe('IntegrationRpc', () => {
       const integration = newMockIntegration();
       await mockServer.post('/integrations/v1').thenJSON(200, integration);
       const response: Integration | null = await integrationRpc.createIntegration(
-        integration,
+        new CreateIntegrationRequest(
+          integration.name,
+          integration.version,
+          new Blockchain(
+            integration.platform,
+            integration.network,
+            integration.interval,
+            integration.threshold,
+          ),
+          integration.filter,
+          integration.provider,
+        ),
       );
-      expect(response).to.deep.equal(integration);
+      expect(JSON.stringify(response)).to.deep.equal(
+        JSON.stringify(integration),
+      );
     });
   });
 

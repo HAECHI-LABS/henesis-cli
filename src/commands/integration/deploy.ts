@@ -2,17 +2,24 @@ import { flags } from '@oclif/command';
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
 import {
-  Handler,
-  HandlerSpec,
   Integration,
   IntegrationSpec,
-  Webhook,
+  UpdateIntegrationRequest,
 } from '../../types';
 import integrationRpc from '../../rpc/integration';
 import { CompileResult, compileSol, getLatestEvmVersion } from '../../compiler';
-import { Status } from '../../types/Integration';
+import {
+  Blockchain,
+  Contract,
+  CreateIntegrationRequest,
+  Filter,
+  Provider,
+} from '../../types';
 import { startWait, endWait } from '../../utils';
 import Command from '../../common/base';
+import { ContractSpec } from '../../types/IntegrationSpec';
+import { Hook } from '@oclif/config';
+import Update = Hook.Update;
 
 const defaultSpecFile = './henesis.yaml';
 
@@ -25,93 +32,81 @@ async function getAbi(
     solcVersion: compilerVersion,
     evmVersion: getLatestEvmVersion(compilerVersion),
   });
-
   return result.getAbi(contractName);
 }
 
-async function toIntegration(spec: IntegrationSpec): Promise<Integration> {
+async function toContract(contractSpec: ContractSpec): Promise<Contract> {
   const abi: any = await getAbi(
-    spec.contract.path,
-    spec.contract.compilerVersion,
-    spec.contract.name,
+    contractSpec.path,
+    contractSpec.compilerVersion,
+    contractSpec.name,
   );
 
   startWait('Deploying');
 
   if (abi === undefined) {
     throw new Error(
-      `corresponding contract name does not exist in '${
-        spec.contract.path
-      }' file`,
+      `corresponding contract name does not exist in '${contractSpec.path}' file`,
     );
   }
 
-  function toHandler(name: string, handlerSpec: HandlerSpec): Handler {
-    if (
-      typeof handlerSpec.path === 'undefined' &&
-      typeof handlerSpec.dep === 'undefined'
-    ) {
-      const code =
-        "exports.template = (web3:any, event: any, blockMeta:any, userMeta:any): any => {\n  console.log('event', event.payload);\n  return event.payload;\n};\n";
-      const dep =
-        '{\n\t"name": "henesis",\n\t"version": "1.0.0",\n\t"description": "",\n\t"main": "index.js",\n\t"scripts": {\n\t\t"test": "echo \\"Error: no test specified\\" && exit 1"\n\t},\n\t"author": "",\n\t"license": "ISC"\n}\n';
-      return new Handler(
-        '',
-        name,
-        handlerSpec.event,
-        'v1',
-        code,
-        dep,
-        'tsnode8',
-        'template',
-      );
-    }
+  return new Contract(contractSpec.name, contractSpec.address, abi);
+}
 
-    if (
-      !fs.existsSync(handlerSpec.path as string) ||
-      !fs.existsSync(handlerSpec.dep as string)
-    ) {
-      throw new Error(
-        `${name} handler dependency file or code file does not exists`,
-      );
-    }
-
-    const code = fs.readFileSync(handlerSpec.path as string, 'utf8');
-    const dep = fs.readFileSync(handlerSpec.dep as string, 'utf8');
-
-    return new Handler(
-      '',
-      name,
-      handlerSpec.event,
-      handlerSpec.version,
-      code,
-      dep,
-      handlerSpec.runtime,
-      handlerSpec.function,
-    );
+async function toContracts(contractSpecs: ContractSpec[]): Promise<Contract[]> {
+  let contracts: Contract[] = [];
+  for (let i = 0; i < contractSpecs.length; i++) {
+    contracts.push(await toContract(contractSpecs[i]));
   }
+  return contracts;
+}
 
-  function toHandlers(handlerSpecs: { [key: string]: HandlerSpec }): Handler[] {
-    const handlers = [];
-    for (let name in handlerSpecs) {
-      handlers.push(toHandler(name, handlerSpecs[name]));
-    }
-    return handlers;
-  }
-
-  const handlers: Handler[] = await toHandlers(spec.handlers);
-  return new Integration(
-    '',
-    0,
+async function toCreateIntegrationRequest(
+  spec: IntegrationSpec,
+): Promise<CreateIntegrationRequest> {
+  const contracts: Contract[] = await toContracts(spec.filters.contracts);
+  return new CreateIntegrationRequest(
     spec.name,
     spec.version,
-    abi,
-    spec.contract.address,
-    spec.blockchain.platform,
-    spec.blockchain.network,
-    handlers,
-    new Webhook(spec.webhook.url, spec.webhook.method, spec.webhook.headers),
-    new Status(0, 'Unavailable'),
+    new Blockchain(
+      spec.blockchain.platform,
+      spec.blockchain.network,
+      spec.blockchain.interval,
+      spec.blockchain.threshold,
+    ),
+    new Filter(contracts),
+    new Provider(
+      spec.provider.type,
+      spec.provider.connectionLimit,
+      spec.provider.url,
+      spec.provider.method,
+      spec.provider.retry,
+      spec.provider.headers,
+    ),
+  );
+}
+
+async function toUpdateIntegrationRequest(
+  spec: IntegrationSpec,
+): Promise<UpdateIntegrationRequest> {
+  const contracts: Contract[] = await toContracts(spec.filters.contracts);
+  return new UpdateIntegrationRequest(
+    spec.version,
+    new Blockchain(
+      spec.blockchain.platform,
+      spec.blockchain.network,
+      spec.blockchain.interval,
+      spec.blockchain.threshold,
+    ),
+    new Filter(contracts),
+    new Provider(
+      spec.provider.type,
+      spec.provider.connectionLimit,
+      spec.provider.url,
+      spec.provider.method,
+      spec.provider.retry,
+      spec.provider.headers,
+    ),
   );
 }
 
@@ -149,13 +144,13 @@ export default class Deploy extends Command {
         );
         await integrationRpc.updateIntegration(
           integration.integrationId,
-          await toIntegration(integrationSpec),
+          await toUpdateIntegrationRequest(integrationSpec),
         );
         this.log(`${integration.integrationId} has been deployed with force`);
         endWait();
       } else {
-        const integration = await integrationRpc.createIntegration(
-          await toIntegration(integrationSpec),
+        const integration: Integration = await integrationRpc.createIntegration(
+          await toCreateIntegrationRequest(integrationSpec),
         );
         this.log(`${integration.integrationId} has been deployed`);
         endWait();

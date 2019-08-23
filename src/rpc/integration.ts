@@ -1,7 +1,8 @@
-import { Integration } from '../types';
+import { Integration, UpdateIntegrationRequest } from '../types';
 import { plainToClass } from 'class-transformer';
 import { baseUrl, rpcVersion } from './config';
 import { getWretcher } from './wretch';
+import { CreateIntegrationRequest } from '../types/Integration';
 
 export class IntegrationRpc {
   private server: string;
@@ -70,11 +71,11 @@ export class IntegrationRpc {
    */
   public async updateIntegration(
     integrationId: string,
-    integration: Integration,
+    updateIntegrationRequest: UpdateIntegrationRequest,
   ): Promise<Integration | null> {
     const json = await getWretcher()
       .url(this.server + '/' + integrationId)
-      .put(integration)
+      .put(updateIntegrationRequest)
       .json()
       .catch((err: any) => {
         throw err;
@@ -87,11 +88,11 @@ export class IntegrationRpc {
    * @returns A integration
    */
   public async createIntegration(
-    integration: Integration,
+    request: CreateIntegrationRequest,
   ): Promise<Integration> {
     const json = await getWretcher()
       .url(this.server)
-      .post(integration)
+      .post(request)
       .json()
       .catch((err: any) => {
         throw err;

@@ -1,5 +1,11 @@
 import { flags } from '@oclif/command';
-import { existsSync, writeFileSync, mkdirSync, readFileSync } from 'fs';
+import {
+  existsSync,
+  copyFileSync,
+  mkdirSync,
+  readFileSync,
+  constants,
+} from 'fs';
 import { join } from 'path';
 import Command from '../common/base';
 import * as simplegit from 'simple-git/promise';
@@ -38,37 +44,46 @@ export default class Init extends Command {
 
   public static args = [];
 
-  private async initTemplate(destinationPath: string): Promise<void> {
-    writeFileSync(
+  private async initTemplate(
+    destinationPath: string,
+    withForce: boolean | undefined = false,
+  ): Promise<void> {
+    copyFileSync(
+      join(`${TEMPLATE_DIR}`, 'henesis.yaml'),
       join(`${destinationPath}`, 'henesis.yaml'),
-      readFileSync(join(`${TEMPLATE_DIR}`, 'henesis.yaml')),
-      {
-        mode: MODE_0666,
-      },
+      withForce ? constants.COPYFILE_FICLONE : undefined,
     );
 
-    // TODO: with force.
-    mkdirSync(`${destinationPath}/handlers`);
-    writeFileSync(
+    if (!existsSync(`${destinationPath}/handlers`)) {
+      mkdirSync(`${destinationPath}/handlers`);
+    }
+
+    copyFileSync(
+      join(`${TEMPLATE_DIR}/handlers`, 'execution.ts'),
       join(`${destinationPath}/handlers`, 'execution.ts'),
-      readFileSync(join(`${TEMPLATE_DIR}/handlers`, 'execution.ts')),
-      { mode: MODE_0666 },
+      withForce ? constants.COPYFILE_FICLONE : undefined,
     );
-    writeFileSync(
+
+    copyFileSync(
+      join(`${TEMPLATE_DIR}/handlers`, 'execution2.ts'),
       join(`${destinationPath}/handlers`, 'execution2.ts'),
-      readFileSync(join(`${TEMPLATE_DIR}/handlers`, 'execution2.ts')),
-      { mode: MODE_0666 },
+      withForce ? constants.COPYFILE_FICLONE : undefined,
     );
-    writeFileSync(
+
+    copyFileSync(
+      join(`${TEMPLATE_DIR}/handlers`, 'package.json'),
       join(`${destinationPath}/handlers`, 'package.json'),
-      readFileSync(join(`${TEMPLATE_DIR}/handlers`, 'package.json')),
-      { mode: MODE_0666 },
+      withForce ? constants.COPYFILE_FICLONE : undefined,
     );
-    mkdirSync(`${destinationPath}/contracts`);
-    writeFileSync(
+
+    if (!existsSync(`${destinationPath}/contracts`)) {
+      mkdirSync(`${destinationPath}/contracts`);
+    }
+
+    copyFileSync(
+      join(`${TEMPLATE_DIR}/contracts`, 'example.sol'),
       join(`${destinationPath}/contracts`, 'example.sol'),
-      readFileSync(join(`${TEMPLATE_DIR}/contracts`, 'example.sol')),
-      { mode: MODE_0666 },
+      withForce ? constants.COPYFILE_FICLONE : undefined,
     );
   }
 
@@ -99,12 +114,14 @@ export default class Init extends Command {
       this.error(`The directory exists at the current directory.`);
     }
 
-    mkdirSync(`${destinationPath}`);
+    if (!existsSync(destinationPath)) {
+      mkdirSync(`${destinationPath}`);
+    }
 
     if (typeof flags.git !== 'undefined') {
       await this.gitInit(flags.git, destinationPath);
     } else {
-      await this.initTemplate(destinationPath);
+      await this.initTemplate(destinationPath, flags.force);
     }
 
     this.log(`${name} directory has been created.`);

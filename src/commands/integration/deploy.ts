@@ -36,6 +36,8 @@ async function toIntegration(spec: IntegrationSpec): Promise<Integration> {
     spec.contract.name,
   );
 
+  startWait('Deploying');
+
   if (abi === undefined) {
     throw new Error(
       `corresponding contract name does not exist in '${
@@ -135,7 +137,6 @@ export default class Deploy extends Command {
   public static args = [];
 
   public async run(): Promise<void> {
-    startWait('Deploying');
     const { flags } = this.parse(Deploy);
     try {
       const integrationSpec: IntegrationSpec = yaml.safeLoad(
@@ -151,6 +152,7 @@ export default class Deploy extends Command {
           await toIntegration(integrationSpec),
         );
         this.log(`${integration.integrationId} has been deployed with force`);
+        endWait();
       } else {
         const integration = await integrationRpc.createIntegration(
           await toIntegration(integrationSpec),

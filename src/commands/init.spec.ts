@@ -49,6 +49,19 @@ describe('init', (): void => {
   test
     .stdout()
     .command(['init'])
+    .command(['init', '-f'])
+    .it(
+      'should be able to successfully create folder with force',
+      (ctx): void => {
+        expect(ctx.stdout).to.equal(
+          'henesis directory has been created.\nhenesis directory has been created.\n',
+        );
+      },
+    );
+
+  test
+    .stdout()
+    .command(['init'])
     .command(['init'])
     .exit(2)
     .it('must be fail when directory already exists.');

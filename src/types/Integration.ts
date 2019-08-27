@@ -127,10 +127,7 @@ export class Integration {
   public userId: number;
   public name: string;
   public version: string;
-  public threshold: number;
-  public interval: number;
-  public platform: PlatformType;
-  public network: NetworkType;
+  public blockchain: Blockchain;
   public filter: Filter;
   public provider: Provider;
   public status: Status;
@@ -140,10 +137,7 @@ export class Integration {
     userId: number,
     name: string,
     version: string,
-    threshold: number,
-    interval: number,
-    platform: PlatformType,
-    network: NetworkType,
+    blockchain: Blockchain,
     filter: Filter,
     provider: Provider,
     status: Status,
@@ -152,10 +146,7 @@ export class Integration {
     this.userId = userId;
     this.name = name;
     this.version = version;
-    this.threshold = threshold;
-    this.interval = interval;
-    this.platform = platform;
-    this.network = network;
+    this.blockchain = blockchain;
     this.filter = filter;
     this.provider = provider;
     this.status = status;

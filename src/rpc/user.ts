@@ -16,9 +16,10 @@ export class UserRpc {
     const json = await getWretcher()
       .url(`${this.server}/login`)
       .post(payload)
-      .unauthorized(
+      .error(
+        403,
         (): Error => {
-          throw new Error(`Unauthenticated User`);
+          throw new Error(`login failed`);
         },
       )
       .json();
@@ -37,12 +38,13 @@ export class UserRpc {
       .patch(payload)
       .unauthorized(
         (): Error => {
-          throw new Error(`Unauthenticated Token`);
+          throw new Error(`unauthenticated token`);
         },
       )
-      .forbidden(
+      .error(
+        403,
         (): Error => {
-          throw new Error(`No satisfied conditions`);
+          throw new Error(`failed to change password`);
         },
       )
       .json();

@@ -3,22 +3,17 @@ import * as rimraf from 'rimraf';
 import { join } from 'path';
 
 describe('init', (): void => {
-  afterEach(
-    (): void => {
-      const path = join(__dirname, '..', '..', `/henesis`);
-      rimraf(path, (): void => {});
-    },
-  );
+  afterEach((): void => {
+    const path = join(__dirname, '..', '..', `/henesis`);
+    rimraf(path, (): void => {});
+  });
 
   test
     .stdout()
     .command(['init'])
-    .it(
-      'must be able to successfully create folders.',
-      (ctx): void => {
-        expect(ctx.stdout).to.equal('henesis directory has been created.\n');
-      },
-    );
+    .it('must be able to successfully create folders.', (ctx): void => {
+      expect(ctx.stdout).to.equal('henesis directory has been created.\n');
+    });
 
   test
     .stdout()

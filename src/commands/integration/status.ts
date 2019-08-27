@@ -14,10 +14,12 @@ export const columns = {
   platform: {
     header: 'Platform',
     minWidth: 13,
+    get: (row: any) => row.blockchain.platform,
   },
   network: {
     header: 'Network',
     minWidth: 10,
+    get: (row: any) => row.blockchain.network,
   },
   version: {
     header: 'Version',

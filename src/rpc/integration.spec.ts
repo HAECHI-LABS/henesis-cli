@@ -53,16 +53,6 @@ describe('IntegrationRpc', () => {
         );
       }
     });
-
-    it('should throw 400 httpError', async () => {
-      const res = 'page not found';
-      await mockServer.get('/integrations/v1').thenReply(400, res);
-      try {
-        await integrationRpc.getIntegrations();
-      } catch (err) {
-        expect(err.toString()).to.deep.equal('Error: page not found');
-      }
-    });
   });
 
   describe('#getIntegration()', async () => {
@@ -125,10 +115,10 @@ describe('IntegrationRpc', () => {
           integration.name,
           integration.version,
           new Blockchain(
-            integration.platform,
-            integration.network,
-            integration.interval,
-            integration.threshold,
+            integration.blockchain.platform,
+            integration.blockchain.network,
+            integration.blockchain.interval,
+            integration.blockchain.threshold,
           ),
           integration.filter,
           integration.provider,

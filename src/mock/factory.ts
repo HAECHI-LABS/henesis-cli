@@ -5,7 +5,8 @@ import {
   IntegrationSpec,
   LoginResponse,
   Filter,
-  Provider, CreateIntegrationRequest,
+  Provider,
+  Blockchain,
 } from '../types';
 import * as faker from 'faker';
 import { Status } from '../types';
@@ -25,10 +26,7 @@ export function newMockIntegration(): Integration {
     faker.random.number(2),
     'asdf',
     'v1',
-    3,
-    333,
-    PlatformType.ETHEREUM,
-    NetworkType.MAINNET,
+    new Blockchain(PlatformType.ETHEREUM, NetworkType.MAINNET, 3, 333),
     new Filter([
       {
         abi: [

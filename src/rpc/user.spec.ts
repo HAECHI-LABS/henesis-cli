@@ -12,6 +12,7 @@ wretch().polyfills({
   URLSearchParams: require('url').URLSearchParams,
 });
 
+process.env.HENESIS_TEST = 'true';
 describe('UserRpc', (): void => {
   const mockServer = mockhttp.getLocal();
   let userRpc: UserRpc;
@@ -34,12 +35,14 @@ describe('UserRpc', (): void => {
     it('should be failed when Nonexistent User Info.', async (): Promise<
       void
     > => {
-      await mockServer.post('/users/v1/login').thenReply(401);
+      await mockServer
+        .post('/users/v1/login')
+        .thenJson(403, { error: { message: 'login failed' } });
 
       try {
         await userRpc.login('asdf', 'password');
       } catch (err) {
-        expect(err.toString()).to.equal('Error: Unauthenticated User');
+        expect(err.toString()).to.equal('Error: login failed');
       }
     });
 
@@ -58,7 +61,7 @@ describe('UserRpc', (): void => {
     it('should be failed when different exist password.', async (): Promise<
       void
     > => {
-      await mockServer.patch('/users/v1/passwd').thenReply(403);
+      await mockServer.patch('/users/v1/passwd').thenJson(403, {});
 
       try {
         await userRpc.changePassword(
@@ -66,14 +69,16 @@ describe('UserRpc', (): void => {
           'To be changed password',
         );
       } catch (err) {
-        expect(err.toString()).to.equal('Error: No satisfied conditions');
+        expect(err.toString()).to.equal('Error: failed to change password');
       }
     });
 
     it('should be failed when jwt Token is expire.', async (): Promise<
       void
     > => {
-      await mockServer.patch('/users/v1/passwd').thenReply(401);
+      await mockServer
+        .patch('/users/v1/passwd')
+        .thenJson(401, { error: { message: 'unauthenticated token' } });
 
       try {
         await userRpc.changePassword(
@@ -81,7 +86,7 @@ describe('UserRpc', (): void => {
           'To be changed password',
         );
       } catch (err) {
-        expect(err.toString()).to.equal('Error: Unauthenticated Token');
+        expect(err.toString()).to.equal('Error: unauthenticated token');
       }
     });
   });

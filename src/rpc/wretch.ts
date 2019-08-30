@@ -1,5 +1,4 @@
 import wretch, { Wretcher, WretcherError } from 'wretch';
-import configstore from '../common/configstore';
 
 const defaultErrorCatcher = (
   error: WretcherError,
@@ -14,9 +13,10 @@ const defaultErrorCatcher = (
 let wretchInstance: Wretcher = wretch()
   .errorType('json')
   .catcher(400, defaultErrorCatcher)
+  .catcher(401, defaultErrorCatcher)
   .catcher(404, defaultErrorCatcher)
   .catcher(500, defaultErrorCatcher)
-  .catcher(401, defaultErrorCatcher)
+  .catcher(503, defaultErrorCatcher)
   .polyfills({
     fetch: require('node-fetch'),
     FormData: require('form-data'),

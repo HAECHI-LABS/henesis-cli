@@ -27,7 +27,7 @@ export default class Config extends Command {
   public async run(): Promise<void> {
     const { flags } = this.parse(Config);
 
-    const re = new RegExp('^(https)://', 'i');
+    const re = new RegExp('^(https|http)://', 'i');
 
     if (re.test(flags.endpoint as string)) {
       configstore.set('endpoint', flags.endpoint);

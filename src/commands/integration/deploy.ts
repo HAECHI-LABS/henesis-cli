@@ -28,10 +28,19 @@ async function getAbi(
   compilerVersion: string,
   contractName: string,
 ): Promise<any> {
-  const result: CompileResult = await compileSol(path, {
-    solcVersion: compilerVersion,
-    evmVersion: getLatestEvmVersion(compilerVersion),
-  });
+  let result: CompileResult;
+  try {
+    result = await compileSol(path, {
+      solcVersion: compilerVersion,
+      evmVersion: getLatestEvmVersion(compilerVersion),
+    });
+  } catch (e) {
+    throw new Error(
+      `compile error: failed to compile '${path}' file.
+    make sure you are at the correct compiler version or solidity file`,
+    );
+  }
+
   return result.getAbi(contractName);
 }
 

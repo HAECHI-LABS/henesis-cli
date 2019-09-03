@@ -4,7 +4,7 @@ import { emailPrompt, passwordPrompt } from '../utils';
 import Command from '../common/base';
 
 export default class Login extends Command {
-  public static description = 'Perform a login';
+  public static description = 'perform a login';
 
   public static examples = [
     `$ henesis login

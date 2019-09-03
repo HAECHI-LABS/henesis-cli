@@ -16,7 +16,7 @@ const MODE_0666 = parseInt('0666', 8);
 
 export default class Init extends Command {
   public static description =
-    'Create the folder structure required for your project.';
+    'create the folder structure required for your project';
 
   public static examples = [
     `$ henesis init -n henesis

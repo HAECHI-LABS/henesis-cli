@@ -5,7 +5,7 @@ import Command from '../common/base';
 import { passwordPrompt } from '../utils';
 
 export default class Changepw extends Command {
-  public static description = 'Change password';
+  public static description = 'change password';
 
   public static examples = [
     `$ henesis user:changepw

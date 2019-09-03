@@ -86,7 +86,6 @@ async function toCreateIntegrationRequest(
     new Filter(contracts),
     new Provider(
       spec.provider.type,
-      spec.provider.connectionLimit,
       spec.provider.url,
       spec.provider.method,
       spec.provider.retry,
@@ -110,7 +109,6 @@ async function toUpdateIntegrationRequest(
     new Filter(contracts),
     new Provider(
       spec.provider.type,
-      spec.provider.connectionLimit,
       spec.provider.url,
       spec.provider.method,
       spec.provider.retry,

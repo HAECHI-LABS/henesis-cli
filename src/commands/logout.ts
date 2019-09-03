@@ -2,7 +2,7 @@ import configstore from '../common/configstore';
 import Command from '../common/base';
 
 export default class Logout extends Command {
-  public static description = 'Perform a logout';
+  public static description = 'perform a logout';
 
   public static examples = [
     `$ henesis logout

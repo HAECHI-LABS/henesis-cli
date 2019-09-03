@@ -13,7 +13,6 @@ export enum NetworkType {
 
 export class Provider {
   public type: string;
-  public connectionLimit?: number;
   public url?: string;
   public method?: string;
   public retry?: {
@@ -24,7 +23,6 @@ export class Provider {
 
   public constructor(
     type: string,
-    connectionLimit?: number,
     url?: string,
     method?: string,
     retry?: {
@@ -34,7 +32,6 @@ export class Provider {
     headers?: { [p: string]: string },
   ) {
     this.type = type;
-    this.connectionLimit = connectionLimit;
     this.url = url;
     this.method = method;
     this.headers = headers;

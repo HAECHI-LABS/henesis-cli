@@ -19,7 +19,6 @@ export interface ProviderSpec {
   type: string;
   url: string;
   method: string;
-  connectionLimit: number;
   retry: {
     retryDelay: number;
     maxRetries: number;

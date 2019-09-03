@@ -135,7 +135,6 @@ export function newMockIntegrationSpec(): IntegrationSpec {
         maxRetries: 5,
         retryDelay: 1000,
       },
-      connectionLimit: 5,
       headers: {
         Authorization: 'Bearer aisdjiajdais',
       },

@@ -1,7 +1,7 @@
 import configstore from '../common/configstore';
 
 export const baseUrl = (): string => {
-  let url = 'https://privatebeta.henesis.io';
+  let url = 'http://api.henesis.io';
 
   if (typeof configstore.get('endpoint') !== 'undefined') {
     url = configstore.get('endpoint');

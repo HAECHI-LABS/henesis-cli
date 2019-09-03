@@ -20,7 +20,7 @@ describe('Config', (): void => {
   it('should be returned prod url on production', (): void => {
     process.env.HENESIS_TEST = 'false';
     const url = baseUrl();
-    expect(url).to.equal('https://privatebeta.henesis.io');
+    expect(url).to.equal('http://api.henesis.io');
     process.env.HENESIS_TEST = 'true';
   });
 });

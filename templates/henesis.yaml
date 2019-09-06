@@ -5,7 +5,6 @@ blockchain:
   platform: ethereum
   network: mainnet
   threshold: 12
-  interval: 1000
 
 filters:
   contracts:
@@ -16,7 +15,7 @@ filters:
 
 provider:
   type: webSocket
-  # if you want to use webhook, you need to place it
+# if you want to use webhook, you need to place it
 #  type: webhook
 #  url: https://localhost:8080
 #  method: POST

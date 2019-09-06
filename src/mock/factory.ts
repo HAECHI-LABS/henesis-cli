@@ -26,7 +26,7 @@ export function newMockIntegration(): Integration {
     faker.random.number(2),
     'asdf',
     'v1',
-    new Blockchain(PlatformType.ETHEREUM, NetworkType.MAINNET, 3, 333),
+    new Blockchain(PlatformType.ETHEREUM, NetworkType.MAINNET, 3),
     new Filter([
       {
         abi: [
@@ -115,7 +115,6 @@ export function newMockIntegrationSpec(): IntegrationSpec {
       platform: PlatformType.KLAYTN,
       network: NetworkType.MAINNET,
       threshold: 5,
-      interval: 333,
     },
     filters: {
       contracts: [

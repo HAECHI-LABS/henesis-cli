@@ -117,7 +117,6 @@ describe('IntegrationRpc', () => {
           new Blockchain(
             integration.blockchain.platform,
             integration.blockchain.network,
-            integration.blockchain.interval,
             integration.blockchain.threshold,
           ),
           integration.filter,

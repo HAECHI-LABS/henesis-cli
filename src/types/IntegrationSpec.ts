@@ -7,7 +7,6 @@ export interface IntegrationSpec {
     platform: PlatformType;
     network: NetworkType;
     threshold: number;
-    interval: number;
   };
   filters: {
     contracts: ContractSpec[];

@@ -97,7 +97,6 @@ blockchain:
   platform: ethereum
   network: mainnet
   threshold: 12
-  interval: 1000
 
 filters:
   contracts:
@@ -120,7 +119,6 @@ blockchain:
   platform: ethereum
   network: mainnet
   threshold: 12
-  interval: 1000
 
 filters:
   contracts:
@@ -142,9 +140,6 @@ provider:
 
 `thresohld` is minimum confirmation thresohld which you want to received.
 
-`interval` Polling time interval to request network.
-
-> If you want to know more about yaml configuration, see the [tutorial](https://docs.henesis.io/undefined-3/untitled/henesis.yaml).
 
 ### integration
 

@@ -80,7 +80,6 @@ async function toCreateIntegrationRequest(
     new Blockchain(
       spec.blockchain.platform,
       spec.blockchain.network,
-      spec.blockchain.interval,
       spec.blockchain.threshold,
     ),
     new Filter(contracts),
@@ -103,7 +102,6 @@ async function toUpdateIntegrationRequest(
     new Blockchain(
       spec.blockchain.platform,
       spec.blockchain.network,
-      spec.blockchain.interval,
       spec.blockchain.threshold,
     ),
     new Filter(contracts),

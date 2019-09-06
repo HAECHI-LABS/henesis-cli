@@ -115,7 +115,6 @@ export function newMockIntegrationSpec(): IntegrationSpec {
       platform: PlatformType.KLAYTN,
       network: NetworkType.MAINNET,
       threshold: 5,
-      interval: 333,
     },
     filters: {
       contracts: [

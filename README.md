@@ -85,60 +85,6 @@ sample_project
 └── henesis.yaml
 ```
 
-**About henesis.yaml**
-
-**webSocket**
-
-```yaml
-version: v1
-name: projectname
-
-blockchain:
-  platform: ethereum
-  network: mainnet
-  threshold: 12
-
-filters:
-  contracts:
-    - address: '0x'
-      path: ./contracts/example.sol
-      name: example
-      compilerVersion: 0.5.8
-
-provider:
-  type: webSocket
-```
-
-**webhook** 
-
-```yaml
-version: v1
-name: projectname
-
-blockchain:
-  platform: ethereum
-  network: mainnet
-  threshold: 12
-
-filters:
-  contracts:
-    - address: '0x'
-      path: ./contracts/example.sol
-      name: example
-      compilerVersion: 0.5.8
-
-provider:
-  type: webhook
-  url: https://localhost:8080
-  method: POST
-  retry:
-    retryDelay: 1000
-    maxRetries: 3
-  headers:
-    Authorization: 'Bearer YOUR-OWN-TOKEN'
-```
-
-`thresohld` is minimum confirmation thresohld which you want to received.
 
 
 ### integration
@@ -222,3 +168,168 @@ Again New Password: ******
 $ henesis logout
 🤗 Logout Success 👍
 ```
+
+
+
+## About henesis.yaml
+
+### webSocket
+
+```yaml
+version: v1
+name: projectname
+
+blockchain:
+  platform: ethereum
+  network: mainnet
+  threshold: 12
+
+filters:
+  contracts:
+    - address: '0x'
+      path: ./contracts/example.sol
+      name: example
+      compilerVersion: 0.5.8
+
+provider:
+  type: webSocket
+```
+
+
+
+### webhook
+
+```yaml
+version: v1
+name: projectname
+
+blockchain:
+  platform: ethereum
+  network: mainnet
+  threshold: 12
+
+filters:
+  contracts:
+    - address: '0x'
+      path: ./contracts/example.sol
+      name: example
+      compilerVersion: 0.5.8
+
+provider:
+  type: webhook
+  url: https://localhost:8080
+  method: POST
+  retry:
+    retryDelay: 1000
+    maxRetries: 3
+  headers:
+    Authorization: 'Bearer YOUR-OWN-TOKEN'
+```
+
+
+
+### parameter details
+
+The following are detailed explanations for parameters used to `henesis.yaml`.
+
+
+
+#### version & name
+
+The `version` and `name` are used as delimiters to identify the project. The `name` must consist only of lowercase letters, numbers, '-' and '.', the maximum length is 253 characters.
+
+
+
+#### blockchain
+
+The blockchain part is an area that describes the platform and network name of the blockchain in which the smart contract to e subscribed is deployed.
+
+##### platform
+
+The blockchain platform you want to use. 
+
+We support now
+
+- `ethereum`
+- `klaytn`
+
+##### network
+
+The blockchain network you want to use.
+
+We support now below chains.
+
+| platform | network | chain           |
+| -------- | ------- | --------------- |
+| ethereum | mainnet | mainnet         |
+| ethereum | ropsten | ropsten testnet |
+| ethereum | rinkeby | rinkeby testnet |
+| klaytn   | mainnet | cypress mainnet |
+| klaytn   | baobob  | baobob testnet  |
+##### threshold
+
+Minimum confirmation thresohld which you want to received.
+
+> Caution : when receiving data, we wait for a threshold of block confirmation.
+
+
+
+#### filters
+
+The filters part is about information for the smart contracts you want to subscribe through Henesis. 
+
+> You can subscribe to more than one contract.
+
+##### contracts
+
+###### address
+
+Address of smart contract
+
+###### path
+
+Directory path of solidity file
+
+###### name
+
+Name of smart contract
+
+###### compilerVersion
+
+The version of the compiler used when the original file of the deployed smart contract was compiled.
+
+
+
+#### provider
+
+The provider is where you choose how to receive events from Henesis. We support `WebSocket` and `Webhook`
+
+The `WebSocket` doesn't need any settings like url, method, retry, headers.
+
+##### type
+
+`WebSocket` or `Webhook`
+
+##### url
+
+URL which you want to hook
+
+##### method
+
+HTTP method like a `GET`, `POST`, `PUT`, `DELETE`
+
+##### retry
+
+###### retryDelay
+
+###### maxRetries
+
+##### headers
+
+###### Authorization
+
+If you want to set authorization (like a `JWT`), you can set authorization
+
+
+
+> We also support [tutorial](https://docs.henesis.io/undefined-3/untitled/henesis.yaml).

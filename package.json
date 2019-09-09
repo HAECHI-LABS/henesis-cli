@@ -1,6 +1,6 @@
 {
 	"name": "@haechi-labs/henesis-cli",
-	"version": "1.0.0-beta.25",
+	"version": "1.0.0-beta.27",
 	"author": "Haechi labs Team",
 	"bin": {
 		"henesis": "./bin/run"

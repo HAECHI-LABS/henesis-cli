@@ -1,7 +1,7 @@
 # henesis-cli 
+🚀 Command Line Interface tool to Utilize henesis
 
 [![License](https://img.shields.io/npm/l/@haechi-labs/henesis-cli.svg)](https://github.com/HAECHI-LABS/henesis-cli/blob/master/package.json) [![Version](https://img.shields.io/npm/v/@haechi-labs/henesis-cli.svg)](https://www.npmjs.com/package/@haechi-labs/henesis-cli) [![Platform](https://img.shields.io/node/v/@haechi-labs/henesis-cli.svg)](https://github.com/HAECHI-LABS/henesis-cli/blob/master/package.json) [![ci](https://travis-ci.com/HAECHI-LABS/henesis-cli.svg?branch=master)]()
-
 
 
 ## Install
@@ -14,7 +14,7 @@ $ npm install -g @haechi-labs/henesis-cli
 $ henesis help
 
 VERSION
-  @haechi-labs/henesis-cli/1.0.0-beta.24 darwin-x64 node-v10.16.0
+  @haechi-labs/henesis-cli/1.0.0-beta.27 darwin-x64 node-v10.16.0
 
 USAGE
   $ henesis [COMMAND]

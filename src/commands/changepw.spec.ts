@@ -18,17 +18,15 @@ describe('changepw', (): void => {
   context(
     'deploy spec when no error occurred',
     async (): Promise<void> => {
-      before(
-        (): void => {
-          configstore.set('user', {
-            email: 'yoonsung@haechi.io',
-            name: 'ys.choi',
-            organization: 'haechilabs',
-            jwtToken: 'asdf',
-            id: 43,
-          });
-        },
-      );
+      before((): void => {
+        configstore.set('user', {
+          email: 'yoonsung@haechi.io',
+          name: 'ys.choi',
+          organization: 'haechilabs',
+          jwtToken: 'asdf',
+          id: 43,
+        });
+      });
 
       test
         .nock(
@@ -44,19 +42,14 @@ describe('changepw', (): void => {
         )
         .stdout()
         .command(['changepw'])
-        .it(
-          'should be success Password change',
-          (ctx): void => {
-            expect(ctx.stdout).to.equal('🦄 Password changed!\n');
-          },
-        );
+        .it('should be success Password change', (ctx): void => {
+          expect(ctx.stdout).to.equal('🦄 Password changed!\n');
+        });
     },
   );
 
-  after(
-    (): void => {
-      configstore.delete('user');
-      configstore.delete('analytics');
-    },
-  );
+  after((): void => {
+    configstore.delete('user');
+    configstore.delete('analytics');
+  });
 });

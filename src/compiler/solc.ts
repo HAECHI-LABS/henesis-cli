@@ -167,7 +167,7 @@ export const compileSol = async (
       if (output.errors[i].severity === 'warning') {
         continue;
       }
-      errMsg = errMsg + (output.errors[i].message + '\n');
+      errMsg = errMsg + (output.errors[i].formattedMessage + '\n');
     }
 
     if (errMsg !== '') {

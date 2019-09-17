@@ -1,7 +1,7 @@
 {
 	"name": "@haechi-labs/henesis-cli",
 	"version": "1.0.0-beta.27",
-	"author": "Haechi labs Team",
+	"author": "Haechi Labs Team",
 	"bin": {
 		"henesis": "./bin/run"
 	},
@@ -20,7 +20,7 @@
 		"find-node-modules": "^2.0.0",
 		"form-data": "^2.3.3",
 		"js-yaml": "^3.13.1",
-		"nock": "^10.0.6",
+		"nock": "^11.3.4",
 		"node-fetch": "^2.5.0",
 		"ora": "^3.4.0",
 		"original-require": "^1.0.1",

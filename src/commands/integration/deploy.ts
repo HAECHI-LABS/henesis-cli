@@ -23,6 +23,25 @@ import Update = Hook.Update;
 
 const defaultSpecFile = './henesis.yaml';
 
+async function detectErrors(
+  error: any,
+  path: string,
+  compilerVersion: string,
+  contractName: string,
+): Promise<string> {
+  if (error.message.includes('requires different compiler version')) {
+    const rawError = error.message
+      .split('less than the released version')[1]
+      .trimEnd();
+    return `Henesis is currently using solc '${compilerVersion}',
+        but your '${contractName}.sol' contract uses different version.
+        ${rawError}`;
+  } else {
+    return `compile error: failed to compile '${path}' file.
+       make sure you are at the correct compiler version or solidity file`;
+  }
+}
+
 async function getAbi(
   path: string,
   compilerVersion: string,
@@ -34,11 +53,14 @@ async function getAbi(
       solcVersion: compilerVersion,
       evmVersion: getLatestEvmVersion(compilerVersion),
     });
-  } catch (e) {
-    throw new Error(
-      `compile error: failed to compile '${path}' file.
-    make sure you are at the correct compiler version or solidity file`,
+  } catch (error) {
+    const message = await detectErrors(
+      error,
+      path,
+      compilerVersion,
+      contractName,
     );
+    throw new Error(message);
   }
 
   return result.getAbi(contractName);
@@ -162,6 +184,7 @@ export default class Deploy extends Command {
         return;
       }
     } catch (err) {
+      //TODO: suggestion to remove > by replacing this.error with console.error
       this.error(err.message);
     }
   }

@@ -11,7 +11,6 @@
 		"@oclif/config": "^1.12.12",
 		"@oclif/plugin-autocomplete": "^0.1.4",
 		"@oclif/plugin-help": "^2.1.6",
-		"@oclif/plugin-not-found": "^1.2.3",
 		"@types/configstore": "^4.0.0",
 		"@types/js-yaml": "^3.12.1",
 		"@types/universal-analytics": "^0.4.2",
@@ -91,7 +90,6 @@
 		"bin": "henesis",
 		"plugins": [
 			"@oclif/plugin-help",
-			"@oclif/plugin-not-found",
 			"@oclif/plugin-autocomplete"
 		],
 		"hooks": {
@@ -110,7 +108,8 @@
 		"prepack": "tsc -b && oclif-dev manifest && oclif-dev readme",
 		"test": "export HENESIS_TEST='true' && nyc --extension .ts mocha --forbid-only \"src/**/*.spec.ts\" --timeout 20000",
 		"version": "oclif-dev readme && git add README.md",
-		"lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+		"lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+		"setup": "sh ./bin/setup.sh"
 	},
 	"types": "lib/index.d.ts"
 }

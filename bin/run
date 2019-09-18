@@ -1,9 +1,5 @@
 #!/usr/bin/env node
 
-const exec = require('child_process').exec;
-
-exec('sh bin/setup.sh');
-
 require('@oclif/command')
   .run()
   .then(require('@oclif/command/flush'))

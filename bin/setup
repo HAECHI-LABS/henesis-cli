@@ -2,9 +2,9 @@
 
 shell_env="$SHELL"
 {
-    henesis="$(node bin/run autocomplete:script)"
-} || {
     henesis="$(henesis autocomplete:script)"
+} || {
+    henesis="$(node bin/run autocomplete:script)"
 }
 
 

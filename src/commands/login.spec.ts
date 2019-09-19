@@ -39,14 +39,11 @@ describe('login', (): void => {
     )
     .stdout()
     .command(['login'])
-    .it(
-      'should be success login with message',
-      (ctx): void => {
-        expect(ctx.stdout).to.equal(
-          'Allow Henesis to collect anonymous CLI usage and error reporting information\n🎉 Login Success from yoonsung@haechi.io 🎉\n',
-        );
-      },
-    );
+    .it('should be success login with message', (ctx): void => {
+      expect(ctx.stdout).to.equal(
+        'Allow Henesis to collect anonymous CLI usage and error reporting information\n🎉 Login Success from yoonsung@haechi.io 🎉\n',
+      );
+    });
 
   test
     .stub(
@@ -72,19 +69,14 @@ describe('login', (): void => {
     )
     .stdout()
     .command(['login'])
-    .it(
-      'should be already login with message',
-      (ctx): void => {
-        expect(ctx.stdout).to.equal(
-          'You are already logged in as yoonsung@haechi.io\n',
-        );
-      },
-    );
+    .it('should be already login with message', (ctx): void => {
+      expect(ctx.stdout).to.equal(
+        'You are already logged in as yoonsung@haechi.io\n',
+      );
+    });
 
-  after(
-    (): void => {
-      configstore.delete('user');
-      configstore.delete('analytics');
-    },
-  );
+  after((): void => {
+    configstore.delete('user');
+    configstore.delete('analytics');
+  });
 });

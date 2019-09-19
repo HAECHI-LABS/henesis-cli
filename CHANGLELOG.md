@@ -2,6 +2,12 @@
 ## [Unreleased]
 
 
+<a name="v1.0.0-beta.29"></a>
+## [v1.0.0-beta.29] - 2019-09-23
+### Feat
+- add node:status
+
+
 <a name="v1.0.0-beta.28"></a>
 ## [v1.0.0-beta.28] - 2019-09-17
 ### Chore
@@ -9,8 +15,8 @@
 - refine compiler version error messages ([#89](https://github.com/HAECHI-LABS/henesis-cli/issues/89), [#90](https://github.com/HAECHI-LABS/henesis-cli/issues/90))
 - update v1.0.0-beta.27
 
-<a name="v1.0.0-beta.27"></a>
 
+<a name="v1.0.0-beta.27"></a>
 ## v1.0.0-beta.27 - 2019-09-09
 ### Chore
 - update v1.0.0-beta.25
@@ -91,5 +97,6 @@
 - apply lint, lint script and husky ([#14](https://github.com/HAECHI-LABS/henesis-cli/issues/14))
 
 
-[Unreleased]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.28...HEAD
+[Unreleased]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.29...HEAD
+[v1.0.0-beta.29]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.28...v1.0.0-beta.29
 [v1.0.0-beta.28]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.27...v1.0.0-beta.28

@@ -12,3 +12,4 @@ export {
 } from './Integration';
 export { IntegrationSpec } from './IntegrationSpec';
 export { LoginRequest, LoginResponse, ChangePassword } from './user';
+export { NodeStatus } from './node';

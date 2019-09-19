@@ -1,4 +1,5 @@
 import configstore from '../common/configstore';
+import { BlockchainNodes } from '../types/node';
 
 export const baseUrl = (): string => {
   let url = 'https://privatebeta.henesis.io';
@@ -14,3 +15,8 @@ export const baseUrl = (): string => {
   return url;
 };
 export const rpcVersion = 'v1';
+export const trustedNodeBaseUrl = 'http://network.henesis.io';
+export const blockchainKinds = new BlockchainNodes(
+  ['mainnet', 'ropsten', 'rinkeby'], //ethereum
+  ['mainnet', 'baobab'], //klaytn
+);

@@ -109,7 +109,7 @@
 		"test": "export HENESIS_TEST='true' && nyc --extension .ts mocha --forbid-only \"src/**/*.spec.ts\" --timeout 20000",
 		"version": "oclif-dev readme && git add README.md",
 		"lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
-		"postinstall": "sh ./bin/setup || %cd%/bin/setup.cmd"
+		"postinstall": "%cd%/bin/setup.cmd || sh ./bin/setup"
 	},
 	"types": "lib/index.d.ts"
 }

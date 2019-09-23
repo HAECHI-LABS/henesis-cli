@@ -1,4 +1,9 @@
-import { LoginRequest, LoginResponse, ChangePassword } from '../types';
+import {
+  LoginRequest,
+  LoginResponse,
+  ChangePassword,
+  DescribeResponse,
+} from '../types';
 import { plainToClass } from 'class-transformer';
 import { baseUrl, rpcVersion } from './config';
 import { getWretcher } from './wretch';
@@ -36,18 +41,28 @@ export class UserRpc {
     await getWretcher()
       .url(`${this.server}/passwd`)
       .patch(payload)
-      .unauthorized(
-        (): Error => {
-          throw new Error(`unauthenticated token`);
-        },
-      )
       .error(
         403,
         (): Error => {
           throw new Error(`failed to change password`);
         },
       )
-      .json();
+      .json()
+      .catch((err: any) => {
+        throw err;
+      });
+  }
+
+  public async describe(): Promise<DescribeResponse> {
+    const json = await getWretcher()
+      .url(`${this.server}/me`)
+      .get()
+      .json()
+      .catch((err: any) => {
+        throw err;
+      });
+
+    return plainToClass(DescribeResponse, json) as DescribeResponse;
   }
 }
 

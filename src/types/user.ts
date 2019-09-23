@@ -38,3 +38,22 @@ export class ChangePassword {
     this.newPassword = newPassword;
   }
 }
+
+export class DescribeResponse {
+  public email: string;
+  public name: string;
+  public organization: string;
+  public clientId: string;
+
+  public constructor(
+    email: string,
+    name: string,
+    organization: string,
+    clientId: string,
+  ) {
+    this.email = email;
+    this.name = name;
+    this.organization = organization;
+    this.clientId = clientId;
+  }
+}

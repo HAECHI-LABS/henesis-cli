@@ -94,6 +94,9 @@
 			"init": "./lib/hooks/init/wretch"
 		},
 		"topics": {
+			"account": {
+				"description": "manage your account"
+			},
 			"integration": {
 				"description": "manage integrations"
 			}

@@ -12,7 +12,9 @@ describe('init', (): void => {
     .stdout()
     .command(['init'])
     .it('must be able to successfully create folders.', (ctx): void => {
-      expect(ctx.stdout).to.equal('henesis directory has been created.\n');
+      expect(ctx.stdout).to.equal(
+        'henesis initialization has been completed.\n',
+      );
     });
 
   test
@@ -23,20 +25,32 @@ describe('init', (): void => {
       (ctx): void => {
         const path = join(__dirname, '..', '..', `/sample`);
         rimraf(path, (): void => {});
-        expect(ctx.stdout).to.equal('sample directory has been created.\n');
+        expect(ctx.stdout).to.equal(
+          'henesis initialization has been completed.\n',
+        );
       },
     );
 
   test
+    .timeout(20000)
     .stdout()
-    .command(['init', '-g', 'https://github.com/HAECHI-LABS/henesis-dai.git'])
+    .command([
+      'init',
+      '-g',
+      'https://github.com/HAECHI-LABS/henesis-cryptokitties-klaytn.git',
+    ])
     .it(
       'should be able to successfully create folders with git template',
       (ctx): void => {
-        const path = join(__dirname, '..', '..', `/henesis-dai`);
+        const path = join(
+          __dirname,
+          '..',
+          '..',
+          `/henesis-cryptokitties-klaytn`,
+        );
         rimraf(path, (): void => {});
         expect(ctx.stdout).to.equal(
-          'henesis-dai directory has been created.\n',
+          'henesis initialization has been completed.\n',
         );
       },
     );
@@ -49,7 +63,7 @@ describe('init', (): void => {
       'should be able to successfully create folder with force',
       (ctx): void => {
         expect(ctx.stdout).to.equal(
-          'henesis directory has been created.\nhenesis directory has been created.\n',
+          'henesis initialization has been completed.\nhenesis initialization has been completed.\n',
         );
       },
     );

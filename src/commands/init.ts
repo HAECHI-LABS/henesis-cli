@@ -3,7 +3,6 @@ import {
   existsSync,
   copyFileSync,
   mkdirSync,
-  readFileSync,
   constants,
   writeFileSync,
 } from 'fs';
@@ -12,14 +11,13 @@ import Command from '../common/base';
 import * as simplegit from 'simple-git/promise';
 
 const TEMPLATE_DIR = join(__dirname, '..', '..', 'templates');
-const MODE_0666 = parseInt('0666', 8);
 
 export default class Init extends Command {
   public static description =
-    'create the folder structure required for your project';
+    'set up configuration file required for your project';
 
   public static examples = [
-    `$ henesis init -n henesis
+    `$ henesis init
 `,
   ];
 
@@ -33,7 +31,7 @@ export default class Init extends Command {
     // flag with no value (-f, --force)
     force: flags.boolean({
       char: 'f',
-      description: 'Delete existing folders and create new ones.',
+      description: 'Delete existing configuration file and create new one.',
       default: false,
     }),
     git: flags.string({
@@ -48,19 +46,29 @@ export default class Init extends Command {
   private async initTemplate(
     destinationPath: string,
     withForce: boolean | undefined = false,
+    insideDir: boolean,
+  ): Promise<void> {
+    await this.initConfiguration(destinationPath, withForce);
+
+    if (!insideDir) {
+      if (!existsSync(`${destinationPath}/contracts`)) {
+        mkdirSync(`${destinationPath}/contracts`);
+      }
+
+      writeFileSync(
+        join(`${destinationPath}/contracts`, 'example.sol'),
+        withForce ? constants.COPYFILE_FICLONE : undefined,
+      );
+    }
+  }
+
+  private async initConfiguration(
+    destinationPath: string,
+    withForce: boolean | undefined = false,
   ): Promise<void> {
     copyFileSync(
       join(`${TEMPLATE_DIR}`, 'henesis.yaml'),
       join(`${destinationPath}`, 'henesis.yaml'),
-      withForce ? constants.COPYFILE_FICLONE : undefined,
-    );
-
-    if (!existsSync(`${destinationPath}/contracts`)) {
-      mkdirSync(`${destinationPath}/contracts`);
-    }
-
-    writeFileSync(
-      join(`${destinationPath}/contracts`, 'example.sol'),
       withForce ? constants.COPYFILE_FICLONE : undefined,
     );
   }
@@ -69,9 +77,7 @@ export default class Init extends Command {
     await simplegit().clone(url, destinationPath);
   }
 
-  public async run(): Promise<void> {
-    const currentPath = process.cwd() || '.';
-    const { flags } = this.parse(Init);
+  private setDirectoryName(currentPath: string, flags: any): string {
     let name;
 
     if (typeof flags.git !== 'undefined') {
@@ -86,22 +92,37 @@ export default class Init extends Command {
       name = 'henesis';
     }
 
-    const destinationPath = `${currentPath}/${name}`;
+    return `${currentPath}/${name}`;
+  }
 
-    if (existsSync(destinationPath) && flags.force === false) {
-      this.error(`The directory exists at the current directory.`);
-    }
+  public async run(): Promise<void> {
+    const currentPath = process.cwd() || '.';
+    const contractsPath = `${currentPath}/contracts`;
+    const { flags } = this.parse(Init);
 
-    if (!existsSync(destinationPath)) {
-      mkdirSync(`${destinationPath}`);
-    }
+    if (existsSync(contractsPath)) {
+      if (existsSync(`${currentPath}/henesis.yaml`) && flags.force === false) {
+        this.error(`henesis.yaml already exists at the current directory.`);
+      }
 
-    if (typeof flags.git !== 'undefined') {
-      await this.gitInit(flags.git, destinationPath);
+      await this.initTemplate(currentPath, flags.force, true);
     } else {
-      await this.initTemplate(destinationPath, flags.force);
-    }
+      const destinationPath = this.setDirectoryName(currentPath, flags);
 
-    this.log(`${name} directory has been created.`);
+      if (existsSync(destinationPath) && flags.force === false) {
+        this.error(`The directory exists at the current directory.`);
+      }
+
+      if (!existsSync(destinationPath)) {
+        mkdirSync(`${destinationPath}`);
+      }
+
+      if (typeof flags.git !== 'undefined') {
+        await this.gitInit(flags.git, destinationPath);
+      } else {
+        await this.initTemplate(destinationPath, flags.force, false);
+      }
+    }
+    this.log(`henesis initialization has been completed.`);
   }
 }

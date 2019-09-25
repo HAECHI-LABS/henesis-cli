@@ -36,6 +36,9 @@ async function detectErrors(
     return `Henesis is currently using solc '${compilerVersion}',
         but your '${contractName}.sol' contract uses different version.
         ${rawError}`;
+  } else if (error.message.includes('ENOENT: no such file or directory')) {
+    const errorFile = error.message.split("'")[1];
+    return `No such file or directory: '${errorFile}`;
   } else {
     return `compile error: failed to compile '${path}' file.
        make sure you are at the correct compiler version or solidity file`;

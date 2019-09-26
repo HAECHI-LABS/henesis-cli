@@ -29,6 +29,22 @@ COMMANDS
   logout       perform a logout
 ```
 
+
+### How to Setup Henesis AutoComplete
+
+```
+$ henesis autocomplete
+```
+
+zsh: 
+> $ printf "$(henesis autocomplete:script zsh)" >> ~/.zshrc; source ~/.zshrc
+
+
+bash:
+> $ printf "$(henesis autocomplete:script bash)" >> ~/.bashrc; source ~/.bashrc
+
+
+
 ## Usage
 
 ### help
@@ -51,22 +67,6 @@ USAGE
 EXAMPLE
   $ henesis integration:delete my-integration-id
 ```
-
-
-
-### autocomplete
-
-```
-$ henesis autocomplete
-```
-
-zsh: 
-> $ printf "$(henesis autocomplete:script zsh)" >> ~/.zshrc; source ~/.zshrc
-
-
-bash:
-> $ printf "$(henesis autocomplete:script bash)" >> ~/.bashrc; source ~/.bashrc
-
 
 
 

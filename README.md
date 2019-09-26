@@ -20,6 +20,7 @@ USAGE
   $ henesis [COMMAND]
 
 COMMANDS
+  autocomplete  display autocomplete installation instructions
   changepw     change password
   help         display help for henesis
   init         create the folder structure required for your project
@@ -50,6 +51,22 @@ USAGE
 EXAMPLE
   $ henesis integration:delete my-integration-id
 ```
+
+
+
+### autocomplete
+
+```
+$ henesis autocomplete
+```
+
+zsh: 
+> $ printf "$(henesis autocomplete:script zsh)" >> ~/.zshrc; source ~/.zshrc
+
+
+bash:
+> $ printf "$(henesis autocomplete:script bash)" >> ~/.bashrc; source ~/.bashrc
+
 
 
 

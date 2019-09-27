@@ -36,6 +36,8 @@ COMMANDS
 $ henesis autocomplete
 ```
 
+Enter the following script according to your shell type.
+
 zsh: 
 > $ printf "$(henesis autocomplete:script zsh)" >> ~/.zshrc; source ~/.zshrc
 

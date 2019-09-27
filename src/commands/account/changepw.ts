@@ -1,14 +1,14 @@
 import cli from 'cli-ux';
-import configstore from '../common/configstore';
-import { default as UserRPC } from '../rpc/user';
-import Command from '../common/base';
-import { passwordPrompt } from '../utils';
+import configstore from '../../common/configstore';
+import { default as UserRPC } from '../../rpc/user';
+import Command from '../../common/base';
+import { passwordPrompt } from '../../utils';
 
 export default class Changepw extends Command {
-  public static description = 'change password';
+  public static description = 'change account password';
 
   public static examples = [
-    `$ henesis user:changepw
+    `$ henesis account:changepw
 Password:
 New Password:
 Again New Password: 

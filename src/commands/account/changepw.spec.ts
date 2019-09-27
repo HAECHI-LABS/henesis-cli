@@ -1,15 +1,15 @@
 import { expect, test } from '@oclif/test';
-import * as utils from '../utils';
-import configstore from '../common/configstore';
+import * as utils from '../../utils';
+import configstore from '../../common/configstore';
 import { Scope } from 'nock';
 
-describe('changepw', (): void => {
+describe('account:changepw', (): void => {
   context(
     'error occurred cases',
     async (): Promise<void> => {
       test
         .stdout()
-        .command(['changepw'])
+        .command(['account:changepw'])
         .exit(2)
         .it('should be fail not logged in');
     },
@@ -41,7 +41,7 @@ describe('changepw', (): void => {
           },
         )
         .stdout()
-        .command(['changepw'])
+        .command(['account:changepw'])
         .it('should be success Password change', (ctx): void => {
           expect(ctx.stdout).to.equal('🦄 Password changed!\n');
         });

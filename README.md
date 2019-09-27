@@ -20,12 +20,13 @@ USAGE
   $ henesis [COMMAND]
 
 COMMANDS
-  changepw     change password
+  account      manage your account
   help         display help for henesis
   init         create the folder structure required for your project
   integration  manage integrations
   login        perform a login
   logout       perform a logout
+  node         get node status
 ```
 
 
@@ -79,6 +80,56 @@ email: yoonsung@haechi.io
 password: ***********
 
 🎉 Login Success from yoonsung@haechi.io 🎉
+```
+
+
+
+### logout
+
+```
+$ henesis logout
+🤗 Logout Success 👍
+```
+
+
+
+### account
+
+*_**You must be logged in to use this features.**_*
+
+```
+manage your account
+
+USAGE
+  $ henesis account:COMMAND
+
+COMMANDS
+  account:changepw  change account password
+  account:describe  describe account information
+```
+
+#### account:changepw
+
+##### Command Line
+
+```
+$ henesis account:changepw
+Password: ******
+New Password: ******
+Again New Password: ******
+🦄 Password changed!
+```
+
+#### account:describe
+
+##### Command Line
+
+```
+$ henesis account:describe
+Email: haechi@haechi.io
+Name: haechi
+Organization: haechi-labs
+clientId: 49e77d0be585ef71c337f758e61e1f16
 ```
 
 
@@ -166,23 +217,29 @@ henesis integration:describe <integrationId>
 
 
 
-### change password
-
-*_**You must be logged in to use this feature.**_*
+### node
 
 ```
-$ henesis changepw
-Password: ******
-New Password: ******
-Again New Password: ******
-🦄 Password changed!
+get node status
+
+USAGE
+  $ henesis node:COMMAND
+
+COMMANDS
+  node:status  get node status
 ```
 
-### logout
+#### node:status
+
+##### Command Line
 
 ```
-$ henesis logout
-🤗 Logout Success 👍
+Platform     Network   Endpoint                                   Status
+ethereum     mainnet   http://network.henesis.io/ethereum/mainnet Synced
+ethereum     ropsten   http://network.henesis.io/ethereum/ropsten Synced
+ethereum     rinkeby   http://network.henesis.io/ethereum/rinkeby Synced
+klaytn       mainnet   http://network.henesis.io/klaytn/mainnet   Synced
+klaytn       baobab    http://network.henesis.io/klaytn/baobab    Synced
 ```
 
 

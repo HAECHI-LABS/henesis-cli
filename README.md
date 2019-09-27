@@ -29,6 +29,24 @@ COMMANDS
   node         get node status
 ```
 
+
+### How to Setup Henesis AutoComplete
+
+```
+$ henesis autocomplete
+```
+
+Enter the following script according to your shell type.
+
+zsh: 
+> $ printf "$(henesis autocomplete:script zsh)" >> ~/.zshrc; source ~/.zshrc
+
+
+bash:
+> $ printf "$(henesis autocomplete:script bash)" >> ~/.bashrc; source ~/.bashrc
+
+
+
 ## Usage
 
 ### help

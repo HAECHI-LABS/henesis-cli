@@ -3,8 +3,8 @@ import wretch from 'wretch';
 import { baseUrl, rpcVersion } from './config';
 import * as mockhttp from 'mockttp';
 import { UserRpc } from './user';
-import { LoginResponse } from '../types';
-import { newMockLogin } from '../mock';
+import { DescribeResponse, LoginResponse } from '../types';
+import { newMockLogin, newMockAccount } from '../mock';
 
 wretch().polyfills({
   fetch: require('node-fetch'),
@@ -76,9 +76,9 @@ describe('UserRpc', (): void => {
     it('should be failed when jwt Token is expire.', async (): Promise<
       void
     > => {
-      await mockServer
-        .patch('/users/v1/passwd')
-        .thenJson(401, { error: { message: 'unauthenticated token' } });
+      await mockServer.patch('/users/v1/passwd').thenJson(401, {
+        error: { message: 'expired token (please log in again)' },
+      });
 
       try {
         await userRpc.changePassword(
@@ -86,8 +86,35 @@ describe('UserRpc', (): void => {
           'To be changed password',
         );
       } catch (err) {
-        expect(err.toString()).to.equal('Error: unauthenticated token');
+        expect(err.toString()).to.equal(
+          'Error: expired token (please log in again)',
+        );
       }
+    });
+  });
+
+  describe('#describeAccount()', (): void => {
+    it('should be failed when jwt Token is expire.', async (): Promise<
+      void
+    > => {
+      await mockServer.get('/users/v1/me').thenJson(401, {
+        error: { message: 'expired token (please log in again)' },
+      });
+
+      try {
+        await userRpc.describe();
+      } catch (err) {
+        expect(err.toString()).to.equal(
+          'Error: expired token (please log in again)',
+        );
+      }
+    });
+
+    it('success describe account.', async (): Promise<void> => {
+      const accountData = newMockAccount();
+      await mockServer.get('/users/v1/me').thenJson(200, accountData);
+      const response: DescribeResponse = await userRpc.describe();
+      expect(response).to.deep.equal(accountData);
     });
   });
 });

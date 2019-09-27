@@ -96,6 +96,9 @@
 			"init": "./lib/hooks/init/wretch"
 		},
 		"topics": {
+			"account": {
+				"description": "manage your account"
+			},
 			"integration": {
 				"description": "manage integrations"
 			}
@@ -109,7 +112,7 @@
 		"test": "export HENESIS_TEST='true' && nyc --extension .ts mocha --forbid-only \"src/**/*.spec.ts\" --timeout 20000",
 		"version": "oclif-dev readme && git add README.md",
 		"lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
-		"postinstall": "./bin/setup.js"
+		"postinstall": "node ./bin/setup.js"
 	},
 	"types": "lib/index.d.ts"
 }

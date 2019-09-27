@@ -6,7 +6,7 @@ import {
   LoginResponse,
   Filter,
   Provider,
-  Blockchain,
+  Blockchain, DescribeResponse,
 } from '../types';
 import * as faker from 'faker';
 import { Status } from '../types';
@@ -17,6 +17,15 @@ export function newMockLogin(): LoginResponse {
     faker.name.findName(),
     faker.commerce.productName(),
     'ashd8uado9012i31kod',
+  );
+}
+
+export function newMockAccount(): DescribeResponse {
+  return new DescribeResponse(
+    faker.internet.email(),
+    faker.name.findName(),
+    faker.commerce.productName(),
+    'jcashd8uoa9p012i31kod',
   );
 }
 

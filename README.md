@@ -14,7 +14,7 @@ $ npm install -g @haechi-labs/henesis-cli
 $ henesis help
 
 VERSION
-  @haechi-labs/henesis-cli/1.0.0-beta.29 darwin-x64 node-v10.16.0
+  @haechi-labs/henesis-cli/1.0.0-beta.30 darwin-x64 node-v10.16.0
 
 USAGE
   $ henesis [COMMAND]
@@ -50,16 +50,47 @@ bash:
 
 ## Usage
 
-#### changepw
+### account
+
+*_**You must be logged in to use this features.**_*
+
+```
+manage your account
+
+USAGE
+  $ henesis account:COMMAND
+
+COMMANDS
+  account:changepw  change account password
+  account:describe  describe account information
+```
+
+
+
+#### account:changepw
 
 ##### Command Line
 
 ```
-$ henesis changepw
+$ henesis account:changepw
 Password: ******
 New Password: ******
 Again New Password: ******
 🦄 Password changed!
+```
+
+
+
+#### account:describe
+
+##### Command Line
+
+```
+$ henesis account:describe
+Email: haechi@haechi.io
+Name: haechi
+Organization: haechi-labs
+clientId: 49e77d0be585ef71c337f758e61e1f16
 ```
 
 ------

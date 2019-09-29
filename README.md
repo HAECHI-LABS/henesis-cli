@@ -14,7 +14,7 @@ $ npm install -g @haechi-labs/henesis-cli
 $ henesis help
 
 VERSION
-  @haechi-labs/henesis-cli/1.0.0-beta.29 darwin-x64 node-v10.16.0
+  @haechi-labs/henesis-cli/1.0.0-beta.30 darwin-x64 node-v10.16.0
 
 USAGE
   $ henesis [COMMAND]
@@ -28,6 +28,7 @@ COMMANDS
   logout       perform a logout
   node         get node status
 ```
+
 
 
 ### How to Setup Henesis AutoComplete
@@ -303,19 +304,17 @@ provider:
 
 
 
-### parameter details
+## parameter details
 
 The following are detailed explanations for parameters used to `henesis.yaml`.
 
-
-
-#### version & name
+### version & name
 
 The `version` and `name` are used as delimiters to identify the project. The `name` must consist only of lowercase letters, numbers, '-' and '.', the maximum length is 253 characters.
 
 
 
-#### blockchain
+### blockchain
 
 The blockchain part is an area that describes the platform and network name of the blockchain in which the smart contract to e subscribed is deployed.
 
@@ -341,6 +340,7 @@ We support now below chains.
 | ethereum | rinkeby | rinkeby testnet |
 | klaytn   | mainnet | cypress mainnet |
 | klaytn   | baobob  | baobob testnet  |
+
 ##### threshold
 
 Minimum confirmation thresohld which you want to received.
@@ -349,7 +349,7 @@ Minimum confirmation thresohld which you want to received.
 
 
 
-#### filters
+### filters
 
 The filters part is about information for the smart contracts you want to subscribe through Henesis. 
 
@@ -375,7 +375,7 @@ The version of the compiler used when the original file of the deployed smart co
 
 
 
-#### provider
+### provider
 
 The provider is where you choose how to receive events from Henesis. We support `WebSocket` and `Webhook`
 
@@ -397,7 +397,11 @@ HTTP method like a `GET`, `POST`, `PUT`, `DELETE`
 
 ###### retryDelay
 
+Retry Interval (ms)
+
 ###### maxRetries
+
+Maximum retry count
 
 ##### headers
 

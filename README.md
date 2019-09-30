@@ -20,7 +20,7 @@ USAGE
   $ henesis [COMMAND]
 
 COMMANDS
-  account      manage your account
+  changepw     change password
   help         display help for henesis
   init         create the folder structure required for your project
   integration  manage integrations
@@ -28,6 +28,7 @@ COMMANDS
   logout       perform a logout
   node         get node status
 ```
+
 
 
 ### How to Setup Henesis AutoComplete
@@ -48,6 +49,20 @@ bash:
 
 
 ## Usage
+
+#### changepw
+
+##### Command Line
+
+```
+$ henesis changepw
+Password: ******
+New Password: ******
+Again New Password: ******
+🦄 Password changed!
+```
+
+------
 
 ### help
 
@@ -70,71 +85,7 @@ EXAMPLE
   $ henesis integration:delete my-integration-id
 ```
 
-
-
-### login
-
-```
-$ henesis login
-Allow Henesis to collect anonymous CLI usage and error reporting information
-yes(y) or no(n): y
-email: yoonsung@haechi.io
-password: ***********
-
-🎉 Login Success from yoonsung@haechi.io 🎉
-```
-
-
-
-### logout
-
-```
-$ henesis logout
-🤗 Logout Success 👍
-```
-
-
-
-### account
-
-*_**You must be logged in to use this features.**_*
-
-```
-manage your account
-
-USAGE
-  $ henesis account:COMMAND
-
-COMMANDS
-  account:changepw  change account password
-  account:describe  describe account information
-```
-
-#### account:changepw
-
-##### Command Line
-
-```
-$ henesis account:changepw
-Password: ******
-New Password: ******
-Again New Password: ******
-🦄 Password changed!
-```
-
-#### account:describe
-
-##### Command Line
-
-```
-$ henesis account:describe
-Email: haechi@haechi.io
-Name: haechi
-Organization: haechi-labs
-clientId: 49e77d0be585ef71c337f758e61e1f16
-```
-
-
+------
 
 ### init
 
@@ -154,7 +105,7 @@ sample_project
 └── henesis.yaml
 ```
 
-
+------
 
 ### integration
 
@@ -180,6 +131,8 @@ There are tasks to be done before the deploy command.
 - Modify the henesis.yaml file to match the event you want to subscribe to and place the file with logic in the handler directory.
 - You can run the deploy command and check the status of the distribution through the status command.
 
+
+
 #### integration:delete
 
 ##### Command Line
@@ -187,6 +140,8 @@ There are tasks to be done before the deploy command.
 ```
 $ henesis integration:delete <integrationId>
 ```
+
+
 
 #### integration:deploy
 
@@ -201,6 +156,8 @@ $ henesis integration:deploy
 - `-f` or `--force`: Erase existing deployed content and deploy current configuration.
 - `-p` or `--path`: Specify where henesis.yaml is located.
 
+
+
 #### integration:describe
 
 ##### Command Line
@@ -209,15 +166,40 @@ $ henesis integration:deploy
 henesis integration:describe <integrationId>
 ```
 
+
+
 #### integration:status
 
 ##### Command Line
 
 ```
-henesis integration:describe <integrationId>
+henesis integration:status
 ```
 
+------
 
+### login
+
+```
+$ henesis login
+Allow Henesis to collect anonymous CLI usage and error reporting information
+yes(y) or no(n): y
+email: yoonsung@haechi.io
+password: ***********
+
+🎉 Login Success from yoonsung@haechi.io 🎉
+```
+
+------
+
+### logout
+
+```
+$ henesis logout
+🤗 Logout Success 👍
+```
+
+------
 
 ### node
 
@@ -303,19 +285,17 @@ provider:
 
 
 
-### parameter details
+## parameter details
 
 The following are detailed explanations for parameters used to `henesis.yaml`.
 
-
-
-#### version & name
+### version & name
 
 The `version` and `name` are used as delimiters to identify the project. The `name` must consist only of lowercase letters, numbers, '-' and '.', the maximum length is 253 characters.
 
+------
 
-
-#### blockchain
+### blockchain
 
 The blockchain part is an area that describes the platform and network name of the blockchain in which the smart contract to e subscribed is deployed.
 
@@ -341,15 +321,16 @@ We support now below chains.
 | ethereum | rinkeby | rinkeby testnet |
 | klaytn   | mainnet | cypress mainnet |
 | klaytn   | baobob  | baobob testnet  |
+
 ##### threshold
 
 Minimum confirmation thresohld which you want to received.
 
 > Caution : when receiving data, we wait for a threshold of block confirmation.
 
+------
 
-
-#### filters
+### filters
 
 The filters part is about information for the smart contracts you want to subscribe through Henesis. 
 
@@ -373,9 +354,9 @@ Name of smart contract
 
 The version of the compiler used when the original file of the deployed smart contract was compiled.
 
+------
 
-
-#### provider
+### provider
 
 The provider is where you choose how to receive events from Henesis. We support `WebSocket` and `Webhook`
 
@@ -397,14 +378,16 @@ HTTP method like a `GET`, `POST`, `PUT`, `DELETE`
 
 ###### retryDelay
 
+Retry Interval (ms)
+
 ###### maxRetries
+
+Maximum retry count
 
 ##### headers
 
 ###### Authorization
 
 If you want to set authorization (like a `JWT`), you can set authorization
-
-
 
 > We also support [tutorial](https://docs.henesis.io/undefined-3/untitled/henesis.yaml).

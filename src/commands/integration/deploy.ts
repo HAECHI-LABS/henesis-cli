@@ -18,8 +18,6 @@ import {
 import { startWait, endWait } from '../../utils';
 import Command from '../../common/base';
 import { ContractSpec } from '../../types/IntegrationSpec';
-import { Hook } from '@oclif/config';
-import Update = Hook.Update;
 
 const defaultSpecFile = './henesis.yaml';
 
@@ -114,6 +112,7 @@ async function toCreateIntegrationRequest(
       spec.provider.method,
       spec.provider.retry,
       spec.provider.headers,
+      spec.provider.timeout,
     ),
   );
 }

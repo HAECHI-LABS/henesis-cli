@@ -49,27 +49,33 @@ export default abstract class extends Command {
       configstore.set('analytics', data);
     } else {
       const data = configstore.get('analytics');
-      const visitor = ua('UA-126138188-2', { uid: data });
+      const user = configstore.get('user');
+      const commandPath: string = (this.id != undefined)
+        ? ((this.id).split(':').join('/'))
+        : '';
+      const visitor = ua('UA-126138188-2', user.id, { uid: data, strictCidFormat : false });
 
       this._dimensions[1] = this._getOSVersion();
       this._dimensions[2] = this._getNodeVersion();
       this._dimensions[3] = this._getCPUCount();
       this._dimensions[4] = this._getRAM();
       this._dimensions[5] = this._cliVersion();
+      this._dimensions[6] = user.id;
 
       const additionals: { [key: string]: boolean | number | string } = {};
       this._dimensions.forEach(
         (v, i): boolean | number | string => (additionals['cd' + i] = v),
       );
 
-      visitor.pageview({ dp: `/command/${name}`, ...additionals }).send();
+      visitor.pageview({ dp: `/command/${commandPath}`, dt: 'Henesis-cli', ...additionals }).send();
     }
   }
 
   protected async catch(err: Error): Promise<void> {
+    const user = configstore.get('user');
     const data = configstore.get('analytics');
     if (typeof data !== 'undefined') {
-      const visitor = ua('UA-126138188-2', { uid: data });
+      const visitor = ua('UA-126138188-2', user.id, { uid: data, strictCidFormat : false });
       visitor.exception(err).send();
     }
     this.error(err);

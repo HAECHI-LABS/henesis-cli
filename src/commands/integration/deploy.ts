@@ -135,6 +135,7 @@ async function toUpdateIntegrationRequest(
       spec.provider.method,
       spec.provider.retry,
       spec.provider.headers,
+      spec.provider.timeout,
     ),
   );
 }

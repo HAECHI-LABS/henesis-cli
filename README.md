@@ -193,7 +193,7 @@ filters:
 
 provider:
   type: webSocket
-  timeout: 10000 #unit: ms
+  timeout: 10000 # unit: ms. This is optional value. The default is 10000 
 ```
 
 

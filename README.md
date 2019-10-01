@@ -193,6 +193,7 @@ filters:
 
 provider:
   type: webSocket
+  timeout: 10000 #unit: ms
 ```
 
 

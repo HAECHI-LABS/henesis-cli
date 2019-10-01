@@ -137,6 +137,7 @@ export function newMockIntegrationSpec(): IntegrationSpec {
       headers: {
         Authorization: 'Bearer aisdjiajdais',
       },
+      timeout: 10000,
     },
   };
 }

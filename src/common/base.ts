@@ -49,7 +49,9 @@ export default abstract class extends Command {
       configstore.set('analytics', data);
     } else {
       const data = configstore.get('analytics');
-      const user = configstore.get('user');
+      const user = (configstore.get('user'))
+        ? configstore.get('user')
+        : 'Not Login';
       const commandPath: string = (this.id != undefined)
         ? ((this.id).split(':').join('/'))
         : '';
@@ -72,7 +74,9 @@ export default abstract class extends Command {
   }
 
   protected async catch(err: Error): Promise<void> {
-    const user = configstore.get('user');
+    const user = (configstore.get('user'))
+      ? configstore.get('user')
+      : 'Not Login';
     const data = configstore.get('analytics');
     if (typeof data !== 'undefined') {
       const visitor = ua('UA-126138188-2', user.id, { uid: data, strictCidFormat : false });

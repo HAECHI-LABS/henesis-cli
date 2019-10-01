@@ -20,6 +20,7 @@ export class Provider {
     maxRetries: number;
   };
   public headers?: { [key: string]: string };
+  public timeout?: number;
 
   public constructor(
     type: string,
@@ -30,12 +31,14 @@ export class Provider {
       maxRetries: number;
     },
     headers?: { [p: string]: string },
+    timeout?: number,
   ) {
     this.type = type;
     this.url = url;
     this.method = method;
     this.headers = headers;
     this.retry = retry;
+    this.timeout = timeout;
   }
 }
 

@@ -23,6 +23,7 @@ export interface ProviderSpec {
     maxRetries: number;
   };
   headers: { [key: string]: string };
+  timeout: number;
 }
 
 export interface ContractSpec {

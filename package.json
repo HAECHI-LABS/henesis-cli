@@ -11,6 +11,7 @@
 		"@oclif/config": "^1.12.12",
 		"@oclif/plugin-help": "^2.1.6",
 		"@oclif/plugin-autocomplete": "^0.1.4",
+		"@sentry/node": "^5.6.2",
 		"@types/configstore": "^4.0.0",
 		"@types/js-yaml": "^3.12.1",
 		"@types/universal-analytics": "^0.4.2",

@@ -4,6 +4,8 @@ import configstore from './configstore';
 import * as ua from 'universal-analytics';
 import { confirmPrompt } from '../utils';
 import * as UIDGenerator from 'uid-generator';
+import * as ErrorHandler from './errorHandler';
+import { CLIError } from '@oclif/errors';
 
 // See https://developers.whatismybrowser.com/useragents/
 const osVersionMap: { [os: string]: { [release: string]: string } } = {
@@ -39,7 +41,7 @@ export default abstract class extends Command {
 
     if (typeof isAgree === 'undefined' && name === 'Login') {
       this.log(
-        `Allow Henesis to collect anonymous CLI usage and error reporting information`,
+        `Allow Henesis to collect CLI usage and error reporting information`,
       );
       const uidgen = new UIDGenerator();
       const Confirmed = await confirmPrompt();
@@ -49,44 +51,41 @@ export default abstract class extends Command {
       configstore.set('analytics', data);
     } else {
       const data = configstore.get('analytics');
-      const user = (configstore.get('user'))
-        ? configstore.get('user')
-        : 'Not Login';
+      const userID = (configstore.get('user'))
+        ? configstore.get('user').id
+        : "Not Login";
       const commandPath: string = (this.id != undefined)
         ? ((this.id).split(':').join('/'))
         : '';
-      const visitor = ua('UA-126138188-2', user.id, { uid: data, strictCidFormat : false });
+      const visitor = ua('UA-126138188-2', userID, { uid: data, strictCidFormat : false });
 
       this._dimensions[1] = this._getOSVersion();
       this._dimensions[2] = this._getNodeVersion();
       this._dimensions[3] = this._getCPUCount();
       this._dimensions[4] = this._getRAM();
       this._dimensions[5] = this._cliVersion();
-      this._dimensions[6] = user.id;
+      this._dimensions[6] = userID;
 
       const additionals: { [key: string]: boolean | number | string } = {};
       this._dimensions.forEach(
         (v, i): boolean | number | string => (additionals['cd' + i] = v),
       );
-
       visitor.pageview({ dp: `/command/${commandPath}`, dt: 'Henesis-cli', ...additionals }).send();
     }
   }
 
-  protected async catch(err: Error): Promise<void> {
-    const user = (configstore.get('user'))
-      ? configstore.get('user')
-      : 'Not Login';
-    const data = configstore.get('analytics');
-    if (typeof data !== 'undefined') {
-      const visitor = ua('UA-126138188-2', user.id, { uid: data, strictCidFormat : false });
-      visitor.exception(err).send();
-    }
-    this.error(err);
+  protected async catch(err: CLIError): Promise<void> {
+    // console.log((err.code));
+    // console.error(`Error Status: ${err.code}, ${err.message}`);
   }
 
-  protected async finally(err: Error | undefined): Promise<void> {
+  protected async finally(err: CLIError): Promise<void> {
     // called after run and catch regardless of whether or not the command errored
+    // ErrorHandler.ErrorHandler(err, this._dimensions, {
+    //   reportSentry: (err.code !== undefined)
+    //     ? false
+    //     : true
+    // });
   }
 
   private _getOSVersion(): string {

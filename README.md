@@ -317,7 +317,7 @@ provider:
 
 
 
-## parameter details
+## Parameter Details
 
 The following are detailed explanations for parameters used to `henesis.yaml`.
 

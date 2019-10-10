@@ -27,7 +27,6 @@ describe('integration:describe', (): void => {
     test
       .stdout()
       .command(['integration:describe'])
-      .exit(2)
       .it('exits with status 1 when integrationId does not provided');
   });
 });

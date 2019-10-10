@@ -12,7 +12,6 @@ describe('integration:status', (): void => {
       )
       .stdout()
       .command(['integration:status'])
-      .exit(2)
       .it('exit with status 2 when fail to getIntegrations');
   });
 });

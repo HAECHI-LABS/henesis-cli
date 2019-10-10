@@ -10,7 +10,6 @@ describe('account:describe', (): void => {
       test
         .stdout()
         .command(['account:describe'])
-        .exit(2)
         .it('should be fail not logged in');
     },
   );

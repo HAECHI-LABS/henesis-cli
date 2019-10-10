@@ -1,26 +1,22 @@
-// Henesis CLI undefined error Handling
 import * as ua from 'universal-analytics';
 import * as Sentry from '@sentry/node';
 import configstore from './configstore';
-import { CLIError } from '@oclif/errors';
 
 export async function ErrorHandler(
-      err: CLIError,
-      userInfo?: any[],
-      {
-          reportGA = true,
-          reportSentry = true
-      } : {
+    err: Error,
+    userInfo?: any,
+    {
+        reportGA = true,
+        reportSentry = true
+    } : {
         reportGA?: boolean,
         reportSentry?: boolean
-      } = {}
-    ): Promise<void> {
-    // Bootstraping
+    } = {}
+): Promise<void> {
     const userID = (configstore.get('user'))
       ? configstore.get('user').id
       : 'Not Login';
 
-    // Google Analytics
     if (reportGA === true) {
         const data = configstore.get('analytics');
         const visitor = ua('UA-126138188-2', userID, { uid: data, strictCidFormat : false });
@@ -48,5 +44,4 @@ export async function ErrorHandler(
 
         Sentry.captureException(err);
     }
-    
 }

@@ -10,7 +10,6 @@ describe('account:changepw', (): void => {
       test
         .stdout()
         .command(['account:changepw'])
-        .exit(2)
         .it('should be fail not logged in');
     },
   );

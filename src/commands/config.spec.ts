@@ -9,7 +9,6 @@ describe('config', (): void => {
   test
     .stdout()
     .command(['config'])
-    .exit(2)
     .it('should fail do not specify an option');
 
   test

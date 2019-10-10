@@ -21,7 +21,6 @@ describe('integration:delete', (): void => {
     test
       .stdout()
       .command(['integration:delete'])
-      .exit(2)
       .it('exits with status 1 when integrationId does not provided');
   });
 });

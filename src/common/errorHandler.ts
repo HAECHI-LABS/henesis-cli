@@ -25,7 +25,7 @@ export async function ErrorHandler(
     
     // Sentry
     if (reportSentry === true) {
-        Sentry.init({ dsn: 'https://84f8992a0a26492ea95ee8bf28b0029c@sentry.io/1767699' });
+        Sentry.init({ dsn: 'https://7564532cd965419da76c20e0593be771@sentry.io/1776450' });
 
         (userInfo)
           ? Sentry.configureScope((scope => {

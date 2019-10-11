@@ -41,7 +41,7 @@ export default abstract class extends Command {
 
     if (typeof isAgree === 'undefined' && name === 'Login') {
       this.log(
-        `Allow Henesis to collect anonymous CLI usage and error reporting information`,
+        `Allow Henesis to collect CLI usage and error reporting information`,
       );
       const uidgen = new UIDGenerator();
       const Confirmed = await confirmPrompt();

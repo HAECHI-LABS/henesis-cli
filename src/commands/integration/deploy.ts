@@ -31,7 +31,7 @@ async function detectErrors(
     const rawError = error.message
       .split('less than the released version')[1]
       .trimEnd();
-    return `Henesis is currently using solc '${compilerVersion}',
+    return `Compile Error: The henesis is currently using solc '${compilerVersion}',
         but your '${contractName}.sol' contract uses different version.
         ${rawError}`;
   } else if (error.message.includes('ENOENT: no such file or directory')) {
@@ -78,7 +78,7 @@ async function toContract(contractSpec: ContractSpec): Promise<Contract> {
 
   if (abi === undefined) {
     throw new Error(
-      `corresponding contract name does not exist in '${contractSpec.path}' file`,
+      `Your filtered contract does not exist in '${contractSpec.path}' file`,
     );
   }
 

@@ -14,7 +14,9 @@ New Password:
 Again New Password: 
 `,
   ];
+  //In order to use the Henesis CLI, you need to login first.
 
+  //Please use the henesis login command to get started.
   public static flags = {};
 
   public static args = [];
@@ -22,7 +24,9 @@ Again New Password:
   public async run(): Promise<void> {
     const user = configstore.get('user');
     if (!user) {
-      this.error('You are not logged in.');
+      this.error(('In order to use the Henesis CLI, you need to login first.\n' +
+         'Please use the henesis login command to get started.'),
+         { code: "460" });
     }
 
     try {
@@ -30,15 +34,15 @@ Again New Password:
       const newPassword1 = await passwordPrompt('New Password');
 
       if (newPassword1.length < 6) {
-        this.error('Password you enter must be at least 6 characters long.');
+        this.error('Password you enter must be at least 6 characters long.', { code: "461" });
       }
       const newPassword2 = await passwordPrompt('Again New Password');
       if (newPassword2.length < 6) {
-        this.error('Password you enter must be at least 6 characters long.');
+        this.error('Password you enter must be at least 6 characters long.', { code: "461" });
       }
 
       if (newPassword1 !== newPassword2) {
-        this.error('The newly entered password does not match.');
+        this.error('The newly entered password does not match.', { code: "462" });
       }
 
       await UserRPC.changePassword(password, newPassword1);

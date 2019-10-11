@@ -14,7 +14,9 @@ export default class Describe extends Command {
   public async run(): Promise<void> {
     const user = configstore.get('user');
     if (!user) {
-      this.error('You are not logged in.');
+      this.error(('In order to use the Henesis CLI, you need to login first.\n' +
+         'Please use the henesis login command to get started.'),
+         { code: "460" });
       //TODO: Enhancement: redirect to login prompt
     }
 

@@ -35,6 +35,7 @@ export default class Config extends Command {
     } else {
       this.error(
         'You must enter url that matches the https form.\neg) $ henesis config -e https://api.henesis.io',
+        { code: "101" }
       );
     }
   }

@@ -1,5 +1,5 @@
 version: v1
-name: projectname
+name: sample
 
 blockchain:
   platform: ethereum
@@ -15,13 +15,11 @@ filters:
 
 provider:
   type: webSocket
+  timeout: 10000 # optional
 # if you want to use webhook, you need to place it
 #  type: webhook
 #  url: https://localhost:8080
 #  method: POST
-#  retry:
-#    retryDelay: 1000
-#    maxRetries: 3
 #  headers:
 #    Authorization: 'Bearer YOUR-OWN-TOKEN'
 

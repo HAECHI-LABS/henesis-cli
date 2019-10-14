@@ -18,10 +18,6 @@ export interface ProviderSpec {
   type: string;
   url: string;
   method: string;
-  retry: {
-    retryDelay: number;
-    maxRetries: number;
-  };
   headers: { [key: string]: string };
   timeout: number;
 }

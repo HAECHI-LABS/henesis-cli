@@ -5,7 +5,7 @@ import * as ua from 'universal-analytics';
 import { confirmPrompt } from '../utils';
 import * as UIDGenerator from 'uid-generator';
 import { CLIError } from '@oclif/errors';
-import * as ErrorHandler from './errorHandler';
+import ErrorHandler from './errorHandler';
 
 // See https://developers.whatismybrowser.com/useragents/
 const osVersionMap: { [os: string]: { [release: string]: string } } = {
@@ -33,7 +33,7 @@ const osVersionMap: { [os: string]: { [release: string]: string } } = {
  * init -> run -> catch -> finally
  */
 export default abstract class extends Command {
-  private _dimensions: (string | number)[] = [];
+  private _clientInfo: (string | number)[] = [];
 
   protected async init(): Promise<void> {
     const isAgree = configstore.get('analytics');
@@ -53,22 +53,22 @@ export default abstract class extends Command {
       const data = configstore.get('analytics');
       const userID = (configstore.get('user'))
         ? configstore.get('user').id
-        : "Not Login";
+        : "None";
       const commandPath: string = (this.id != undefined)
         ? ((this.id).split(':').join('/'))
         : '';
 
       const visitor = ua('UA-126138188-2', userID, { uid: data, strictCidFormat : false });
 
-      this._dimensions[1] = this._getOSVersion();
-      this._dimensions[2] = this._getNodeVersion();
-      this._dimensions[3] = this._getCPUCount();
-      this._dimensions[4] = this._getRAM();
-      this._dimensions[5] = this._cliVersion();
-      this._dimensions[6] = userID;
+      this._clientInfo[1] = this._getOSVersion();
+      this._clientInfo[2] = this._getNodeVersion();
+      this._clientInfo[3] = this._getCPUCount();
+      this._clientInfo[4] = this._getRAM();
+      this._clientInfo[5] = this._cliVersion();
+      this._clientInfo[6] = userID;
 
       const additionals: { [key: string]: boolean | number | string } = {};
-      this._dimensions.forEach(
+      this._clientInfo.forEach(
         (v, i): boolean | number | string => (additionals['cd' + i] = v),
       );
 
@@ -77,11 +77,13 @@ export default abstract class extends Command {
   }
 
   protected async catch(err: CLIError): Promise<void> {
-    await ErrorHandler.ErrorHandler(err, this._dimensions, {
-      reportSentry: (err.code !== undefined)
-        ? false
-        : true
-    });
+    if (!process.env.HENESIS_TEST) {
+      await ErrorHandler(err, this._clientInfo, {
+        reportSentry: (err.code !== undefined)
+          ? false
+          : true
+      });
+    }
 
     console.error(err.message);
   }

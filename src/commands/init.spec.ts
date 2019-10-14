@@ -72,5 +72,6 @@ describe('init', (): void => {
     .stdout()
     .command(['init'])
     .command(['init'])
+    .exit(2)
     .it('must be fail when directory already exists.');
 });

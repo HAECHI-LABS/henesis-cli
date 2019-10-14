@@ -20,14 +20,14 @@ export default async function ErrorHandler(
     if (reportGA) {
         const data = configstore.get('analytics');
         const visitor = ua('UA-126138188-2', userID, { uid: data, strictCidFormat : false });
-        visitor.exception(err.message, true).send();
+        await visitor.exception(err.message, true).send();
     }
     
     // Sentry
     if (reportSentry) {
-        Sentry.init({ dsn: 'https://7564532cd965419da76c20e0593be771@sentry.io/1776450' });
+        await Sentry.init({ dsn: 'https://7564532cd965419da76c20e0593be771@sentry.io/1776450' });
         
-        Sentry.configureScope((scope => {
+        await Sentry.configureScope((scope => {
               scope.setUser({ id: userID });
               if (clientInfo) {
                 scope.setTags({
@@ -39,6 +39,6 @@ export default async function ErrorHandler(
               })}
         }));
 
-        Sentry.captureException(err);
+        await Sentry.captureException(err);
     }
 }

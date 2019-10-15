@@ -102,7 +102,7 @@ export default class Init extends Command {
 
     if (existsSync(contractsPath)) {
       if (existsSync(`${currentPath}/henesis.yaml`) && flags.force === false) {
-        this.error(`henesis.yaml already exists at the current directory.`);
+        this.error(`The henesis.yaml configuration file already exists at the current path.`, { code: "361" });
       }
 
       await this.initTemplate(currentPath, flags.force, true);
@@ -110,7 +110,7 @@ export default class Init extends Command {
       const destinationPath = this.setDirectoryName(currentPath, flags);
 
       if (existsSync(destinationPath) && flags.force === false) {
-        this.error(`The directory exists at the current directory.`);
+        this.error(`The henesis directory already exists at the current path.`, { code: "362" });
       }
 
       if (!existsSync(destinationPath)) {

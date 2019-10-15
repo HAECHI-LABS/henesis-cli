@@ -4,6 +4,8 @@ import configstore from './configstore';
 import * as ua from 'universal-analytics';
 import { confirmPrompt } from '../utils';
 import * as UIDGenerator from 'uid-generator';
+import { CLIError } from '@oclif/errors';
+import * as Sentry from '@sentry/node';
 
 // See https://developers.whatismybrowser.com/useragents/
 const osVersionMap: { [os: string]: { [release: string]: string } } = {
@@ -31,7 +33,7 @@ const osVersionMap: { [os: string]: { [release: string]: string } } = {
  * init -> run -> catch -> finally
  */
 export default abstract class extends Command {
-  private _dimensions: (string | number)[] = [];
+  private _clientInfo: (string | number)[] = [];
 
   protected async init(): Promise<void> {
     const isAgree = configstore.get('analytics');
@@ -39,44 +41,105 @@ export default abstract class extends Command {
 
     if (typeof isAgree === 'undefined' && name === 'Login') {
       this.log(
-        `Allow Henesis to collect anonymous CLI usage and error reporting information`,
+        `Allow Henesis to collect CLI usage and error reporting information`,
       );
       const uidgen = new UIDGenerator();
-      const Confirmed = await confirmPrompt();
-      const data: string | boolean = Confirmed
-        ? (await uidgen.generate()).toString()
-        : false;
-      configstore.set('analytics', data);
+      const confirmed = await confirmPrompt();
+      if (confirmed) {
+        configstore.set('analytics', (await uidgen.generate()).toString());
+      }
     } else {
-      const data = configstore.get('analytics');
-      const visitor = ua('UA-126138188-2', { uid: data });
-
-      this._dimensions[1] = this._getOSVersion();
-      this._dimensions[2] = this._getNodeVersion();
-      this._dimensions[3] = this._getCPUCount();
-      this._dimensions[4] = this._getRAM();
-      this._dimensions[5] = this._cliVersion();
+      this._clientInfo[1] = this._getOSVersion();
+      this._clientInfo[2] = this._getNodeVersion();
+      this._clientInfo[3] = this._getCPUCount();
+      this._clientInfo[4] = this._getRAM();
+      this._clientInfo[5] = this._cliVersion();
+      this._clientInfo[6] = this._getUserId();
 
       const additionals: { [key: string]: boolean | number | string } = {};
-      this._dimensions.forEach(
+      this._clientInfo.forEach(
         (v, i): boolean | number | string => (additionals['cd' + i] = v),
       );
 
-      visitor.pageview({ dp: `/command/${name}`, ...additionals }).send();
+      const data = configstore.get('analytics');
+      const visitor = ua('UA-126138188-2', this._getUserId(), {
+        uid: data,
+        strictCidFormat: false,
+      });
+      const commandPath: string =
+        this.id != undefined ? this.id.split(':').join('/') : '';
+      visitor
+        .pageview({
+          dp: `/command/${commandPath}`,
+          dt: 'Henesis CLI',
+          ...additionals,
+        })
+        .send();
     }
   }
 
-  protected async catch(err: Error): Promise<void> {
-    const data = configstore.get('analytics');
-    if (typeof data !== 'undefined') {
-      const visitor = ua('UA-126138188-2', { uid: data });
-      visitor.exception(err).send();
+  protected async catch(err: CLIError): Promise<void> {
+    const email = this._getUserEmal();
+    if (!process.env.HENESIS_TEST && !email.includes('@haechi.io')) {
+      if (typeof err.code === 'undefined') {
+        await this.reportToSentry(err);
+      }
+      await this.reportToGA(err);
     }
+
     this.error(err);
+  }
+
+  private async reportToSentry(error: Error) {
+    Sentry.init({
+      dsn: 'https://27ff620b68bf4da39b40f5d491e16fd8@sentry.io/1779992',
+    });
+    Sentry.configureScope(scope => {
+      scope.setUser({ id: this._getUserId() });
+      if (this._clientInfo) {
+        scope.setTags({
+          OS: String(this._clientInfo[1]),
+          'Node Version': String(this._clientInfo[2]),
+          'CPU Count': String(this._clientInfo[3]),
+          RAM: String(this._clientInfo[4]),
+          'CLI Version': String(this._clientInfo[5]),
+        });
+      }
+    });
+    Sentry.captureException(error);
+    await Sentry.flush();
+  }
+
+  private reportToGA(error: Error): Promise<void> {
+    return new Promise((resolve, rejects) => {
+      const data = configstore.get('analytics');
+      const visitor = ua('UA-126138188-2', this._getUserId(), {
+        uid: data,
+        strictCidFormat: false,
+      });
+      visitor.exception(error.message, true).send((err, req) => {
+        if (!err) {
+          resolve();
+        }
+        rejects();
+      });
+    });
   }
 
   protected async finally(err: Error | undefined): Promise<void> {
     // called after run and catch regardless of whether or not the command errored
+  }
+
+  private _getUser(): any {
+    return configstore.get('user');
+  }
+
+  private _getUserId(): string {
+    return this._getUser() ? this._getUser().id : 'None';
+  }
+
+  private _getUserEmal(): string {
+    return this._getUser() ? this._getUser().email : 'None';
   }
 
   private _getOSVersion(): string {

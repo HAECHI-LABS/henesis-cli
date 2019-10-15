@@ -41,7 +41,7 @@ describe('login', (): void => {
     .command(['login'])
     .it('should be success login with message', (ctx): void => {
       expect(ctx.stdout).to.equal(
-        'Allow Henesis to collect anonymous CLI usage and error reporting information\n🎉 Login Success from yoonsung@haechi.io 🎉\n',
+        'Allow Henesis to collect CLI usage and error reporting information\n🎉 Login Success from yoonsung@haechi.io 🎉\n',
       );
     });
 

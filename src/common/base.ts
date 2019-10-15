@@ -5,7 +5,8 @@ import * as ua from 'universal-analytics';
 import { confirmPrompt } from '../utils';
 import * as UIDGenerator from 'uid-generator';
 import { CLIError } from '@oclif/errors';
-import ErrorHandler from './errorHandler';
+import ReportError from './errorHandler';
+import { includes } from 'lodash';
 
 // See https://developers.whatismybrowser.com/useragents/
 const osVersionMap: { [os: string]: { [release: string]: string } } = {
@@ -77,8 +78,9 @@ export default abstract class extends Command {
   }
 
   protected async catch(err: CLIError): Promise<void> {
-    if (!process.env.HENESIS_TEST) {
-      await ErrorHandler(err, this._clientInfo, {
+    const userEmail = configstore.get('user').email;
+    if (!process.env.HENESIS_TEST && !userEmail.includes('@haechi.io')) {
+      await ReportError(err, this._clientInfo, {
         reportSentry: (err.code !== undefined)
           ? false
           : true

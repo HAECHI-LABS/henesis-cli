@@ -2,7 +2,7 @@ import * as ua from 'universal-analytics';
 import * as Sentry from '@sentry/node';
 import configstore from './configstore';
 
-export default async function ErrorHandler(
+export default async function ReportError(
     err: Error,
     clientInfo?: any,
     {
@@ -17,11 +17,15 @@ export default async function ErrorHandler(
       ? configstore.get('user').id
       : 'None';
 
-    await googlaAnalytics(err, userID, reportGA);
+    try {
+        await gaSend(err, userID, reportGA);
+    } catch {
+        console.log('Google Analytics Error Report - Failed');
+    }
     
     // Sentry
     if (reportSentry) {
-        Sentry.init({ dsn: 'https://7564532cd965419da76c20e0593be771@sentry.io/1776450' });
+        Sentry.init({ dsn: 'https://27ff620b68bf4da39b40f5d491e16fd8@sentry.io/1779992' });
         
         Sentry.configureScope((scope => {
               scope.setUser({ id: userID });
@@ -39,7 +43,7 @@ export default async function ErrorHandler(
     }
 }
 
-function googlaAnalytics(err: Error, userID: string, reportGA: boolean): Promise<void> {
+function gaSend(err: Error, userID: string, reportGA: boolean): Promise<void> {
     return new Promise((resolve, rejects) => {
         const userID = (configstore.get('user'))
           ? configstore.get('user').id

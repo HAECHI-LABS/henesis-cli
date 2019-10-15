@@ -62,16 +62,28 @@ export default abstract class extends Command {
       );
 
       const data = configstore.get('analytics');
-      const visitor = ua('UA-126138188-2', this._getUserId(), { uid: data, strictCidFormat: false });
-      const commandPath: string = (this.id != undefined) ? ((this.id).split(':').join('/')) : '';
-      visitor.pageview({ dp: `/command/${commandPath}`, dt: 'Henesis CLI', ...additionals }).send();
+      const visitor = ua('UA-126138188-2', this._getUserId(), {
+        uid: data,
+        strictCidFormat: false,
+      });
+      const commandPath: string =
+        this.id != undefined ? this.id.split(':').join('/') : '';
+      visitor
+        .pageview({
+          dp: `/command/${commandPath}`,
+          dt: 'Henesis CLI',
+          ...additionals,
+        })
+        .send();
     }
   }
 
   protected async catch(err: CLIError): Promise<void> {
     const email = this._getUserEmal();
     if (!process.env.HENESIS_TEST && !email.includes('@haechi.io')) {
-      await this.reportToSentry(err);
+      if (typeof err.code === 'undefined') {
+        await this.reportToSentry(err);
+      }
       await this.reportToGA(err);
     }
 
@@ -79,19 +91,21 @@ export default abstract class extends Command {
   }
 
   private async reportToSentry(error: Error) {
-    Sentry.init({ dsn: 'https://27ff620b68bf4da39b40f5d491e16fd8@sentry.io/1779992' });
-    Sentry.configureScope((scope => {
+    Sentry.init({
+      dsn: 'https://27ff620b68bf4da39b40f5d491e16fd8@sentry.io/1779992',
+    });
+    Sentry.configureScope(scope => {
       scope.setUser({ id: this._getUserId() });
       if (this._clientInfo) {
         scope.setTags({
-          'OS': String(this._clientInfo[1]),
+          OS: String(this._clientInfo[1]),
           'Node Version': String(this._clientInfo[2]),
           'CPU Count': String(this._clientInfo[3]),
-          'RAM': String(this._clientInfo[4]),
+          RAM: String(this._clientInfo[4]),
           'CLI Version': String(this._clientInfo[5]),
         });
       }
-    }));
+    });
     Sentry.captureException(error);
     await Sentry.flush();
   }
@@ -99,7 +113,10 @@ export default abstract class extends Command {
   private reportToGA(error: Error): Promise<void> {
     return new Promise((resolve, rejects) => {
       const data = configstore.get('analytics');
-      const visitor = ua('UA-126138188-2', this._getUserId(), { uid: data, strictCidFormat: false });
+      const visitor = ua('UA-126138188-2', this._getUserId(), {
+        uid: data,
+        strictCidFormat: false,
+      });
       visitor.exception(error.message, true).send((err, req) => {
         if (!err) {
           resolve();
@@ -114,19 +131,15 @@ export default abstract class extends Command {
   }
 
   private _getUser(): any {
-    return (configstore.get('user'));
+    return configstore.get('user');
   }
 
   private _getUserId(): string {
-    return this._getUser()
-      ? this._getUser().id
-      : 'None';
+    return this._getUser() ? this._getUser().id : 'None';
   }
 
   private _getUserEmal(): string {
-    return this._getUser()
-      ? this._getUser().email
-      : 'None';
+    return this._getUser() ? this._getUser().email : 'None';
   }
 
   private _getOSVersion(): string {

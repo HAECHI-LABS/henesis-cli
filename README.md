@@ -265,7 +265,7 @@ klaytn       baobab    http://network.henesis.io/klaytn/baobab    Synced
 
 ```yaml
 version: v1
-name: projectname
+name: sample
 
 blockchain:
   platform: ethereum
@@ -290,7 +290,7 @@ provider:
 
 ```yaml
 version: v1
-name: projectname
+name: sample
 
 blockchain:
   platform: ethereum
@@ -308,16 +308,13 @@ provider:
   type: webhook
   url: https://localhost:8080
   method: POST
-  retry:
-    retryDelay: 1000
-    maxRetries: 3
   headers:
     Authorization: 'Bearer YOUR-OWN-TOKEN'
 ```
 
 
 
-## parameter details
+## Parameter Details
 
 The following are detailed explanations for parameters used to `henesis.yaml`.
 
@@ -392,7 +389,7 @@ The version of the compiler used when the original file of the deployed smart co
 
 The provider is where you choose how to receive events from Henesis. We support `WebSocket` and `Webhook`
 
-The `WebSocket` doesn't need any settings like url, method, retry, headers.
+The `WebSocket` doesn't need any settings like url, method, headers.
 
 ##### type
 
@@ -405,16 +402,6 @@ URL which you want to hook
 ##### method
 
 HTTP method like a `GET`, `POST`, `PUT`, `DELETE`
-
-##### retry
-
-###### retryDelay
-
-Retry Interval (ms)
-
-###### maxRetries
-
-Maximum retry count
 
 ##### headers
 

@@ -139,10 +139,6 @@ export function newMockIntegrationSpec(): IntegrationSpec {
       type: 'webhook',
       url: 'https://localhost:8080',
       method: 'POST',
-      retry: {
-        maxRetries: 5,
-        retryDelay: 1000,
-      },
       headers: {
         Authorization: 'Bearer aisdjiajdais',
       },

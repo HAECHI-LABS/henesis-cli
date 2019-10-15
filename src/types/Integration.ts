@@ -15,10 +15,6 @@ export class Provider {
   public type: string;
   public url?: string;
   public method?: string;
-  public retry?: {
-    retryDelay: number;
-    maxRetries: number;
-  };
   public headers?: { [key: string]: string };
   public timeout?: number;
 
@@ -26,10 +22,6 @@ export class Provider {
     type: string,
     url?: string,
     method?: string,
-    retry?: {
-      retryDelay: number;
-      maxRetries: number;
-    },
     headers?: { [p: string]: string },
     timeout?: number,
   ) {
@@ -37,7 +29,6 @@ export class Provider {
     this.url = url;
     this.method = method;
     this.headers = headers;
-    this.retry = retry;
     this.timeout = timeout;
   }
 }

@@ -70,7 +70,7 @@ export default abstract class extends Command {
 
   protected async catch(err: CLIError): Promise<void> {
     const email = this._getUserEmal();
-    if (process.env.HENESIS_TEST && !email.includes('@haechi.io')) {
+    if (!process.env.HENESIS_TEST && !email.includes('@haechi.io')) {
       await this.reportToSentry(err);
       await this.reportToGA(err);
     }

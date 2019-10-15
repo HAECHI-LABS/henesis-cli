@@ -6,7 +6,6 @@ import { confirmPrompt } from '../utils';
 import * as UIDGenerator from 'uid-generator';
 import { CLIError } from '@oclif/errors';
 import ReportError from './errorHandler';
-import { includes } from 'lodash';
 
 // See https://developers.whatismybrowser.com/useragents/
 const osVersionMap: { [os: string]: { [release: string]: string } } = {

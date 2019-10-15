@@ -78,8 +78,11 @@ export default abstract class extends Command {
   }
 
   protected async catch(err: CLIError): Promise<void> {
-    const userEmail = configstore.get('user').email;
-    if (!process.env.HENESIS_TEST && !userEmail.includes('@haechi.io')) {
+    const userEmail = (configstore.get('user'))
+      ? configstore.get('user').email
+      : 'None';
+
+    if (process.env.HENESIS_TEST && !userEmail.includes('@haechi.io')) {
       await ReportError(err, this._clientInfo, {
         reportSentry: (err.code !== undefined)
           ? false

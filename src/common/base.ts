@@ -83,9 +83,9 @@ export default abstract class extends Command {
           ? false
           : true
       });
-    }
+    };
 
-    throw err;
+    this.error(err);
   }
 
   protected async finally(err: Error | undefined): Promise<void> {

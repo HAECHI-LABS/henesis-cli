@@ -17,17 +17,13 @@ export default async function ErrorHandler(
       ? configstore.get('user').id
       : 'None';
 
-    if (reportGA) {
-        const data = configstore.get('analytics');
-        const visitor = ua('UA-126138188-2', userID, { uid: data, strictCidFormat : false });
-        await visitor.exception(err.message, true).send();
-    }
+    await googlaAnalytics(err, userID, reportGA);
     
     // Sentry
     if (reportSentry) {
-        await Sentry.init({ dsn: 'https://7564532cd965419da76c20e0593be771@sentry.io/1776450' });
+        Sentry.init({ dsn: 'https://7564532cd965419da76c20e0593be771@sentry.io/1776450' });
         
-        await Sentry.configureScope((scope => {
+        Sentry.configureScope((scope => {
               scope.setUser({ id: userID });
               if (clientInfo) {
                 scope.setTags({
@@ -38,7 +34,25 @@ export default async function ErrorHandler(
                     "CLI Version": clientInfo[5]
               })}
         }));
-
-        await Sentry.captureException(err);
+        Sentry.captureException(err);
+        await Sentry.flush();
     }
+}
+
+function googlaAnalytics(err: Error, userID: string, reportGA: boolean): Promise<void> {
+    return new Promise((resolve, rejects) => {
+        const userID = (configstore.get('user'))
+          ? configstore.get('user').id
+          : 'None';
+    
+        if (reportGA) {
+            const data = configstore.get('analytics');
+            const visitor = ua('UA-126138188-2', userID, { uid: data, strictCidFormat : false });
+            visitor.exception(err.message, true).send((err, req) => {
+                if (!err) {
+                    resolve();
+                } rejects();
+            });
+        }
+    })
 }

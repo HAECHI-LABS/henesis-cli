@@ -97,6 +97,9 @@ async function toCreateIntegrationRequest(
   spec: IntegrationSpec,
 ): Promise<CreateIntegrationRequest> {
   const contracts: Contract[] = await toContracts(spec.filters.contracts);
+  const metadata: Object = {
+    contents: spec
+  };
   return new CreateIntegrationRequest(
     spec.name,
     spec.version,
@@ -113,6 +116,7 @@ async function toCreateIntegrationRequest(
       spec.provider.headers,
       spec.provider.timeout,
     ),
+    metadata,
   );
 }
 
@@ -120,6 +124,9 @@ async function toUpdateIntegrationRequest(
   spec: IntegrationSpec,
 ): Promise<UpdateIntegrationRequest> {
   const contracts: Contract[] = await toContracts(spec.filters.contracts);
+  const metadata: Object = {
+    contents: spec,
+  };
   return new UpdateIntegrationRequest(
     spec.version,
     new Blockchain(
@@ -135,6 +142,7 @@ async function toUpdateIntegrationRequest(
       spec.provider.headers,
       spec.provider.timeout,
     ),
+    metadata,
   );
 }
 

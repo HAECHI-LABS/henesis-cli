@@ -74,17 +74,20 @@ export class UpdateIntegrationRequest {
   public blockchain: Blockchain;
   public filter: Filter;
   public provider: Provider;
+  public metadata: Object;
 
   public constructor(
     version: string,
     blockchain: Blockchain,
     filter: Filter,
     provider: Provider,
+    metadata: Object,
   ) {
     this.version = version;
     this.blockchain = blockchain;
     this.filter = filter;
     this.provider = provider;
+    this.metadata = metadata;
   }
 }
 
@@ -94,6 +97,7 @@ export class CreateIntegrationRequest {
   public blockchain: Blockchain;
   public filter: Filter;
   public provider: Provider;
+  public metadata: Object;
 
   public constructor(
     name: string,
@@ -101,12 +105,14 @@ export class CreateIntegrationRequest {
     blockchain: Blockchain,
     filter: Filter,
     provider: Provider,
+    metadata: Object
   ) {
     this.name = name;
     this.version = version;
     this.blockchain = blockchain;
     this.filter = filter;
     this.provider = provider;
+    this.metadata = metadata;
   }
 }
 

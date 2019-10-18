@@ -4,7 +4,9 @@ name: sample
 blockchain:
   platform: ethereum
   network: mainnet
-  threshold: 12
+  threshold: 12 # optional.
+                # Ethereum: (default: 12, min: 6)
+                # Klaytn: (default: 0, min: 0)
 
 filters:
   contracts:

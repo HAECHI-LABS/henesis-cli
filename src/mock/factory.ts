@@ -113,6 +113,7 @@ export function newMockIntegration(): Integration {
     ]),
     new Provider('webhook'),
     new Status('Available'),
+    newMockIntegrationSpec,
   );
 }
 

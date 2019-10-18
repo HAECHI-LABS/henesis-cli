@@ -125,6 +125,7 @@ export class Integration {
   public filter: Filter;
   public provider: Provider;
   public status: Status;
+  public metadata: Object;
 
   public constructor(
     integrationId: string,
@@ -135,6 +136,7 @@ export class Integration {
     filter: Filter,
     provider: Provider,
     status: Status,
+    metadata: Object,
   ) {
     this.integrationId = integrationId;
     this.userId = userId;
@@ -144,6 +146,7 @@ export class Integration {
     this.filter = filter;
     this.provider = provider;
     this.status = status;
+    this.metadata = metadata;
   }
 }
 

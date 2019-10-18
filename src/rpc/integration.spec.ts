@@ -2,7 +2,7 @@ import { expect } from '@oclif/test';
 import { IntegrationRpc } from './integration';
 import wretch from 'wretch';
 import { baseUrl, rpcVersion } from './config';
-import { newMockIntegration } from '../mock';
+import { newMockIntegration, newMockIntegrationSpec } from '../mock';
 import * as mockhttp from 'mockttp';
 import {
   Blockchain,
@@ -109,6 +109,9 @@ describe('IntegrationRpc', () => {
   describe('#createIntegration()', async () => {
     it('should create a integration', async () => {
       const integration = newMockIntegration();
+      const integrationSpec: Object = {
+        contents: newMockIntegrationSpec()
+      };
       await mockServer.post('/integrations/v1').thenJSON(200, integration);
       const response: Integration | null = await integrationRpc.createIntegration(
         new CreateIntegrationRequest(
@@ -121,6 +124,7 @@ describe('IntegrationRpc', () => {
           ),
           integration.filter,
           integration.provider,
+          integrationSpec
         ),
       );
       expect(JSON.stringify(response)).to.deep.equal(

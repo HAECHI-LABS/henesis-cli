@@ -109,9 +109,9 @@ describe('IntegrationRpc', () => {
   describe('#createIntegration()', async () => {
     it('should create a integration', async () => {
       const integration = newMockIntegration();
-      const integrationSpec: Object = {
-        contents: newMockIntegrationSpec()
-      };
+      const integrationSpec = new Map<string, Object>([
+        ['contents', newMockIntegrationSpec()]
+      ]);
       await mockServer.post('/integrations/v1').thenJSON(200, integration);
       const response: Integration | null = await integrationRpc.createIntegration(
         new CreateIntegrationRequest(
@@ -124,7 +124,7 @@ describe('IntegrationRpc', () => {
           ),
           integration.filter,
           integration.provider,
-          integrationSpec
+          integrationSpec,
         ),
       );
       expect(JSON.stringify(response)).to.deep.equal(

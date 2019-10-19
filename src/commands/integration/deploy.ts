@@ -97,9 +97,9 @@ async function toCreateIntegrationRequest(
   spec: IntegrationSpec,
 ): Promise<CreateIntegrationRequest> {
   const contracts: Contract[] = await toContracts(spec.filters.contracts);
-  const metadata: Object = {
-    contents: spec
-  };
+  const metadata = new Map<string, Object>([
+    ['contents', spec]
+  ])
   return new CreateIntegrationRequest(
     spec.name,
     spec.version,
@@ -124,9 +124,9 @@ async function toUpdateIntegrationRequest(
   spec: IntegrationSpec,
 ): Promise<UpdateIntegrationRequest> {
   const contracts: Contract[] = await toContracts(spec.filters.contracts);
-  const metadata: Object = {
-    contents: spec,
-  };
+  const metadata = new Map<string, Object>([
+    ['contents', spec]
+  ])
   return new UpdateIntegrationRequest(
     spec.version,
     new Blockchain(

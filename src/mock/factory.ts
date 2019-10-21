@@ -114,7 +114,7 @@ export function newMockIntegration(): Integration {
     new Provider('webhook'),
     new Status('Available'),
     new Map<string, Object>([
-      ['contents', newMockIntegrationSpec]
+      ['spec', newMockIntegrationSpec]
     ]),
   );
 }

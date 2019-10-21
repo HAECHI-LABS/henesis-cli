@@ -98,7 +98,7 @@ async function toCreateIntegrationRequest(
 ): Promise<CreateIntegrationRequest> {
   const contracts: Contract[] = await toContracts(spec.filters.contracts);
   const metadata = new Map<string, Object>([
-    ['contents', spec]
+    ['spec', spec]
   ])
   return new CreateIntegrationRequest(
     spec.name,
@@ -125,7 +125,7 @@ async function toUpdateIntegrationRequest(
 ): Promise<UpdateIntegrationRequest> {
   const contracts: Contract[] = await toContracts(spec.filters.contracts);
   const metadata = new Map<string, Object>([
-    ['contents', spec]
+    ['spec', spec]
   ])
   return new UpdateIntegrationRequest(
     spec.version,

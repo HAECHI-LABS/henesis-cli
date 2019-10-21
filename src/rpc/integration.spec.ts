@@ -110,7 +110,7 @@ describe('IntegrationRpc', () => {
     it('should create a integration', async () => {
       const integration = newMockIntegration();
       const integrationSpec = new Map<string, Object>([
-        ['contents', newMockIntegrationSpec()]
+        ['spec', newMockIntegrationSpec()]
       ]);
       await mockServer.post('/integrations/v1').thenJSON(200, integration);
       const response: Integration | null = await integrationRpc.createIntegration(

@@ -2,6 +2,13 @@
 ## [Unreleased]
 
 
+<a name="v1.0.0-beta.32"></a>
+## [v1.0.0-beta.32] - 2019-10-18
+### Chore
+- add min-threshold, default-threshold per platform
+- update v1.0.0-beta.31
+
+
 <a name="v1.0.0-beta.31"></a>
 ## [v1.0.0-beta.31] - 2019-10-16
 ### Chore
@@ -126,7 +133,8 @@
 - apply lint, lint script and husky ([#14](https://github.com/HAECHI-LABS/henesis-cli/issues/14))
 
 
-[Unreleased]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.31...HEAD
+[Unreleased]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.32...HEAD
+[v1.0.0-beta.32]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.31...v1.0.0-beta.32
 [v1.0.0-beta.31]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.30...v1.0.0-beta.31
 [v1.0.0-beta.30]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.29...v1.0.0-beta.30
 [v1.0.0-beta.29]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.28...v1.0.0-beta.29

@@ -15,7 +15,7 @@ import {
   Filter,
   Provider,
 } from '../../types';
-import { startWait, endWait } from '../../utils';
+import { startWait, endWait, concatAndDeDuplicate } from '../../utils';
 import Command from '../../common/base';
 import { ContractFileSpec, ContractSpec } from '../../types/IntegrationSpec';
 
@@ -85,11 +85,11 @@ async function toContractFile(
   return abi;
 }
 
-async function toContract(contractSpec: ContractSpec): Promise<Contract> {
+export async function toContract(
+  contractSpec: ContractSpec,
+): Promise<Contract> {
   startWait('Deploying');
-  const concatAndDeDuplicate = (...arrs: any[]) => [
-    ...new Set([].concat(...arrs)),
-  ];
+
   const abis: any[] = concatAndDeDuplicate(
     ...(await Promise.all(
       contractSpec.files.map(async c => await toContractFile(c)),

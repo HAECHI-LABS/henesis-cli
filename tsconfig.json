@@ -10,7 +10,8 @@
     "target": "es2017",
     "sourceMap": true,
     "skipLibCheck": true,
-    "resolveJsonModule":true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "allowJs": true,
     "typeRoots": ["./node_modules/@types", "./@types"]
   },

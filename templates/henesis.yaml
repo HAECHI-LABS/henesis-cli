@@ -11,9 +11,11 @@ blockchain:
 filters:
   contracts:
     - address: '0x'
-      path: ./contracts/example.sol
       name: example
-      compilerVersion: 0.5.8
+      files: # The events of the contracts listed below can be combined together at this address.
+        - path: ./contracts/example.sol
+          contractName: example
+          compilerVersion: 0.5.8
 
 provider:
   type: webSocket

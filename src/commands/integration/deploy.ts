@@ -17,7 +17,7 @@ import {
 } from '../../types';
 import { startWait, endWait } from '../../utils';
 import Command from '../../common/base';
-import { ContractSpec } from '../../types/IntegrationSpec';
+import { ContractFileSpec, ContractSpec } from '../../types/IntegrationSpec';
 
 const defaultSpecFile = './henesis.yaml';
 
@@ -67,22 +67,36 @@ async function getAbi(
   return result.getAbi(contractName);
 }
 
-async function toContract(contractSpec: ContractSpec): Promise<Contract> {
+async function toContractFile(
+  contractFileSpec: ContractFileSpec,
+): Promise<any> {
   const abi: any = await getAbi(
-    contractSpec.path,
-    contractSpec.compilerVersion,
-    contractSpec.name,
+    contractFileSpec.path,
+    contractFileSpec.compilerVersion,
+    contractFileSpec.contractName,
   );
-
-  startWait('Deploying');
 
   if (abi === undefined) {
     throw new Error(
-      `Your filtered contract does not exist in '${contractSpec.path}' file`,
+      `Your filtered contract does not exist in '${contractFileSpec.path}' file`,
     );
   }
 
-  return new Contract(contractSpec.name, contractSpec.address, abi);
+  return abi;
+}
+
+async function toContract(contractSpec: ContractSpec): Promise<Contract> {
+  startWait('Deploying');
+  const concatAndDeDuplicate = (...arrs: any[]) => [
+    ...new Set([].concat(...arrs)),
+  ];
+  const abis: any[] = concatAndDeDuplicate(
+    ...(await Promise.all(
+      contractSpec.files.map(async c => await toContractFile(c)),
+    )),
+  );
+
+  return new Contract(contractSpec.name, contractSpec.address, abis);
 }
 
 async function toContracts(contractSpecs: ContractSpec[]): Promise<Contract[]> {

@@ -23,8 +23,13 @@ export interface ProviderSpec {
 }
 
 export interface ContractSpec {
-  name: string;
   address: string;
+  name: string;
+  files: ContractFileSpec[];
+}
+
+export interface ContractFileSpec {
   path: string;
+  contractName: string;
   compilerVersion: string;
 }

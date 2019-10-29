@@ -21,3 +21,7 @@ export const startWait = (sentence: string): void => {
 export const endWait = (): void => {
   cli.action.stop();
 };
+
+export const concatAndDeDuplicate = (...arrs: any[]) => [
+  ...new Set([].concat(...arrs)),
+];

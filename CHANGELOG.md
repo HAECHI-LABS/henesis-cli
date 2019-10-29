@@ -2,9 +2,22 @@
 ## [Unreleased]
 
 
-<a name="v1.0.0-beta.32"></a>
-## [v1.0.0-beta.32] - 2019-10-18
+<a name="v1.0.0-beta.33"></a>
+## [v1.0.0-beta.33] - 2019-10-29
 ### Chore
+- update v1.0.0-beta.32
+
+### Feat
+- support delegatecall event listening ([#116](https://github.com/HAECHI-LABS/henesis-cli/issues/116))
+
+### Fix
+- account filter logic error
+
+
+<a name="v1.0.0-beta.32"></a>
+## [v1.0.0-beta.32] - 2019-10-22
+### Chore
+- update v1.0.0-beta.32
 - add min-threshold, default-threshold per platform
 - update v1.0.0-beta.31
 
@@ -133,7 +146,8 @@
 - apply lint, lint script and husky ([#14](https://github.com/HAECHI-LABS/henesis-cli/issues/14))
 
 
-[Unreleased]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.32...HEAD
+[Unreleased]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.33...HEAD
+[v1.0.0-beta.33]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.32...v1.0.0-beta.33
 [v1.0.0-beta.32]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.31...v1.0.0-beta.32
 [v1.0.0-beta.31]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.30...v1.0.0-beta.31
 [v1.0.0-beta.30]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.29...v1.0.0-beta.30

@@ -1,9 +1,9 @@
 import Command from '@oclif/command';
 import * as os from 'os';
 import configstore from './configstore';
-import * as ua from 'universal-analytics';
+import ua from 'universal-analytics';
 import { confirmPrompt } from '../utils';
-import * as UIDGenerator from 'uid-generator';
+import UIDGenerator from 'uid-generator';
 import { CLIError } from '@oclif/errors';
 import * as Sentry from '@sentry/node';
 

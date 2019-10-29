@@ -1,3 +1,3 @@
-import * as configstore from 'configstore';
+import configstore from 'configstore';
 
 export default new configstore('henesis');

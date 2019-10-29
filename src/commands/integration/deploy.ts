@@ -90,13 +90,13 @@ export async function toContract(
 ): Promise<Contract> {
   startWait('Deploying');
 
-  const abis: any[] = concatAndDeDuplicate(
+  const abi: any[] = concatAndDeDuplicate(
     ...(await Promise.all(
       contractSpec.files.map(async c => await toContractFile(c)),
     )),
   );
 
-  return new Contract(contractSpec.name, contractSpec.address, abis);
+  return new Contract(contractSpec.name, contractSpec.address, abi);
 }
 
 async function toContracts(contractSpecs: ContractSpec[]): Promise<Contract[]> {

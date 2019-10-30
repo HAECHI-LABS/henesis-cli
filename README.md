@@ -270,18 +270,22 @@ name: sample
 blockchain:
   platform: ethereum
   network: mainnet
-  threshold: 12
+  threshold: 12 # optional.
+                # Ethereum: (default: 12, min: 6)
+                # Klaytn: (default: 0, min: 0)
 
 filters:
   contracts:
     - address: '0x'
-      path: ./contracts/example.sol
       name: example
-      compilerVersion: 0.5.8
+      files: # The events of the contracts listed below can be combined together at this address.
+        - path: ./contracts/example.sol
+          contractName: example
+          compilerVersion: 0.5.8
 
 provider:
   type: webSocket
-  timeout: 10000 # unit: ms. This is optional value. The default is 10000 
+  timeout: 10000 # optional. (default: 10000, unit: ms)
 ```
 
 
@@ -295,14 +299,18 @@ name: sample
 blockchain:
   platform: ethereum
   network: mainnet
-  threshold: 12
+  threshold: 12 # optional.
+                # Ethereum: (default: 12, min: 6)
+                # Klaytn: (default: 0, min: 0)
 
 filters:
   contracts:
     - address: '0x'
-      path: ./contracts/example.sol
       name: example
-      compilerVersion: 0.5.8
+      files: # The events of the contracts listed below can be combined together at this address.
+        - path: ./contracts/example.sol
+          contractName: example
+          compilerVersion: 0.5.8
 
 provider:
   type: webhook
@@ -369,19 +377,25 @@ The filters part is about information for the smart contracts you want to subscr
 
 ###### address
 
-Address of smart contract
-
-###### path
-
-Directory path of solidity file
+An address of the deployed smart contract
 
 ###### name
 
-Name of smart contract
+A name of the contract filter
+
+##### files
+
+###### path
+
+A file path of the smart contract source code
+
+###### contractName
+
+A name of the contract to subscribe in the source code
 
 ###### compilerVersion
 
-The version of the compiler used when the original file of the deployed smart contract was compiled.
+A solidity compiler version. Must be identical to the compiler version at the time of deployment.
 
 ------
 
@@ -409,4 +423,4 @@ HTTP method like a `GET`, `POST`, `PUT`, `DELETE`
 
 If you want to set authorization (like a `JWT`), you can set authorization
 
-> We also support [tutorial](https://docs.henesis.io/undefined-3/untitled/henesis.yaml).
+> We also support [tutorial](https://docs.henesis.io/subscribing-events/deploy-integration#henesis-yaml).

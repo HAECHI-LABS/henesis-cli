@@ -44,12 +44,12 @@ export class Filter {
 export class Blockchain {
   public platform: PlatformType;
   public network: NetworkType;
-  public threshold: number;
+  public threshold?: number;
 
   public constructor(
     platform: PlatformType,
     network: NetworkType,
-    threshold: number,
+    threshold?: number,
   ) {
     this.platform = platform;
     this.network = network;

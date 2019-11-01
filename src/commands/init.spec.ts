@@ -1,5 +1,5 @@
 import { expect, test } from '@oclif/test';
-import * as rimraf from 'rimraf';
+import rimraf from 'rimraf';
 import { join } from 'path';
 
 describe('init', (): void => {

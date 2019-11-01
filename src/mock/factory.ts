@@ -6,7 +6,8 @@ import {
   LoginResponse,
   Filter,
   Provider,
-  Blockchain, DescribeResponse,
+  Blockchain,
+  DescribeResponse,
 } from '../types';
 import * as faker from 'faker';
 import { Status } from '../types';
@@ -132,9 +133,14 @@ export function newMockIntegrationSpec(): IntegrationSpec {
       contracts: [
         {
           address: '0xef3fbc3e228dbdc523ce5e58530874005553eb2e',
-          path: `${__dirname}/../../templates/contracts/example.sol`,
           name: 'example',
-          compilerVersion: '0.5.8',
+          files: [
+            {
+              path: `${__dirname}/../../templates/contracts/example.sol`,
+              contractName: 'example',
+              compilerVersion: '0.5.8',
+            },
+          ],
         },
       ],
     },

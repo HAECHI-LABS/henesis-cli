@@ -125,7 +125,6 @@ async function toCreateIntegrationRequest(
       spec.provider.url,
       spec.provider.method,
       spec.provider.headers,
-      spec.provider.timeout,
     ),
   );
 }
@@ -147,7 +146,6 @@ async function toUpdateIntegrationRequest(
       spec.provider.url,
       spec.provider.method,
       spec.provider.headers,
-      spec.provider.timeout,
     ),
   );
 }

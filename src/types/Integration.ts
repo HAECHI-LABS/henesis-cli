@@ -68,17 +68,20 @@ export class Contract {
 
 export class UpdateIntegrationRequest {
   public version: string;
+  public apiVersion: string;
   public blockchain: Blockchain;
   public filter: Filter;
   public provider: Provider;
 
   public constructor(
     version: string,
+    apiVersion: string = 'v1',
     blockchain: Blockchain,
     filter: Filter,
     provider: Provider,
   ) {
     this.version = version;
+    this.apiVersion = apiVersion;
     this.blockchain = blockchain;
     this.filter = filter;
     this.provider = provider;
@@ -88,6 +91,7 @@ export class UpdateIntegrationRequest {
 export class CreateIntegrationRequest {
   public name: string;
   public version: string;
+  public apiVersion: string;
   public blockchain: Blockchain;
   public filter: Filter;
   public provider: Provider;
@@ -95,12 +99,14 @@ export class CreateIntegrationRequest {
   public constructor(
     name: string,
     version: string,
+    apiVersion: string = 'v1',
     blockchain: Blockchain,
     filter: Filter,
     provider: Provider,
   ) {
     this.name = name;
     this.version = version;
+    this.apiVersion = apiVersion;
     this.blockchain = blockchain;
     this.filter = filter;
     this.provider = provider;
@@ -112,6 +118,7 @@ export class Integration {
   public userId: number;
   public name: string;
   public version: string;
+  public apiVersion: string;
   public blockchain: Blockchain;
   public filter: Filter;
   public provider: Provider;
@@ -122,6 +129,7 @@ export class Integration {
     userId: number,
     name: string,
     version: string,
+    apiVersion: string,
     blockchain: Blockchain,
     filter: Filter,
     provider: Provider,
@@ -131,6 +139,7 @@ export class Integration {
     this.userId = userId;
     this.name = name;
     this.version = version;
+    this.apiVersion = apiVersion;
     this.blockchain = blockchain;
     this.filter = filter;
     this.provider = provider;

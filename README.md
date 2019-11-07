@@ -236,8 +236,9 @@ $ henesis logout
 ### webSocket
 
 ```yaml
-version: v1
 name: sample
+version: v1    # (TBD) The version of this yaml file.
+apiVersion: v1 # (TBD) The version of Henesis api. The type of message you receive can be changed depending on this version.
 
 blockchain:
   platform: ethereum
@@ -264,8 +265,9 @@ provider:
 ### webhook
 
 ```yaml
-version: v1
 name: sample
+version: v1    # (TBD) The version of this yaml file.
+apiVersion: v1 # (TBD) The version of Henesis api. The type of message you receive can be changed depending on this version.
 
 blockchain:
   platform: ethereum
@@ -300,6 +302,10 @@ The following are detailed explanations for parameters used to `henesis.yaml`.
 ### version & name
 
 The `version` and `name` are used as delimiters to identify the project. The `name` must consist only of lowercase letters, numbers, '-' and '.', the maximum length is 253 characters.
+
+### apiVersion
+
+The `apiVersion` is the version of Henesis api. The type of message you receive can be changed depending on this version.
 
 ------
 

@@ -17,4 +17,3 @@ export {
   ChangePassword,
   DescribeResponse,
 } from './user';
-export { NodeStatus } from './node';

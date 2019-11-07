@@ -26,7 +26,6 @@ COMMANDS
   integration  manage integrations
   login        perform a login
   logout       perform a logout
-  node         get node status
 ```
 
 
@@ -228,33 +227,6 @@ password: ***********
 ```
 $ henesis logout
 🤗 Logout Success 👍
-```
-
-------
-
-### node
-
-```
-get node status
-
-USAGE
-  $ henesis node:COMMAND
-
-COMMANDS
-  node:status  get node status
-```
-
-#### node:status
-
-##### Command Line
-
-```
-Platform     Network   Endpoint                                   Status
-ethereum     mainnet   http://network.henesis.io/ethereum/mainnet Synced
-ethereum     ropsten   http://network.henesis.io/ethereum/ropsten Synced
-ethereum     rinkeby   http://network.henesis.io/ethereum/rinkeby Synced
-klaytn       mainnet   http://network.henesis.io/klaytn/mainnet   Synced
-klaytn       baobab    http://network.henesis.io/klaytn/baobab    Synced
 ```
 
 

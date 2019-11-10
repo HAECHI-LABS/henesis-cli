@@ -19,7 +19,6 @@ filters:
 
 provider:
   type: webSocket
-  timeout: 10000 # optional. (default: 10000, unit: ms)
 # if you want to use webhook, you need to place it
 #  type: webhook
 #  url: https://localhost:8080

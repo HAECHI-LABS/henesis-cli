@@ -19,7 +19,6 @@ export interface ProviderSpec {
   url: string;
   method: string;
   headers: { [key: string]: string };
-  timeout: number;
 }
 
 export interface ContractSpec {

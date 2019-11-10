@@ -16,20 +16,17 @@ export class Provider {
   public url?: string;
   public method?: string;
   public headers?: { [key: string]: string };
-  public timeout?: number;
 
   public constructor(
     type: string,
     url?: string,
     method?: string,
     headers?: { [p: string]: string },
-    timeout?: number,
   ) {
     this.type = type;
     this.url = url;
     this.method = method;
     this.headers = headers;
-    this.timeout = timeout;
   }
 }
 

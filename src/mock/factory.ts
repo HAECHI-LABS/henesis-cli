@@ -36,6 +36,7 @@ export function newMockIntegration(): Integration {
     faker.random.number(2),
     'asdf',
     'v1',
+    'v1',
     new Blockchain(PlatformType.ETHEREUM, NetworkType.MAINNET, 3),
     new Filter([
       {
@@ -120,6 +121,7 @@ export function newMockIntegration(): Integration {
 export function newMockIntegrationSpec(): IntegrationSpec {
   return {
     version: 'v1',
+    apiVersion: 'v1',
     name: 'integration',
     blockchain: {
       platform: PlatformType.KLAYTN,

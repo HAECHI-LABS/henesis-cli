@@ -114,6 +114,7 @@ describe('IntegrationRpc', () => {
         new CreateIntegrationRequest(
           integration.name,
           integration.version,
+          integration.apiVersion,
           new Blockchain(
             integration.blockchain.platform,
             integration.blockchain.network,

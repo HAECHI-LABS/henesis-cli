@@ -27,7 +27,7 @@ export default class Describe extends Command {
       this.log(`Email: ${userResponse.email}`);
       this.log(`Name: ${userResponse.name}`);
       this.log(`Organization: ${userResponse.organization}`);
-      this.log(`clientId: ${userResponse.clientId}`);
+      this.log(`ClientId: ${userResponse.clientId}`);
     } catch (err) {
       this.error(err.message);
     }

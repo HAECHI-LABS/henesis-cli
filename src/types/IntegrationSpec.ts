@@ -1,8 +1,9 @@
 import { PlatformType, NetworkType } from './Integration';
 
 export interface IntegrationSpec {
-  version: string;
   name: string;
+  version: string;
+  apiVersion: string;
   blockchain: {
     platform: PlatformType;
     network: NetworkType;

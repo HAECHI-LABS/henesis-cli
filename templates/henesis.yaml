@@ -1,5 +1,6 @@
-version: v1
 name: sample
+version: v1    # (TBD) The version of this yaml file.
+apiVersion: v1 # (TBD) The version of Henesis api. The type of message you receive can be changed depending on this version.
 
 blockchain:
   platform: ethereum

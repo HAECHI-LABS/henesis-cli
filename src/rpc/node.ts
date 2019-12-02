@@ -40,7 +40,7 @@ export class NodeRpc {
       )
       .get()
       .error(404, err => {
-        if (err.message === 'stats does not exist') {
+        if (err.json.error.message === 'stats does not exist') {
           return {
             data: [],
           };
@@ -72,7 +72,7 @@ export class NodeRpc {
       )
       .get()
       .error(404, err => {
-        if (err.message === 'stats does not exist') {
+        if (err.json.error.message === 'stats does not exist') {
           return {
             data: [],
           };

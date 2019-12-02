@@ -1,6 +1,6 @@
 {
 	"name": "@haechi-labs/henesis-cli",
-	"version": "1.0.0-beta.34",
+	"version": "1.0.0-beta.35",
 	"author": "Haechi Labs Team",
 	"bin": {
 		"henesis": "./bin/run"
@@ -102,6 +102,9 @@
 			},
 			"integration": {
 				"description": "manage integrations"
+			},
+			"node": {
+				"description": "manage trusted nodes"
 			}
 		}
 	},

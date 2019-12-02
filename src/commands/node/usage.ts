@@ -31,8 +31,10 @@ export default class Usage extends Command {
 
   public async run(): Promise<void> {
     try {
-      const nodeDailyStats = await NodeRpc.dailyUsage();
-      const nodeHourlyStats = await NodeRpc.hourlyUsage();
+      const [nodeDailyStats, nodeHourlyStats] = await Promise.all([
+        NodeRpc.dailyUsage(),
+        NodeRpc.hourlyUsage(),
+      ]);
 
       if (nodeDailyStats.length !== 0 || nodeHourlyStats.length !== 0) {
         const filteredDailyStats = this.filterDailyStats(
@@ -57,6 +59,7 @@ export default class Usage extends Command {
         this.log(
           'This command shows the trusted node usage this month(The stat is updated every hour).',
         );
+        this.log('The daily statistic is added at UTC+0.');
         cli.table(ethStats, columns, {
           printLine: this.log,
         });

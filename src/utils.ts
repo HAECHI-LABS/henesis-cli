@@ -1,4 +1,5 @@
 import { cli } from 'cli-ux';
+import configstore from './common/configstore';
 
 export const emailPrompt = async (): Promise<string> => {
   return await cli.prompt('email');
@@ -25,3 +26,57 @@ export const endWait = (): void => {
 export const concatAndDeDuplicate = (...arrs: any[]) => [
   ...new Set([].concat(...arrs)),
 ];
+
+export const formatBytes = (bytes: number, decimals = 2): string => {
+  if (bytes === 0) return '0 Bytes';
+
+  const k = 1024;
+  const dm = decimals < 0 ? 0 : decimals;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+};
+
+export const formatNumbers = (num: number): string => {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
+export const getSpecificDayOfMonth = (day: number): Date => {
+  const now = new Date();
+  return new Date(
+    Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), day, 0, 0, 0, 0),
+  );
+};
+
+export const startOfDay = (hour: number): Date => {
+  const now = new Date();
+  return new Date(
+    Date.UTC(
+      now.getUTCFullYear(),
+      now.getUTCMonth(),
+      +now.toISOString().substring(8, 10),
+      hour,
+      0,
+      0,
+      0,
+    ),
+  );
+};
+
+export const getUserProperty = (property: string): string => {
+  const user = configstore.get('user');
+  if (!user) {
+    throw new Error(
+      'In order to use the Henesis CLI, you need to login first.\n' +
+        'Please use the henesis login command to get started.',
+    );
+    //TODO: Enhancement: redirect to login prompt
+  }
+
+  if (!user[property]) {
+    throw new Error('There is no such property.');
+  }
+  return user[property];
+};

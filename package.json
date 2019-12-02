@@ -102,6 +102,9 @@
 			},
 			"integration": {
 				"description": "manage integrations"
+			},
+			"node": {
+				"description": "manage trusted nodes"
 			}
 		}
 	},

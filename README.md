@@ -26,6 +26,7 @@ COMMANDS
   integration  manage integrations
   login        perform a login
   logout       perform a logout
+  node         manage trusted nodes
 ```
 
 
@@ -229,7 +230,48 @@ $ henesis logout
 🤗 Logout Success 👍
 ```
 
+------
+### node
 
+```	
+manage trusted nodes
+
+USAGE
+  $ henesis node:COMMAND
+
+COMMANDS
+  node:status  show truested node information
+  node:usage   show truested node statistics
+```
+
+#### node:status
+
+##### Command Line
+
+```
+$ henesis node:status
+Platform     Network   Endpoint
+ethereum     mainnet   https://tn.henesis.io/ethereum/mainnet
+ethereum     ropsten   https://tn.henesis.io/ethereum/ropsten
+ethereum     rinkeby   https://tn.henesis.io/ethereum/rinkeby
+```
+
+#### node:usage	
+
+##### Command Line
+
+```
+$ henesis node:usage
+ETHEREUM NODE STATISTICS
+Total RPC Call of this Month: 171,552,390
+This stat is updated every hour.
+Date         Usage        Bandwidth
+2019-11-30   17,306,295   45.94 GB
+2019-11-29   49,847,848   124.85 GB
+2019-11-28   52,960,359   107.34 GB
+2019-11-27   46,942,129   105.7 GB
+2019-11-26   4,495,759    10.79 GB
+```
 
 ## About henesis.yaml
 

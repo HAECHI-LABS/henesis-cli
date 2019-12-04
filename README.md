@@ -262,15 +262,16 @@ ethereum     rinkeby   https://tn.henesis.io/ethereum/rinkeby
 
 ```
 $ henesis node:usage
-ETHEREUM NODE STATISTICS
-Total RPC Call of this Month: 171,552,390
-This stat is updated every hour.
+Henesis Trusted Node (Ethereum) Statistics
+
+Total rpc call of this month: 226,233,096
+This command shows the trusted node usage this month(The stat is updated every hour).
+The daily statistic is added at UTC+0.
 Date         Usage        Bandwidth
-2019-11-30   17,306,295   45.94 GB
-2019-11-29   49,847,848   124.85 GB
-2019-11-28   52,960,359   107.34 GB
-2019-11-27   46,942,129   105.7 GB
-2019-11-26   4,495,759    10.79 GB
+2019-12-04   27,105,464   75.96 GB
+2019-12-03   107,220,983  300.35 GB
+2019-12-02   51,677,543   135.39 GB
+2019-12-01   40,229,106   107.58 GB
 ```
 
 ## About henesis.yaml

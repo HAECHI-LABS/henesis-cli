@@ -111,21 +111,23 @@ export default class Usage extends Command {
   ): NodeUsage[] {
     let nodeUsages: NodeUsage[] = [];
 
-    nodeUsages.push(
-      new NodeUsage(
-        filteredHourlyStats[0].createdAt.split('T')[0],
-        formatNumbers(
-          filteredHourlyStats.reduce((a, b) => {
-            return a + b.count;
-          }, 0),
+    if (filteredHourlyStats.length > 0) {
+      nodeUsages.push(
+        new NodeUsage(
+          filteredHourlyStats[0].createdAt.split('T')[0],
+          formatNumbers(
+            filteredHourlyStats.reduce((a, b) => {
+              return a + b.count;
+            }, 0),
+          ),
+          formatBytes(
+            filteredHourlyStats.reduce((a, b) => {
+              return a + b.requestBytes + b.responseBytes;
+            }, 0),
+          ),
         ),
-        formatBytes(
-          filteredHourlyStats.reduce((a, b) => {
-            return a + b.requestBytes + b.responseBytes;
-          }, 0),
-        ),
-      ),
-    );
+      );
+    }
 
     filteredDailyStats.forEach(nodeDailyStat => {
       // json rpc db record is created at tomorrow. 1 day time difference exists now.

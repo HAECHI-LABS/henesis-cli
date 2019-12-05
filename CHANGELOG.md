@@ -2,6 +2,15 @@
 ## [Unreleased]
 
 
+<a name="v1.0.0-beta.37"></a>
+## [v1.0.0-beta.37] - 2019-12-05
+### Chore
+- change console output to updated version
+
+### Fix
+- handling the case when there is no hourly stats
+
+
 <a name="v1.0.0-beta.36"></a>
 ## [v1.0.0-beta.36] - 2019-12-03
 ### Fix
@@ -173,7 +182,8 @@
 - apply lint, lint script and husky ([#14](https://github.com/HAECHI-LABS/henesis-cli/issues/14))
 
 
-[Unreleased]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.36...HEAD
+[Unreleased]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.37...HEAD
+[v1.0.0-beta.37]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.36...v1.0.0-beta.37
 [v1.0.0-beta.36]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.35...v1.0.0-beta.36
 [v1.0.0-beta.35]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.34...v1.0.0-beta.35
 [v1.0.0-beta.34]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.33...v1.0.0-beta.34

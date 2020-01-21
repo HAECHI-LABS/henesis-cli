@@ -72,6 +72,7 @@ export class UpdateIntegrationRequest {
   public blockchain: Blockchain;
   public filter: Filter;
   public provider: Provider;
+  public metadata: Map<string, Object>;
 
   public constructor(
     version: string,
@@ -79,12 +80,14 @@ export class UpdateIntegrationRequest {
     blockchain: Blockchain,
     filter: Filter,
     provider: Provider,
+    metadata: Map<string, Object>,
   ) {
     this.version = version;
     this.apiVersion = apiVersion;
     this.blockchain = blockchain;
     this.filter = filter;
     this.provider = provider;
+    this.metadata = metadata;
   }
 }
 
@@ -95,6 +98,7 @@ export class CreateIntegrationRequest {
   public blockchain: Blockchain;
   public filter: Filter;
   public provider: Provider;
+  public metadata: Map<string, Object>;
 
   public constructor(
     name: string,
@@ -103,6 +107,7 @@ export class CreateIntegrationRequest {
     blockchain: Blockchain,
     filter: Filter,
     provider: Provider,
+    metadata: Map<string, Object>,
   ) {
     this.name = name;
     this.version = version;
@@ -110,6 +115,7 @@ export class CreateIntegrationRequest {
     this.blockchain = blockchain;
     this.filter = filter;
     this.provider = provider;
+    this.metadata = metadata;
   }
 }
 
@@ -123,6 +129,7 @@ export class Integration {
   public filter: Filter;
   public provider: Provider;
   public status: Status;
+  public metadata: Map<string, Object>;
 
   public constructor(
     integrationId: string,
@@ -134,6 +141,7 @@ export class Integration {
     filter: Filter,
     provider: Provider,
     status: Status,
+    metadata: Map<string, Object>,
   ) {
     this.integrationId = integrationId;
     this.userId = userId;
@@ -144,6 +152,7 @@ export class Integration {
     this.filter = filter;
     this.provider = provider;
     this.status = status;
+    this.metadata = metadata;
   }
 }
 

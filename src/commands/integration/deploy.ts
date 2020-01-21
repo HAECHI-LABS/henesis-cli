@@ -123,6 +123,9 @@ async function toCreateIntegrationRequest(
   spec: IntegrationSpec,
 ): Promise<CreateIntegrationRequest> {
   const contracts: Contract[] = await toContracts(spec.filters.contracts);
+  const metadata = new Map<string, Object>([
+    ['spec', spec]
+  ])
   if ('timeout' in spec.provider) {
     throw new Error(
       `The timeout value is deprecated. Please refer to https://docs.henesis.io/`,
@@ -144,6 +147,7 @@ async function toCreateIntegrationRequest(
       spec.provider.method,
       spec.provider.headers,
     ),
+    metadata,
   );
 }
 
@@ -151,6 +155,9 @@ async function toUpdateIntegrationRequest(
   spec: IntegrationSpec,
 ): Promise<UpdateIntegrationRequest> {
   const contracts: Contract[] = await toContracts(spec.filters.contracts);
+  const metadata = new Map<string, Object>([
+    ['spec', spec]
+  ])
   if ('timeout' in spec.provider) {
     throw new Error(
       `The timeout value is deprecated. Please refer to https://docs.henesis.io/`,
@@ -171,6 +178,7 @@ async function toUpdateIntegrationRequest(
       spec.provider.method,
       spec.provider.headers,
     ),
+    metadata,
   );
 }
 

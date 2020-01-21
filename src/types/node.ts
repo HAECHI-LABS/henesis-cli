@@ -15,6 +15,79 @@ export class NodeStatus {
     this.state = state;
   }
 }
+export class NodeDailyStat {
+  public id: number;
+  public clientId: string;
+  public count: number;
+  public requestBytes: number;
+  public responseBytes: number;
+  public createdAt: string;
+  public jobId: number;
+  public platform: string;
+
+  public constructor(
+    id: number,
+    clientId: string,
+    count: number,
+    requestBytes: number,
+    responseBytes: number,
+    createdAt: string,
+    jobId: number,
+    platform: string,
+  ) {
+    this.id = id;
+    this.clientId = clientId;
+    this.count = count;
+    this.requestBytes = requestBytes;
+    this.responseBytes = responseBytes;
+    this.createdAt = createdAt;
+    this.jobId = jobId;
+    this.platform = platform;
+  }
+}
+export class NodeHourlyStat {
+  public id: number;
+  public clientId: string;
+  public count: number;
+  public platform: string;
+  public requestBytes: number;
+  public responseBytes: number;
+  public createdAt: string;
+  public hour: number;
+  public jobId: number;
+
+  public constructor(
+    id: number,
+    clientId: string,
+    count: number,
+    platform: string,
+    requestBytes: number,
+    responseBytes: number,
+    createdAt: string,
+    hour: number,
+    jobId: number,
+  ) {
+    this.id = id;
+    this.clientId = clientId;
+    this.count = count;
+    this.platform = platform;
+    this.requestBytes = requestBytes;
+    this.responseBytes = responseBytes;
+    this.createdAt = createdAt;
+    this.hour = hour;
+    this.jobId = jobId;
+  }
+}
+export class NodeUsage {
+  public date: string;
+  public usage: string;
+  public bandwidth: string;
+  public constructor(date: string, usage: string, bandwidth: string) {
+    this.date = date;
+    this.usage = usage;
+    this.bandwidth = bandwidth;
+  }
+}
 export class BlockchainNodes {
   public ethereum: string[];
   public klaytn: string[];

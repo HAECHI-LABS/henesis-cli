@@ -11,6 +11,7 @@ import {
 } from '../types';
 import * as faker from 'faker';
 import { Status } from '../types';
+import { NodeDailyStat } from '../types/node';
 
 export function newMockLogin(): LoginResponse {
   return new LoginResponse(
@@ -35,6 +36,7 @@ export function newMockIntegration(): Integration {
     faker.random.alphaNumeric(15),
     faker.random.number(2),
     'asdf',
+    'v1',
     'v1',
     new Blockchain(PlatformType.ETHEREUM, NetworkType.MAINNET, 3),
     new Filter([
@@ -123,6 +125,7 @@ export function newMockIntegration(): Integration {
 export function newMockIntegrationSpec(): IntegrationSpec {
   return {
     version: 'v1',
+    apiVersion: 'v1',
     name: 'integration',
     blockchain: {
       platform: PlatformType.KLAYTN,
@@ -151,7 +154,52 @@ export function newMockIntegrationSpec(): IntegrationSpec {
       headers: {
         Authorization: 'Bearer aisdjiajdais',
       },
-      timeout: 10000,
     },
   };
+}
+
+// DailyStats for haechi@haechi.io
+export function newMockJsonRpcDailyStats(): NodeDailyStat[] {
+  return [
+    {
+      id: 12,
+      clientId: 'dummyClientId',
+      count: 43,
+      platform: 'ethereum',
+      requestBytes: 3090,
+      responseBytes: 1639286,
+      createdAt: '2019-11-30T00:00:01.463',
+      jobId: 212,
+    },
+    {
+      id: 8,
+      clientId: 'dummyClientId',
+      count: 303,
+      platform: 'ethereum',
+      requestBytes: 20937,
+      responseBytes: 2721064,
+      createdAt: '2019-11-29T00:00:02.188',
+      jobId: 187,
+    },
+    {
+      id: 5,
+      clientId: 'dummyClientId',
+      count: 3028,
+      platform: 'ethereum',
+      requestBytes: 485178,
+      responseBytes: 4583237,
+      createdAt: '2019-11-28T00:00:01.509',
+      jobId: 161,
+    },
+    {
+      id: 2,
+      clientId: 'dummyClientId',
+      count: 253,
+      platform: 'ethereum',
+      requestBytes: 30453,
+      responseBytes: 4178469,
+      createdAt: '2019-11-27T00:00:02.05',
+      jobId: 136,
+    },
+  ];
 }

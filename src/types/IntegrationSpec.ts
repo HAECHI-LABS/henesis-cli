@@ -1,8 +1,9 @@
 import { PlatformType, NetworkType } from './Integration';
 
 export interface IntegrationSpec {
-  version: string;
   name: string;
+  version: string;
+  apiVersion: string;
   blockchain: {
     platform: PlatformType;
     network: NetworkType;
@@ -19,7 +20,6 @@ export interface ProviderSpec {
   url: string;
   method: string;
   headers: { [key: string]: string };
-  timeout: number;
 }
 
 export interface ContractSpec {

@@ -27,14 +27,20 @@ async function detectErrors(
   compilerVersion: string,
   contractName: string,
 ): Promise<string> {
-  if (error.message.includes('requires different compiler version')) {
+  if (
+    error.message &&
+    error.message.includes('requires different compiler version')
+  ) {
     const rawError = error.message
       .split('less than the released version')[1]
       .trimEnd();
     return `Compile Error: The henesis is currently using solc '${compilerVersion}',
         but your '${contractName}.sol' contract uses different version.
         ${rawError}`;
-  } else if (error.message.includes('ENOENT: no such file or directory')) {
+  } else if (
+    error.message &&
+    error.message.includes('ENOENT: no such file or directory')
+  ) {
     const errorFile = error.message.split("'")[1];
     return `No such file or directory: '${errorFile}`;
   } else {
@@ -90,6 +96,12 @@ export async function toContract(
 ): Promise<Contract> {
   startWait('Deploying');
 
+  if (contractSpec.files === undefined) {
+    throw new Error(
+      `You need to update henesis.yaml schema. Please refer to https://docs.henesis.io/ or run 'henesis init' again for the new schema`,
+    );
+  }
+
   const abi: any[] = concatAndDeDuplicate(
     ...(await Promise.all(
       contractSpec.files.map(async c => await toContractFile(c)),
@@ -114,9 +126,15 @@ async function toCreateIntegrationRequest(
   const metadata = new Map<string, Object>([
     ['spec', spec]
   ])
+  if ('timeout' in spec.provider) {
+    throw new Error(
+      `The timeout value is deprecated. Please refer to https://docs.henesis.io/`,
+    );
+  }
   return new CreateIntegrationRequest(
     spec.name,
     spec.version,
+    spec.apiVersion,
     new Blockchain(
       spec.blockchain.platform,
       spec.blockchain.network,
@@ -128,7 +146,6 @@ async function toCreateIntegrationRequest(
       spec.provider.url,
       spec.provider.method,
       spec.provider.headers,
-      spec.provider.timeout,
     ),
     metadata,
   );
@@ -141,8 +158,14 @@ async function toUpdateIntegrationRequest(
   const metadata = new Map<string, Object>([
     ['spec', spec]
   ])
+  if ('timeout' in spec.provider) {
+    throw new Error(
+      `The timeout value is deprecated. Please refer to https://docs.henesis.io/`,
+    );
+  }
   return new UpdateIntegrationRequest(
     spec.version,
+    spec.apiVersion,
     new Blockchain(
       spec.blockchain.platform,
       spec.blockchain.network,
@@ -154,7 +177,6 @@ async function toUpdateIntegrationRequest(
       spec.provider.url,
       spec.provider.method,
       spec.provider.headers,
-      spec.provider.timeout,
     ),
     metadata,
   );

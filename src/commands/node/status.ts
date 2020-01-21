@@ -18,15 +18,10 @@ export const columns = {
     minWidth: 10,
     get: (row: any) => row.endpoint,
   },
-  status: {
-    header: 'Status',
-    minWidth: 15,
-    get: (row: any) => row.status,
-  },
 };
 
 export default class Status extends Command {
-  public static description = 'get node status';
+  public static description = 'show truested node information';
   public static examples = [`$ henesis node:status`];
   public static flags = {};
   public static args = [];

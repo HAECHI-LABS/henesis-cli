@@ -2,56 +2,87 @@
 ## [Unreleased]
 
 
+<a name="v1.0.0-beta.37"></a>
+## [v1.0.0-beta.37] - 2019-12-05
+### Chore
+- change console output to updated version
+
+### Fix
+- handling the case when there is no hourly stats
+
+
+<a name="v1.0.0-beta.36"></a>
+## [v1.0.0-beta.36] - 2019-12-03
+### Fix
+- empty stat list handling
+
+
+<a name="v1.0.0-beta.35"></a>
+## [v1.0.0-beta.35] - 2019-12-03
+### Chore
+- update v1.0.0-beta.34
+
+### Feat
+- add trusted node commands
+
+
+<a name="v1.0.0-beta.34"></a>
+## [v1.0.0-beta.34] - 2019-11-18
+### Chore
+- remove websocket ack timeout
+- separate TN commands from henesis cli
+- change description to updated spec
+
+### Feat
+- add apiVersion field in henesis.yaml
+
+
 <a name="v1.0.0-beta.33"></a>
 ## [v1.0.0-beta.33] - 2019-10-29
 ### Chore
+- update v1.0.0-beta.33
 - update v1.0.0-beta.32
 
 ### Feat
 - support delegatecall event listening ([#116](https://github.com/HAECHI-LABS/henesis-cli/issues/116))
 
-### Fix
-- account filter logic error
-
 
 <a name="v1.0.0-beta.32"></a>
-## [v1.0.0-beta.32] - 2019-10-22
+## [v1.0.0-beta.32] - 2019-10-18
 ### Chore
-- update v1.0.0-beta.32
 - add min-threshold, default-threshold per platform
-- update v1.0.0-beta.31
 
 
 <a name="v1.0.0-beta.31"></a>
 ## [v1.0.0-beta.31] - 2019-10-16
 ### Chore
+- update v1.0.0-beta.31
 - fix template for updated spec ([#118](https://github.com/HAECHI-LABS/henesis-cli/issues/118))
-- update v1.0.0-beta.30
-- fix typos
 
 ### Feat
 - collecting logs and errors to Google Analytics and Sentry ([#105](https://github.com/HAECHI-LABS/henesis-cli/issues/105))
-- add custom webSocket timeout
-
-### Fix
-- add timeout paramter to update command create function
 
 
 <a name="v1.0.0-beta.30"></a>
-## [v1.0.0-beta.30] - 2019-09-27
+## [v1.0.0-beta.30] - 2019-09-29
 ### Chore
+- update v1.0.0-beta.30
+- fix typos
 - apply autocomplete ([#66](https://github.com/HAECHI-LABS/henesis-cli/issues/66))
 - change to init command available in existing directory ([#103](https://github.com/HAECHI-LABS/henesis-cli/issues/103))
 
 ### Feat
+- add custom webSocket timeout
 - add account:describe command
+
+### Fix
+- add timeout paramter to update command create function
 
 
 <a name="v1.0.0-beta.29"></a>
 ## [v1.0.0-beta.29] - 2019-09-23
 ### Chore
 - update v1.0.0-beta.29
-- update v1.0.0-beta.28
 
 ### Feat
 - add node:status
@@ -66,9 +97,14 @@
 
 
 <a name="v1.0.0-beta.27"></a>
-## v1.0.0-beta.27 - 2019-09-09
+## [v1.0.0-beta.27] - 2019-09-09
 ### Chore
 - update v1.0.0-beta.25
+
+
+<a name="v1.0.0-beta.25"></a>
+## v1.0.0-beta.25 - 2019-09-07
+### Chore
 - update readme for yaml config
 - remove blockchain interval property in yaml file ([#85](https://github.com/HAECHI-LABS/henesis-cli/issues/85))
 - format help commands desc
@@ -146,10 +182,15 @@
 - apply lint, lint script and husky ([#14](https://github.com/HAECHI-LABS/henesis-cli/issues/14))
 
 
-[Unreleased]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.33...HEAD
+[Unreleased]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.37...HEAD
+[v1.0.0-beta.37]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.36...v1.0.0-beta.37
+[v1.0.0-beta.36]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.35...v1.0.0-beta.36
+[v1.0.0-beta.35]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.34...v1.0.0-beta.35
+[v1.0.0-beta.34]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.33...v1.0.0-beta.34
 [v1.0.0-beta.33]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.32...v1.0.0-beta.33
 [v1.0.0-beta.32]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.31...v1.0.0-beta.32
 [v1.0.0-beta.31]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.30...v1.0.0-beta.31
 [v1.0.0-beta.30]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.29...v1.0.0-beta.30
 [v1.0.0-beta.29]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.28...v1.0.0-beta.29
 [v1.0.0-beta.28]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.27...v1.0.0-beta.28
+[v1.0.0-beta.27]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.25...v1.0.0-beta.27

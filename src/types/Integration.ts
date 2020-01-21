@@ -16,20 +16,17 @@ export class Provider {
   public url?: string;
   public method?: string;
   public headers?: { [key: string]: string };
-  public timeout?: number;
 
   public constructor(
     type: string,
     url?: string,
     method?: string,
     headers?: { [p: string]: string },
-    timeout?: number,
   ) {
     this.type = type;
     this.url = url;
     this.method = method;
     this.headers = headers;
-    this.timeout = timeout;
   }
 }
 
@@ -71,6 +68,7 @@ export class Contract {
 
 export class UpdateIntegrationRequest {
   public version: string;
+  public apiVersion: string;
   public blockchain: Blockchain;
   public filter: Filter;
   public provider: Provider;
@@ -78,12 +76,14 @@ export class UpdateIntegrationRequest {
 
   public constructor(
     version: string,
+    apiVersion: string = 'v1',
     blockchain: Blockchain,
     filter: Filter,
     provider: Provider,
     metadata: Map<string, Object>,
   ) {
     this.version = version;
+    this.apiVersion = apiVersion;
     this.blockchain = blockchain;
     this.filter = filter;
     this.provider = provider;
@@ -94,6 +94,7 @@ export class UpdateIntegrationRequest {
 export class CreateIntegrationRequest {
   public name: string;
   public version: string;
+  public apiVersion: string;
   public blockchain: Blockchain;
   public filter: Filter;
   public provider: Provider;
@@ -102,6 +103,7 @@ export class CreateIntegrationRequest {
   public constructor(
     name: string,
     version: string,
+    apiVersion: string = 'v1',
     blockchain: Blockchain,
     filter: Filter,
     provider: Provider,
@@ -109,6 +111,7 @@ export class CreateIntegrationRequest {
   ) {
     this.name = name;
     this.version = version;
+    this.apiVersion = apiVersion;
     this.blockchain = blockchain;
     this.filter = filter;
     this.provider = provider;
@@ -121,6 +124,7 @@ export class Integration {
   public userId: number;
   public name: string;
   public version: string;
+  public apiVersion: string;
   public blockchain: Blockchain;
   public filter: Filter;
   public provider: Provider;
@@ -132,6 +136,7 @@ export class Integration {
     userId: number,
     name: string,
     version: string,
+    apiVersion: string,
     blockchain: Blockchain,
     filter: Filter,
     provider: Provider,
@@ -142,6 +147,7 @@ export class Integration {
     this.userId = userId;
     this.name = name;
     this.version = version;
+    this.apiVersion = apiVersion;
     this.blockchain = blockchain;
     this.filter = filter;
     this.provider = provider;

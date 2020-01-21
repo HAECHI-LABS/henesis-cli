@@ -14,7 +14,7 @@ $ npm install -g @haechi-labs/henesis-cli
 $ henesis help
 
 VERSION
-  @haechi-labs/henesis-cli/1.0.0-beta.33 darwin-x64 node-v10.16.0
+  @haechi-labs/henesis-cli/1.0.0-beta.37 darwin-x64 node-v10.16.0
 
 USAGE
   $ henesis [COMMAND]
@@ -26,7 +26,7 @@ COMMANDS
   integration  manage integrations
   login        perform a login
   logout       perform a logout
-  node         get node status
+  node         manage trusted nodes
 ```
 
 
@@ -231,17 +231,17 @@ $ henesis logout
 ```
 
 ------
-
 ### node
 
-```
-get node status
+```	
+manage trusted nodes
 
 USAGE
   $ henesis node:COMMAND
 
 COMMANDS
-  node:status  get node status
+  node:status  show truested node information
+  node:usage   show truested node statistics
 ```
 
 #### node:status
@@ -249,23 +249,39 @@ COMMANDS
 ##### Command Line
 
 ```
-Platform     Network   Endpoint                                   Status
-ethereum     mainnet   http://network.henesis.io/ethereum/mainnet Synced
-ethereum     ropsten   http://network.henesis.io/ethereum/ropsten Synced
-ethereum     rinkeby   http://network.henesis.io/ethereum/rinkeby Synced
-klaytn       mainnet   http://network.henesis.io/klaytn/mainnet   Synced
-klaytn       baobab    http://network.henesis.io/klaytn/baobab    Synced
+$ henesis node:status
+Platform     Network   Endpoint
+ethereum     mainnet   https://tn.henesis.io/ethereum/mainnet
+ethereum     ropsten   https://tn.henesis.io/ethereum/ropsten
+ethereum     rinkeby   https://tn.henesis.io/ethereum/rinkeby
 ```
 
+#### node:usage	
 
+##### Command Line
+
+```
+$ henesis node:usage
+Henesis Trusted Node (Ethereum) Statistics
+
+Total rpc call of this month: 226,233,096
+This command shows the trusted node usage this month(The stat is updated every hour).
+The daily statistic is added at UTC+0.
+Date         Usage        Bandwidth
+2019-12-04   27,105,464   75.96 GB
+2019-12-03   107,220,983  300.35 GB
+2019-12-02   51,677,543   135.39 GB
+2019-12-01   40,229,106   107.58 GB
+```
 
 ## About henesis.yaml
 
 ### webSocket
 
 ```yaml
-version: v1
 name: sample
+version: v1    # (TBD) The version of this yaml file.
+apiVersion: v1 # (TBD) The version of Henesis api. The type of message you receive can be changed depending on this version.
 
 blockchain:
   platform: ethereum
@@ -285,7 +301,6 @@ filters:
 
 provider:
   type: webSocket
-  timeout: 10000 # optional. (default: 10000, unit: ms)
 ```
 
 
@@ -293,8 +308,9 @@ provider:
 ### webhook
 
 ```yaml
-version: v1
 name: sample
+version: v1    # (TBD) The version of this yaml file.
+apiVersion: v1 # (TBD) The version of Henesis api. The type of message you receive can be changed depending on this version.
 
 blockchain:
   platform: ethereum
@@ -329,6 +345,10 @@ The following are detailed explanations for parameters used to `henesis.yaml`.
 ### version & name
 
 The `version` and `name` are used as delimiters to identify the project. The `name` must consist only of lowercase letters, numbers, '-' and '.', the maximum length is 253 characters.
+
+### apiVersion
+
+The `apiVersion` is the version of Henesis api. The type of message you receive can be changed depending on this version.
 
 ------
 

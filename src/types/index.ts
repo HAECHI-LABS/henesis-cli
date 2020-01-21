@@ -17,4 +17,4 @@ export {
   ChangePassword,
   DescribeResponse,
 } from './user';
-export { NodeStatus } from './node';
+export { NodeStatus, NodeUsage, BlockchainNodes } from './node';

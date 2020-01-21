@@ -1,5 +1,6 @@
-version: v1
 name: sample
+version: v1    # (TBD) The version of this yaml file.
+apiVersion: v1 # (TBD) The version of Henesis api. The type of message you receive can be changed depending on this version.
 
 blockchain:
   platform: ethereum
@@ -19,7 +20,6 @@ filters:
 
 provider:
   type: webSocket
-  timeout: 10000 # optional. (default: 10000, unit: ms)
 # if you want to use webhook, you need to place it
 #  type: webhook
 #  url: https://localhost:8080

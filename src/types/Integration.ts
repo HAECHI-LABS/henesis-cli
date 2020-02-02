@@ -113,6 +113,29 @@ export class CreateIntegrationRequest {
   }
 }
 
+export class SubscriptionStat {
+  public id: string;
+  public eventCount: number;
+
+  public constructor(id: string, eventCount: number) {
+    this.id = id;
+    this.eventCount = eventCount;
+  }
+}
+
+export class IntegrationStat {
+  public integrationId: string;
+  public subscriptions: SubscriptionStat[];
+
+  public constructor(
+    integrationId: string,
+    subscriptions: SubscriptionStat[],
+  ) {
+    this.integrationId = integrationId;
+    this.subscriptions = subscriptions;
+  }
+}
+
 export class Integration {
   public integrationId: string;
   public userId: number;
@@ -152,5 +175,15 @@ export class Status {
 
   public constructor(state: string) {
     this.state = state;
+  }
+}
+
+export class SubscriptionUsage {
+  public subscriptionId: string;
+  public events: string;
+
+  public constructor(subscriptionId: string, events: string) {
+    this.subscriptionId = subscriptionId;
+    this.events = events;
   }
 }

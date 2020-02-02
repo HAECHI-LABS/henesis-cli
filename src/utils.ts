@@ -1,5 +1,10 @@
 import { cli } from 'cli-ux';
 import configstore from './common/configstore';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
+const now = dayjs().utc();
 
 export const emailPrompt = async (): Promise<string> => {
   return await cli.prompt('email');
@@ -43,26 +48,35 @@ export const formatNumbers = (num: number): string => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
+export const getStartOfThisMonth = (): Date => {
+  return now.startOf('month').toDate();
+};
+
+export const getStartOfLastMonth = (): Date => {
+  return now
+    .subtract(1, 'month')
+    .startOf('month')
+    .toDate();
+};
+
+export const getEndOfLastMonth = (): Date => {
+  return dayjs(getStartOfThisMonth())
+    .subtract(1, 'millisecond')
+    .toDate();
+};
+
 export const getSpecificDayOfMonth = (day: number): Date => {
-  const now = new Date();
-  return new Date(
-    Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), day, 0, 0, 0, 0),
-  );
+  return now
+    .set('day', day)
+    .startOf('day')
+    .toDate();
 };
 
 export const startOfDay = (hour: number): Date => {
-  const now = new Date();
-  return new Date(
-    Date.UTC(
-      now.getUTCFullYear(),
-      now.getUTCMonth(),
-      +now.toISOString().substring(8, 10),
-      hour,
-      0,
-      0,
-      0,
-    ),
-  );
+  return now
+    .set('hour', hour)
+    .startOf('hour')
+    .toDate();
 };
 
 export const getUserProperty = (property: string): string => {

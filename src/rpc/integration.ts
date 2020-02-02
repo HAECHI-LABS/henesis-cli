@@ -2,13 +2,34 @@ import { Integration, UpdateIntegrationRequest } from '../types';
 import { plainToClass } from 'class-transformer';
 import { baseUrl, rpcVersion } from './config';
 import { getWretcher } from './wretch';
-import { CreateIntegrationRequest } from '../types/Integration';
+import {
+  CreateIntegrationRequest,
+  IntegrationStat,
+} from '../types/Integration';
 
 export class IntegrationRpc {
   private server: string;
 
   public constructor(server: string, version: string) {
     this.server = server + '/integrations/' + version;
+  }
+
+  public async getIntegrationUsage(
+    integrationId: string,
+    startDate: string,
+    endDate: string,
+  ): Promise<IntegrationStat> {
+    let json = await getWretcher()
+      .url(
+        `${this.server}/${integrationId}/stats?start=${startDate}&end=${endDate}`,
+      )
+      .get()
+      .json()
+      .catch((err: any) => {
+        throw err;
+      });
+
+    return plainToClass(IntegrationStat, json);
   }
 
   /**

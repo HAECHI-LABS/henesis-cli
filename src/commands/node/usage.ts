@@ -1,7 +1,7 @@
 import Command from '../../common/base';
 import { cli } from 'cli-ux';
 import NodeRpc from '../../rpc/node';
-import { NodeDailyStat, NodeHourlyStat, NodeUsage } from '../../types/node';
+import { NodeDailyStat, NodeHourlyStat, NodeUsage } from '../../types';
 import { formatBytes, formatNumbers } from '../../utils';
 
 export const columns = {

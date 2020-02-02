@@ -17,4 +17,11 @@ export {
   ChangePassword,
   DescribeResponse,
 } from './user';
-export { NodeStatus, NodeUsage, BlockchainNodes } from './node';
+export {
+  NodeDailyStat,
+  NodeHourlyStat,
+  NodeStatus,
+  NodeUsage,
+  BlockchainNodes,
+} from './node';
+export { NFTDailyStat, NFTUsage } from './nft';

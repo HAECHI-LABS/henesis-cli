@@ -1,9 +1,8 @@
 import Command from '../../common/base';
 import { cli } from 'cli-ux';
-import { formatBytes, formatNumbers } from '../../utils';
+import { formatNumbers } from '../../utils';
 import { NFTDailyStat, NFTUsage } from '../../types/nft';
-import NFTHttp from '../../rpc/nft';
-import { NodeDailyStat, NodeHourlyStat, NodeUsage } from '../../types';
+import NFTRpc from '../../rpc/nft/nft';
 
 export const columns = {
   date: {
@@ -26,7 +25,7 @@ export default class Usage extends Command {
 
   public async run(): Promise<void> {
     try {
-      const [nftDailyStats] = await Promise.all([NFTHttp.dailyUsage()]);
+      const [nftDailyStats] = await Promise.all([NFTRpc.dailyUsage()]);
 
       if (nftDailyStats.length !== 0) {
         const ethStats = this.aggregateStats(nftDailyStats);

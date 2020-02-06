@@ -1,9 +1,9 @@
 import { plainToClass } from 'class-transformer';
 import { getWretcher } from '../wretch';
-import { rpcVersion } from './config';
+import { rpcVersion } from './url';
 import { getUserProperty } from '../../utils';
 import { NFTDailyStat } from '../../types';
-import { nftBaseUrl } from './config';
+import { nftBaseUrl } from './url';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 
@@ -19,13 +19,6 @@ export class NFTRpc {
     this.rpcVersion = version;
   }
 
-  private test() {
-    // Date Setting
-    dayjs.extend(utc);
-    const now = dayjs().utc();
-    const startDate = now.startOf('month');
-  }
-
   public async dailyUsage(): Promise<NFTDailyStat[]> {
     const clientId = getUserProperty('clientId');
     // Date Setting
@@ -33,6 +26,7 @@ export class NFTRpc {
     let now = dayjs().utc();
     const startDate = now.startOf('month').add(1, 'day').format('YYYY-MM-DD');
     const nowDate = now.format('YYYY-MM-DD');
+
     const json = await getWretcher()
       .url(
         `${this.server}/jsonRpcDailyStats?clientId=${clientId}&start=${startDate}&end=${nowDate}&size=31&page=0&order_by=date&order_direction=DESC`,
@@ -61,5 +55,7 @@ export class NFTRpc {
 }
 
 const url = nftBaseUrl();
-const nftRpc = new NFTRpc(url, rpcVersion);
-export default nftRpc;
+export default new NFTRpc(
+  url,
+  rpcVersion
+);

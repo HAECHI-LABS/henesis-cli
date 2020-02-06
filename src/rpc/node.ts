@@ -2,30 +2,27 @@ import { NodeStatus, BlockchainNodes } from '../types';
 import { plainToClass } from 'class-transformer';
 import { getWretcher } from './wretch';
 import {
-  trustedNodeBaseUrl,
-  blockchainKinds,
   baseUrl,
   rpcVersion,
-} from './config';
+} from './url';
 import { NodeDailyStat, NodeHourlyStat } from '../types/node';
 import { getUserProperty, getSpecificDayOfMonth, startOfDay } from '../utils';
 
 export class NodeRpc {
   private server: string;
   private rpcVersion: string;
-  private trustedNodeBaseUrl: string;
-  private blockchainNodes: BlockchainNodes;
+  private readonly trustedNodeBaseUrl: string = 'http://tn.henesis.io';
+  private readonly blockchainNodes: BlockchainNodes = new BlockchainNodes(
+    ['mainnet', 'ropsten', 'rinkeby'], //ethereum
+    ['mainnet', 'baobab'], //klaytn
+  );
 
   public constructor(
     server: string,
     version: string,
-    trustedNodeBaseUrl: string,
-    blockchainNodes: BlockchainNodes,
   ) {
     this.server = server + '/stats/' + version;
     this.rpcVersion = version;
-    this.trustedNodeBaseUrl = trustedNodeBaseUrl;
-    this.blockchainNodes = blockchainNodes;
   }
 
   public async dailyUsage(): Promise<NodeDailyStat[]> {
@@ -117,10 +114,7 @@ export class NodeRpc {
 }
 
 const url = baseUrl();
-const nodeRpc = new NodeRpc(
+export default new NodeRpc(
   url,
-  rpcVersion,
-  trustedNodeBaseUrl,
-  blockchainKinds,
+  rpcVersion
 );
-export default nodeRpc;

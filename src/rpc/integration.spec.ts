@@ -1,7 +1,7 @@
 import { expect } from '@oclif/test';
 import { IntegrationRpc } from './integration';
 import wretch from 'wretch';
-import { baseUrl, rpcVersion } from './config';
+import { baseUrl, rpcVersion } from './url';
 import { newMockIntegration } from '../mock';
 import * as mockhttp from 'mockttp';
 import {

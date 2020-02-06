@@ -1,6 +1,6 @@
 import { expect } from '@oclif/test';
 import wretch from 'wretch';
-import { baseUrl, rpcVersion } from './config';
+import { baseUrl, rpcVersion } from './url';
 import * as mockhttp from 'mockttp';
 import { UserRpc } from './user';
 import { DescribeResponse, LoginResponse } from '../types';

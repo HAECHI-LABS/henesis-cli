@@ -16,8 +16,3 @@ export const baseUrl = (): string => {
 };
 
 export const rpcVersion = 'v1';
-export const trustedNodeBaseUrl = 'http://tn.henesis.io';
-export const blockchainKinds = new BlockchainNodes(
-  ['mainnet', 'ropsten', 'rinkeby'], //ethereum
-  ['mainnet', 'baobab'], //klaytn
-);

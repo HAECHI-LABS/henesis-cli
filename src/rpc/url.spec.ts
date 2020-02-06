@@ -1,5 +1,5 @@
 import { expect } from '@oclif/test';
-import { baseUrl } from './config';
+import { baseUrl } from './url';
 import configstore from '../common/configstore';
 
 describe('Config', (): void => {

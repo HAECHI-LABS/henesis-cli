@@ -1,7 +1,7 @@
 import configstore from '../../common/configstore';
 
 export const nftBaseUrl = (): string => {
-  let url = 'https://eth-mainnet.api.henesis.io';
+  let url = 'https://eth-rinkeby.api.henesis.io';
 
   if (process.env.HENESIS_TEST === 'true') {
     url = 'http://localhost:8080';

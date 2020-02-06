@@ -1,6 +1,6 @@
 import { Integration, UpdateIntegrationRequest } from '../types';
 import { plainToClass } from 'class-transformer';
-import { baseUrl, rpcVersion } from './config';
+import { baseUrl, rpcVersion } from './url';
 import { getWretcher } from './wretch';
 import {
   CreateIntegrationRequest,

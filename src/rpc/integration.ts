@@ -19,7 +19,6 @@ export class IntegrationRpc {
     startDate: string,
     endDate: string,
   ): Promise<IntegrationStat> {
-    const qwer = `${this.server}/stats?integrationId=${integrationId}&start=${startDate}&end=${endDate}`;
     let json = await getWretcher()
       .url(
         `${this.server}/${integrationId}/stats?start=${startDate}&end=${endDate}`,

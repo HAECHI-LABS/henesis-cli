@@ -14,7 +14,7 @@ $ npm install -g @haechi-labs/henesis-cli
 $ henesis help
 
 VERSION
-  @haechi-labs/henesis-cli/1.0.0-beta.37 darwin-x64 node-v10.16.0
+  @haechi-labs/henesis-cli/1.0.0-beta.38 darwin-x64 node-v10.16.0
 
 USAGE
   $ henesis [COMMAND]
@@ -154,6 +154,7 @@ COMMANDS
   integration:deploy    deploy a integration
   integration:describe  describe a integration
   integration:status    get integrations
+  integration:usage     show event streamer statistics
 ```
 
 There are tasks to be done before the deploy command.
@@ -207,6 +208,15 @@ henesis integration:describe <integrationId>
 henesis integration:status
 ```
 
+
+
+#### integration:describe
+
+##### Command Line
+
+```
+henesis integration:describe <integrationId>
+```
 ------
 
 ### login
@@ -273,6 +283,37 @@ Date         Usage        Bandwidth
 2019-12-02   51,677,543   135.39 GB
 2019-12-01   40,229,106   107.58 GB
 ```
+---
+
+### nft
+
+```
+manage nft api
+
+USAGE
+  $ henesis nft:COMMAND
+
+COMMANDS
+  nft:usage  show nft api statistics
+```
+
+#### nft:usage	
+
+##### Command Line
+
+```
+$ henesis nft:usage
+Henesis NFT API (Ethereum) Statistics
+
+Total api call of this month: 25,904
+This command shows the nft api usage this month.
+Date         Usage        
+2020-02-05   6,250        
+2020-02-04   11,500       
+2020-02-03   8,154     
+```
+
+---
 
 ## About henesis.yaml
 

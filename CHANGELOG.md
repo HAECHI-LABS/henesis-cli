@@ -2,6 +2,21 @@
 ## [Unreleased]
 
 
+<a name="v1.0.0-beta.38"></a>
+## [v1.0.0-beta.38] - 2020-02-07
+### Chore
+- change integration usage endpoint
+- modify rpc/config and name
+
+### Feat
+- add integration usage command
+- add dayjs library
+- add nft usage command
+
+### Fix
+- handling the case when there is no hourly stats
+
+
 <a name="v1.0.0-beta.37"></a>
 ## [v1.0.0-beta.37] - 2019-12-05
 ### Chore
@@ -182,7 +197,8 @@
 - apply lint, lint script and husky ([#14](https://github.com/HAECHI-LABS/henesis-cli/issues/14))
 
 
-[Unreleased]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.37...HEAD
+[Unreleased]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.38...HEAD
+[v1.0.0-beta.38]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.37...v1.0.0-beta.38
 [v1.0.0-beta.37]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.36...v1.0.0-beta.37
 [v1.0.0-beta.36]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.35...v1.0.0-beta.36
 [v1.0.0-beta.35]: https://github.com/HAECHI-LABS/henesis-cli/compare/v1.0.0-beta.34...v1.0.0-beta.35

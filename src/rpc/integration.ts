@@ -19,11 +19,15 @@ export class IntegrationRpc {
     startDate: string,
     endDate: string,
   ): Promise<IntegrationStat> {
+    const qwer = `${this.server}/stats?integrationId=${integrationId}&start=${startDate}&end=${endDate}`;
     let json = await getWretcher()
       .url(
-        `${this.server}/stats?integrationId=${integrationId}&start=${startDate}&end=${endDate}`,
+        `${this.server}/${integrationId}/stats?start=${startDate}&end=${endDate}`,
       )
       .get()
+      .error(404, err => {
+        throw new Error('integration does not exist');
+      })
       .json()
       .catch((err: any) => {
         throw err;

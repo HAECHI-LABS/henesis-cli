@@ -11,10 +11,7 @@ export class NFTRpc {
   private server: string;
   private rpcVersion: string;
 
-  public constructor(
-    server: string,
-    version: string,
-  ) {
+  public constructor(server: string, version: string) {
     this.server = server + '/nft/' + version + '/stats';
     this.rpcVersion = version;
   }
@@ -24,7 +21,10 @@ export class NFTRpc {
     // Date Setting
     dayjs.extend(utc);
     let now = dayjs().utc();
-    const startDate = now.startOf('month').add(1, 'day').format('YYYY-MM-DD');
+    const startDate = now
+      .startOf('month')
+      .add(1, 'day')
+      .format('YYYY-MM-DD');
     const nowDate = now.format('YYYY-MM-DD');
 
     const json = await getWretcher()
@@ -55,7 +55,4 @@ export class NFTRpc {
 }
 
 const url = nftBaseUrl();
-export default new NFTRpc(
-  url,
-  rpcVersion
-);
+export default new NFTRpc(url, rpcVersion);

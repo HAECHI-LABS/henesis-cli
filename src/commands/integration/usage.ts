@@ -9,7 +9,7 @@ import {
   formatNumbers,
   getEndOfLastMonth,
   getStartOfLastMonth,
-  getStartOfThisMonth, startOfDay,
+  getStartOfThisMonth,
 } from '../../utils';
 
 export const columns = {
@@ -73,6 +73,7 @@ export default class Usage extends Command {
 
       // render CUI
       this.log('Henesis Event Streamer (Ethereum) Statistics');
+      this.log('All times are in UTC+0.');
       const thisMonth =
         '[' +
         now.year().toString() +

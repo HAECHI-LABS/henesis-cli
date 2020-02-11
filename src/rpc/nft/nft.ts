@@ -32,6 +32,9 @@ export class NFTRpc {
         `${this.server}/jsonRpcDailyStats?clientId=${clientId}&start=${startDate}&end=${nowDate}&size=31&page=0&order_by=date&order_direction=DESC`,
       )
       .get()
+      .error(401, err => {
+        throw new Error('You are not registered at NFT API.');
+      })
       .error(404, err => {
         if (err.json.error.message === 'stats does not exist') {
           return {

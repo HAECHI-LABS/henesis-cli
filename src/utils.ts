@@ -67,12 +67,12 @@ export const getEndOfLastMonth = (): Date => {
 
 export const getSpecificDayOfMonth = (day: number): Date => {
   return now
-    .set('day', day)
-    .startOf('day')
+    .startOf('month')
+    .add(day - 1, 'day')
     .toDate();
 };
 
-export const startOfDay = (hour: number): Date => {
+export const getSpecificHourOfDay = (hour: number): Date => {
   return now
     .set('hour', hour)
     .startOf('hour')

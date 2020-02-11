@@ -1,7 +1,7 @@
 import Command from '../../common/base';
 import { cli } from 'cli-ux';
 import { formatNumbers } from '../../utils';
-import { NFTDailyStat, NFTUsage } from '../../types/nft';
+import { NFTDailyStat, NFTUsage } from '../../types';
 import NFTRpc from '../../rpc/nft/nft';
 
 export const columns = {
@@ -36,13 +36,10 @@ export default class Usage extends Command {
           'Total api call of this month: ' +
             formatNumbers(this.getTotalUsage(nftDailyStats)),
         );
-        this.log(
-          'This command shows the nft api usage this month.',
-        );
+        this.log('This command shows the nft api usage this month.');
         cli.table(ethStats, columns, {
           printLine: this.log,
         });
-
       } else {
         this.log('Your nft api statistics does not exist');
       }

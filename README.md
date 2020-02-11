@@ -26,6 +26,7 @@ COMMANDS
   integration  manage integrations
   login        perform a login
   logout       perform a logout
+  nft          manage nft api
   node         manage trusted nodes
 ```
 

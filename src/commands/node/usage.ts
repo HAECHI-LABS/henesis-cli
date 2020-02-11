@@ -31,6 +31,7 @@ export default class Usage extends Command {
 
   public async run(): Promise<void> {
     try {
+      // rpc call
       const [nodeDailyStats, nodeHourlyStats] = await Promise.all([
         NodeRpc.dailyUsage(),
         NodeRpc.hourlyUsage(),
@@ -46,7 +47,10 @@ export default class Usage extends Command {
           this.ETHEREUM,
         );
 
-        const ethStats = this.aggregateStats(nodeDailyStats, nodeHourlyStats);
+        const ethStats = this.aggregateStats(
+          filteredDailyStats,
+          filteredHourlyStats,
+        );
 
         this.log('Henesis Trusted Node (Ethereum) Statistics');
         this.log();

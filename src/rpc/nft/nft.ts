@@ -39,6 +39,11 @@ export class NFTRpc {
           };
         }
       })
+      .error(401, err => {
+        if (err.json.error.message === 'Unauthorized user') {
+          throw new Error('Unauthorized user (please log in again or check clientId)');
+        }
+      })
       .json()
       .catch((err: any) => {
         throw err;

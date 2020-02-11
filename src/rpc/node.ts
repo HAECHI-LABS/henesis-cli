@@ -6,7 +6,7 @@ import {
   rpcVersion,
 } from './url';
 import { NodeDailyStat, NodeHourlyStat } from '../types/node';
-import { getUserProperty, getSpecificDayOfMonth, startOfDay } from '../utils';
+import { getUserProperty, getSpecificDayOfMonth, getSpecificHourOfDay } from '../utils';
 
 export class NodeRpc {
   private server: string;
@@ -61,7 +61,7 @@ export class NodeRpc {
     const clientId = getUserProperty('clientId');
     const now = new Date().toISOString();
     // json rpc db record is created at 1 hour later. 1 hour time difference exists now.
-    const startDate = startOfDay(1).toISOString();
+    const startDate = getSpecificHourOfDay(1).toISOString();
 
     const json = await getWretcher()
       .url(

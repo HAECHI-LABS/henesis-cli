@@ -1,12 +1,13 @@
 import { NodeStatus, BlockchainNodes } from '../types';
 import { plainToClass } from 'class-transformer';
 import { getWretcher } from './wretch';
-import {
-  baseUrl,
-  rpcVersion,
-} from './url';
+import { baseUrl, rpcVersion } from './url';
 import { NodeDailyStat, NodeHourlyStat } from '../types/node';
-import { getUserProperty, getSpecificDayOfMonth, getSpecificHourOfDay } from '../utils';
+import {
+  getUserProperty,
+  getSpecificDayOfMonth,
+  getSpecificHourOfDay,
+} from '../utils';
 
 export class NodeRpc {
   private server: string;
@@ -17,10 +18,7 @@ export class NodeRpc {
     ['mainnet', 'baobab'], //klaytn
   );
 
-  public constructor(
-    server: string,
-    version: string,
-  ) {
+  public constructor(server: string, version: string) {
     this.server = server + '/stats/' + version;
     this.rpcVersion = version;
   }
@@ -114,7 +112,4 @@ export class NodeRpc {
 }
 
 const url = baseUrl();
-export default new NodeRpc(
-  url,
-  rpcVersion
-);
+export default new NodeRpc(url, rpcVersion);

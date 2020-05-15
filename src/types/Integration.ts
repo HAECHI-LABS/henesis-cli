@@ -127,10 +127,7 @@ export class IntegrationStat {
   public integrationId: string;
   public subscriptions: SubscriptionStat[];
 
-  public constructor(
-    integrationId: string,
-    subscriptions: SubscriptionStat[],
-  ) {
+  public constructor(integrationId: string, subscriptions: SubscriptionStat[]) {
     this.integrationId = integrationId;
     this.subscriptions = subscriptions;
   }

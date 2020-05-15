@@ -31,9 +31,7 @@ export default class Usage extends Command {
       const [nftDailyStats] = await Promise.all([NFTRpc.dailyUsage()]);
 
       if (nftDailyStats.length !== 0) {
-        const ethStats = this.aggregateStats(
-          this.addUnusedDays(nftDailyStats)
-        );
+        const ethStats = this.aggregateStats(this.addUnusedDays(nftDailyStats));
 
         this.log('Henesis NFT API (Ethereum) Statistics');
         this.log();
@@ -79,13 +77,17 @@ export default class Usage extends Command {
     let now = dayjs().utc();
     let nowDate = now.format('YYYY-MM-DD');
 
-    for(let index = 0 ; index < now.date() ; nowDate = now.add(-(index + 1), 'day').format('YYYY-MM-DD'), index++) {
-      if(nftDailyStats[index] == undefined) {
+    for (
+      let index = 0;
+      index < now.date();
+      nowDate = now.add(-(index + 1), 'day').format('YYYY-MM-DD'), index++
+    ) {
+      if (nftDailyStats[index] == undefined) {
         nftDailyStats.push(new NFTDailyStat(nowDate, 0));
         continue;
       }
 
-      if(nowDate != nftDailyStats[index].date) {
+      if (nowDate != nftDailyStats[index].date) {
         nftDailyStats.splice(index, 0, new NFTDailyStat(nowDate, 0));
       }
     }

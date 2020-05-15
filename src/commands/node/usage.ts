@@ -22,60 +22,61 @@ export const columns = {
   },
 };
 
-export default class Usage extends Command {
-  public static description = 'show truested node statistics';
-  public static examples = [`$ henesis node:usage`];
-  public static flags = {};
-  public static args = [];
-  private readonly ETHEREUM = 'ethereum';
+interface Logger {
+  log(message?: string, ...args: any[]): void;
+}
 
-  public async run(): Promise<void> {
-    try {
-      // rpc call
-      const [nodeDailyStats, nodeHourlyStats] = await Promise.all([
-        NodeRpc.dailyUsage(),
-        NodeRpc.hourlyUsage(),
-      ]);
+abstract class UsageViewer {
+  private logger: Logger;
 
-      if (nodeDailyStats.length !== 0 || nodeHourlyStats.length !== 0) {
-        const filteredDailyStats = this.filterDailyStats(
-          nodeDailyStats,
-          this.ETHEREUM,
-        );
-        const filteredHourlyStats = this.filterHourlyStats(
-          nodeHourlyStats,
-          this.ETHEREUM,
-        );
+  public constructor(logger: Logger) {
+    this.logger = logger;
+  }
 
-        const ethStats = this.aggregateStats(
-          filteredDailyStats,
-          filteredHourlyStats,
-        );
+  public display(
+    nodeDailyStats: NodeDailyStat[],
+    nodeHourlyStats: NodeHourlyStat[],
+  ): void {
+    if (nodeDailyStats.length !== 0 || nodeHourlyStats.length !== 0) {
+      const filteredDailyStats = this.filterDailyStats(
+        nodeDailyStats,
+        this.getPlatform(),
+      );
+      const filteredHourlyStats = this.filterHourlyStats(
+        nodeHourlyStats,
+        this.getPlatform(),
+      );
 
-        this.log('Henesis Trusted Node (Ethereum) Statistics');
-        this.log();
-        this.log(
-          'Total rpc call of this month: ' +
-            formatNumbers(
-              this.getTotalUsage(filteredDailyStats, filteredHourlyStats),
-            ),
-        );
-        this.log(
-          'This command shows the trusted node usage this month(The stat is updated every hour).',
-        );
-        this.log('The daily statistic is added at UTC+0.');
-        cli.table(ethStats, columns, {
-          printLine: this.log,
-        });
+      const aggregatedStats = this.aggregateStats(
+        filteredDailyStats,
+        filteredHourlyStats,
+      );
 
-        //TODO: show klaytn usgae
-      } else {
-        this.log('Your trusted node statistics does not exist');
-      }
-    } catch (err) {
-      this.error(err.message);
+      this.logger.log(
+        `Henesis Trusted Node (${this.getPlatform()}) Statistics`,
+      );
+      this.logger.log();
+      this.logger.log(
+        'Total rpc call of this month: ' +
+          formatNumbers(
+            this.getTotalUsage(filteredDailyStats, filteredHourlyStats),
+          ),
+      );
+      this.logger.log(
+        'This command shows the trusted node usage this month(The stat is updated every hour).',
+      );
+      this.logger.log('The daily statistic is added at UTC+0.');
+      cli.table(aggregatedStats, columns, {
+        printLine: this.logger.log,
+      });
+      this.logger.log();
+      this.logger.log();
+    } else {
+      this.logger.log('Your trusted node statistics does not exist');
     }
   }
+
+  abstract getPlatform(): string;
 
   private filterDailyStats(
     nodeDailyStats: NodeDailyStat[],
@@ -151,5 +152,50 @@ export default class Usage extends Command {
     });
 
     return nodeUsages;
+  }
+}
+
+class EthUsageViewer extends UsageViewer {
+  private readonly platform = 'ethereum';
+
+  public constructor(logger: Logger) {
+    super(logger);
+  }
+
+  public getPlatform() {
+    return this.platform;
+  }
+}
+
+class KlayUsageViewer extends UsageViewer {
+  private readonly platform = 'klaytn';
+
+  public constructor(logger: Logger) {
+    super(logger);
+  }
+
+  public getPlatform() {
+    return this.platform;
+  }
+}
+
+export default class Usage extends Command {
+  public static description = 'show truested node statistics';
+  public static examples = [`$ henesis node:usage`];
+  public static flags = {};
+  public static args = [];
+
+  public async run(): Promise<void> {
+    try {
+      // rpc call
+      const [nodeDailyStats, nodeHourlyStats] = await Promise.all([
+        NodeRpc.dailyUsage(),
+        NodeRpc.hourlyUsage(),
+      ]);
+      new EthUsageViewer(this).display(nodeDailyStats, nodeHourlyStats);
+      new KlayUsageViewer(this).display(nodeDailyStats, nodeHourlyStats);
+    } catch (err) {
+      this.error(err.message);
+    }
   }
 }

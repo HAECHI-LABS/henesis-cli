@@ -12,7 +12,7 @@ import {
 export class NodeRpc {
   private server: string;
   private rpcVersion: string;
-  private readonly trustedNodeBaseUrl: string = 'http://tn.henesis.io';
+  private readonly trustedNodeBaseUrl: string = 'https://tn.henesis.io';
   private readonly blockchainNodes: BlockchainNodes = new BlockchainNodes(
     ['mainnet', 'ropsten', 'rinkeby'], //ethereum
     ['mainnet', 'baobab'], //klaytn
@@ -28,7 +28,6 @@ export class NodeRpc {
     const now = new Date().toISOString();
     // json rpc db record is created at tomorrow. 1 day time difference exists now.
     const startDate = getSpecificDayOfMonth(2).toISOString();
-
     const json = await getWretcher()
       .url(
         `${this.server}/jsonRpcDailyStats?clientId=${clientId}&start=${startDate}&end=${now}&size=31&page=0`,
@@ -94,9 +93,9 @@ export class NodeRpc {
       nodeStatus.push(this.statusToNodeStatus('ethereum', network));
     }
 
-    // for (const network of this.blockchainNodes.klaytn) {
-    //   nodeStatus.push(await this.getState('klaytn', network));
-    // }
+    for (const network of this.blockchainNodes.klaytn) {
+      nodeStatus.push(this.statusToNodeStatus('klaytn', network));
+    }
 
     return nodeStatus;
   }

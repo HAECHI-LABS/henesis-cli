@@ -46,12 +46,10 @@ abstract class UsageViewer {
         nodeHourlyStats,
         this.getPlatform(),
       );
-
       const aggregatedStats = this.aggregateStats(
         filteredDailyStats,
         filteredHourlyStats,
       );
-
       this.logger.log(
         `Henesis Trusted Node (${this.getPlatform()}) Statistics`,
       );

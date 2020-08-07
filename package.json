@@ -15,7 +15,7 @@
 		"@types/configstore": "^4.0.0",
 		"@types/js-yaml": "^3.12.1",
 		"@types/universal-analytics": "^0.4.2",
-		"class-transformer": "^0.2.0",
+		"class-transformer": "^0.3.1",
 		"cli-ux": "^5.2.1",
 		"configstore": "^4.0.0",
 		"dayjs": "^1.8.19",
